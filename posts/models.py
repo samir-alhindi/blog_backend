@@ -9,3 +9,6 @@ class Post(models.Model):
     body = models.TextField()
     image = models.ImageField(upload_to='posts/', null=True)
     creation_date = models.DateField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.title
