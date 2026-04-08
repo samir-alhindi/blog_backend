@@ -22,10 +22,12 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from users.views import UserViewSet
 from posts.views import PostViewSet
+from comments.views import CommentViewSet
 
 router = routers.DefaultRouter()
-router.register(prefix=r'users', viewset=UserViewSet, basename=None)
-router.register(prefix=r'posts', viewset=PostViewSet)
+router.register(prefix=r'users', viewset=UserViewSet, basename='user')
+router.register(prefix=r'posts', viewset=PostViewSet, basename='post')
+router.register(prefix=r'comments', viewset=CommentViewSet, basename='comment')
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),
