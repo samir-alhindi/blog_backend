@@ -18,13 +18,28 @@ from django.contrib import admin
 from django.urls import URLResolver, include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.decorators import api_view
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
+@api_view(['GET', 'OPTIONS', 'HEAD'])
+def api_entry_point(request: Request) -> Response:
+    '''
+    Blog API Entry Point. 
+    '''
+    return Response({
+        'users' : reverse('user-list', request=request),
+        'posts' : reverse('post-list', request=request),
+    })
+
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),
     path('auth/', include('rest_framework.urls')),
+    path('api/', api_entry_point, name='entry-point'),
     path('api/posts/', include('posts.urls')),
     path('api/users/', include('users.urls')),
-    path('api/comments/', include('comments.urls'))
 ]
 
 
