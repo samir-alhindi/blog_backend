@@ -23,7 +23,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-@api_view(['GET', 'OPTIONS', 'HEAD'])
+@api_view(['GET', 'HEAD'])
 def api_entry_point(request: Request) -> Response:
     '''
     Blog API Entry Point. 
