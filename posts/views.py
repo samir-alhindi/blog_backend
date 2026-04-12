@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import permissions, generics
 from .serializers import PostSerializer
 from .models import Post
-from .permissions import IsAuthorOrReadOnly
+from core.permissions import IsAuthorOrReadOnly
 
 class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer

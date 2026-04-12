@@ -4,9 +4,12 @@ from rest_framework import generics, viewsets
 from posts.models import Post
 from .models import Comment
 from .serializers import CommentSerializer
+from rest_framework import permissions
+from core.permissions import IsAuthorOrReadOnly
 
 class PostCommentsList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
     def perform_create(self, serializer):
         author = self.request.user
@@ -20,3 +23,4 @@ class PostCommentsList(generics.ListCreateAPIView):
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
+    permission_classes = [IsAuthorOrReadOnly]
