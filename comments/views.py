@@ -7,6 +7,8 @@ from .serializers import CommentSerializer
 from rest_framework import permissions
 from core.permissions import IsAuthorOrReadOnly
 
+from .serializers import CommentReactionSerializer
+
 class PostCommentsList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -24,3 +26,20 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
     permission_classes = [IsAuthorOrReadOnly]
+
+class CommentReactionList(generics.ListCreateAPIView):
+    serializer_class = CommentReactionSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_comment(self) -> Comment:
+        comment_pk = self.kwargs['comment_pk']
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        return comment
+
+    def get_queryset(self):
+        return self.get_comment().reactions # type: ignore
+    
+    def perform_create(self, serializer):
+        author = self.request.user
+        comment = self.get_comment()
+        serializer.save(author=author, comment=comment)

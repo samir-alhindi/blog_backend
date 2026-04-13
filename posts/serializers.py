@@ -4,7 +4,6 @@ from rest_framework.reverse import reverse
 
 from .models import Post, PostReaction
 from rest_framework import serializers
-from reactions.serializers import ReactionSerializer
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -36,8 +35,8 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         model = Post
         fields = ['url', 'title', 'body', 'image', 'creation_date', 'author', 'comments_url', 'reactions_url']
     
-class PostReactionSerializers(ReactionSerializer):
-    class Meta(ReactionSerializer.Meta):
+class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
+    class Meta:
         model = PostReaction
         fields = ['author', 'reaction_type', 'created_at', 'post']
         read_only_fields = ['post', 'author']

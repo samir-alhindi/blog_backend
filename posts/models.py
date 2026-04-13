@@ -15,4 +15,5 @@ class Post(models.Model):
         return self.title
 
 class PostReaction(Reaction):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_reactions')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reactions')

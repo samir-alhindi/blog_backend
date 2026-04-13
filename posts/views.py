@@ -23,6 +23,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class PostReactionsList(generics.ListCreateAPIView):
     serializer_class = PostReactionSerializers
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         post_pk = self.kwargs['post_pk']
