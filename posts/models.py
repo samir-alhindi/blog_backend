@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from reactions.models import Reaction
 
 # Create your models here.
 class Post(models.Model):
@@ -12,3 +13,6 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+class PostReaction(Reaction):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reactions')
