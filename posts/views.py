@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from rest_framework import permissions, generics
+
 from .serializers import PostSerializer, PostReactionSerializers
-from .models import Post
+from .models import Post, PostReaction
 from core.permissions import IsAuthorOrReadOnly
 
 class PostList(generics.ListCreateAPIView):
@@ -35,3 +36,12 @@ class PostReactionsList(generics.ListCreateAPIView):
         post = get_object_or_404(Post, pk=post_pk)
         author = self.request.user
         serializer.save(author=author, post=post)
+
+class PostReactionsDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = PostReactionSerializers
+    permission_classes = [IsAuthorOrReadOnly]
+
+    def get_object(self): # type: ignore
+        reaction_pk = self.kwargs['pk']
+        reaction = get_object_or_404(PostReaction, pk=reaction_pk)
+        return reaction

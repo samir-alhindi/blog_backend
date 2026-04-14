@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from rest_framework import generics, viewsets
 
 from posts.models import Post
-from .models import Comment
+from .models import Comment, CommentReaction
 from .serializers import CommentSerializer
 from rest_framework import permissions
 from core.permissions import IsAuthorOrReadOnly
@@ -27,7 +27,7 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     permission_classes = [IsAuthorOrReadOnly]
 
-class CommentReactionList(generics.ListCreateAPIView):
+class CommentReactionsList(generics.ListCreateAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -43,3 +43,12 @@ class CommentReactionList(generics.ListCreateAPIView):
         author = self.request.user
         comment = self.get_comment()
         serializer.save(author=author, comment=comment)
+
+class CommentReactionsDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CommentReactionSerializer
+    permission_classes = [IsAuthorOrReadOnly]
+
+    def get_object(self): # type: ignore
+        reaction_pk = self.kwargs['pk']
+        reaction = get_object_or_404(CommentReaction, pk=reaction_pk)
+        return reaction

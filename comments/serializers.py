@@ -44,7 +44,20 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
 
 class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
+    url = serializers.SerializerMethodField()
     comment = serializers.SerializerMethodField()
+
+    def get_url(self, obj):
+        request = self.context['request']
+        return reverse(
+            'comment-reactions-detail',
+            kwargs={
+                'post_pk' : obj.comment.post.pk,
+                'comment_pk' : obj.comment.pk,
+                'pk' : obj.pk,
+            },
+            request=request
+        )
 
     def get_comment(self, obj):
         request = self.context.get('request')
@@ -56,5 +69,5 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = CommentReaction
-        fields = ['author', 'reaction_type', 'created_at', 'comment']
+        fields = ['url', 'author', 'reaction_type', 'created_at', 'comment',]
         read_only_fields  = ['author', 'comment']

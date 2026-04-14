@@ -30,13 +30,23 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             kwargs={'post_pk' : obj.pk},
             request=request
         )
-
     class Meta:
         model = Post
         fields = ['url', 'title', 'body', 'image', 'creation_date', 'author', 'comments_url', 'reactions_url']
     
 class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
+
+    url = serializers.SerializerMethodField()
+
+    def get_url(self, obj):
+        request = self.context.get('request')
+        return reverse(
+            'post-reactions-detail',
+            kwargs={'post_pk' : obj.post.pk, 'pk' : obj.pk},
+            request=request
+        )
+
     class Meta:
         model = PostReaction
-        fields = ['author', 'reaction_type', 'created_at', 'post']
+        fields = ['url', 'author', 'reaction_type', 'created_at', 'post']
         read_only_fields = ['post', 'author']
