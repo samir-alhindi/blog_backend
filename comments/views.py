@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, render
-from rest_framework import generics, viewsets
+from django.shortcuts import get_object_or_404
+from rest_framework import generics
 
 from posts.models import Post
 from .models import Comment, CommentReaction
@@ -18,7 +18,7 @@ class PostCommentsList(generics.ListCreateAPIView):
         post_pk = self.kwargs['post_pk']
         post = get_object_or_404(Post, pk=post_pk)
         return serializer.save(author=author, post=post)
-    
+
     def get_queryset(self): # type: ignore
         return Comment.objects.filter(post__pk=self.kwargs['post_pk'])
 
@@ -47,8 +47,12 @@ class CommentReactionsList(generics.ListCreateAPIView):
 class CommentReactionsDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    queryset = CommentReaction.objects.all()
 
+    # This function is not necessary:
+    '''
     def get_object(self): # type: ignore
         reaction_pk = self.kwargs['pk']
         reaction = get_object_or_404(CommentReaction, pk=reaction_pk)
         return reaction
+    '''

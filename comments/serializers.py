@@ -62,8 +62,11 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
     def get_comment(self, obj):
         request = self.context.get('request')
         return reverse(
-            'post-comments-list',
-            kwargs={'post_pk' : obj.comment.post.pk},
+            'post-comments-detail',
+            kwargs={
+                'post_pk' : obj.comment.post.pk,
+                'pk' : obj.comment.pk
+            },
             request=request
         )
 
