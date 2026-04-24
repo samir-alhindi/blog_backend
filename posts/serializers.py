@@ -22,7 +22,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         request = self.context.get('request')
         return reverse(
             'post-comments-list',
-            kwargs={'post_pk' : obj.pk},
+            kwargs={'slug' : obj.slug},
             request=request
         )
     
@@ -30,7 +30,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         request = self.context.get('request')
         return reverse(
             'post-reactions-list',
-            kwargs={'post_pk' : obj.pk},
+            kwargs={'slug' : obj.slug},
             request=request
         )
     class Meta:
@@ -41,12 +41,22 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
 
     url = serializers.SerializerMethodField()
+    author = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        read_only=True,
+        lookup_field='username'
+    )
+    post = serializers.HyperlinkedRelatedField(
+        view_name='post-detail',
+        read_only=True,
+        lookup_field='slug'
+    )
 
     def get_url(self, obj):
         request = self.context.get('request')
         return reverse(
             'post-reactions-detail',
-            kwargs={'post_pk' : obj.post.pk, 'pk' : obj.pk},
+            kwargs={'slug' : obj.post.slug, 'pk' : obj.pk},
             request=request
         )
 

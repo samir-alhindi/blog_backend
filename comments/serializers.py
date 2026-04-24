@@ -18,13 +18,12 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='username'
     )
     
-
     def get_url(self, obj):
         request = self.context.get('request')
         return reverse(
             'post-comments-detail',
             kwargs={
-                'post_pk' : obj.post.pk,
+                'slug' : obj.post.slug,
                 'pk' : obj.pk
             },
             request=request
@@ -35,7 +34,7 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         return reverse(
             'comment-reactions-list',
             kwargs={
-                'post_pk' : obj.post.pk,
+                'slug' : obj.post.slug,
                 'comment_pk' : obj.pk,
                 },
             request=request
@@ -49,13 +48,19 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
     url = serializers.SerializerMethodField()
     comment = serializers.SerializerMethodField()
+    author = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        read_only=True,
+        lookup_field='username'
+    )
+
 
     def get_url(self, obj):
         request = self.context['request']
         return reverse(
             'comment-reactions-detail',
             kwargs={
-                'post_pk' : obj.comment.post.pk,
+                'slug' : obj.comment.post.slug,
                 'comment_pk' : obj.comment.pk,
                 'pk' : obj.pk,
             },
@@ -67,7 +72,7 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
         return reverse(
             'post-comments-detail',
             kwargs={
-                'post_pk' : obj.comment.post.pk,
+                'slug' : obj.comment.post.slug,
                 'pk' : obj.comment.pk
             },
             request=request

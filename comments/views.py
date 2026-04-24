@@ -15,12 +15,12 @@ class PostCommentsList(generics.ListCreateAPIView):
     
     def perform_create(self, serializer):
         author = self.request.user
-        post_pk = self.kwargs['post_pk']
-        post = get_object_or_404(Post, pk=post_pk)
+        slug = self.kwargs['slug']
+        post = get_object_or_404(Post, slug=slug)
         return serializer.save(author=author, post=post)
 
     def get_queryset(self): # type: ignore
-        return Comment.objects.filter(post__pk=self.kwargs['post_pk'])
+        return Comment.objects.filter(post__slug=self.kwargs['slug'])
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer

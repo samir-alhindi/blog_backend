@@ -31,13 +31,13 @@ class PostReactionsList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        post_pk = self.kwargs['post_pk']
-        post = get_object_or_404(Post, pk=post_pk)
+        slug = self.kwargs['slug']
+        post = get_object_or_404(Post, slug=slug)
         return post.reactions # type: ignore
     
     def perform_create(self, serializer):
-        post_pk = self.kwargs['post_pk']
-        post = get_object_or_404(Post, pk=post_pk)
+        slug = self.kwargs['slug']
+        post = get_object_or_404(Post, slug=slug)
         author = self.request.user
         serializer.save(author=author, post=post)
 

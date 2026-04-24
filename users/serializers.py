@@ -5,7 +5,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     url = serializers.HyperlinkedIdentityField(
         view_name='user-detail',
-        lookup_field='username' 
+        lookup_field='username'
     )
 
     posts = serializers.HyperlinkedRelatedField(
