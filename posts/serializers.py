@@ -11,7 +11,8 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
-        read_only=True
+        read_only=True,
+        lookup_field='username'
     )
 
     comments_url = serializers.SerializerMethodField()

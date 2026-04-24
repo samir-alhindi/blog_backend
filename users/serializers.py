@@ -2,6 +2,12 @@ from .models import User
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+
+    url = serializers.HyperlinkedIdentityField(
+        view_name='user-detail',
+        lookup_field='username' 
+    )
+
     posts = serializers.HyperlinkedRelatedField(
         read_only=True,
         many=True,

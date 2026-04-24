@@ -19,3 +19,4 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [
         IsUserOrReadOnly
     ]
+    lookup_field = 'username'
