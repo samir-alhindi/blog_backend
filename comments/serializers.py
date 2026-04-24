@@ -10,6 +10,7 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
         read_only=True,
+        lookup_field='slug'
     )
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',

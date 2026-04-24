@@ -5,7 +5,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     posts = serializers.HyperlinkedRelatedField(
         read_only=True,
         many=True,
-        view_name='post-detail'
+        view_name='post-detail',
+        lookup_field='slug'
     )
     class Meta:
         model = User

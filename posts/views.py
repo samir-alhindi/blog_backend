@@ -11,6 +11,8 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
+    lookup_field = 'slug'
+    lookup_url_kwarg = 'slug'
 
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
@@ -21,6 +23,8 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [
         IsAuthorOrReadOnly
     ]
+    lookup_field = 'slug'
+    lookup_url_kwarg = 'slug'
 
 class PostReactionsList(generics.ListCreateAPIView):
     serializer_class = PostReactionSerializers

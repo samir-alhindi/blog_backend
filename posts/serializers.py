@@ -4,6 +4,11 @@ from rest_framework import serializers
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
 
+    url = serializers.HyperlinkedIdentityField(
+        view_name='post-detail',
+        lookup_field='slug'
+    )
+
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
         read_only=True
