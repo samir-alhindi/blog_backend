@@ -15,3 +15,11 @@ class Comment(models.Model):
 class CommentReaction(Reaction):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_reactions')
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='reactions')
+
+    class Meta: # type: ignore
+        constraints = [
+            models.constraints.UniqueConstraint(
+                fields=['author', 'comment'],
+                name='author_comment_reaction',
+            )
+        ]

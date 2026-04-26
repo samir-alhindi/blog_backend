@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+
 from .models import Comment, CommentReaction
 from rest_framework import serializers
 from rest_framework.reverse import reverse
@@ -77,6 +79,25 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
             },
             request=request
         )
+    
+    def validate(self, attrs):
+
+        # Only validate on POST requests
+        if self.instance is not None:
+            return attrs
+
+        request = self.context.get('request')
+        comment_pk = self.context['view'].kwargs.get('comment_pk')
+
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        author = request.user #type: ignore 
+
+        if CommentReaction.objects.filter(comment=comment, author=author).exists():
+            raise serializers.ValidationError(
+                "You have already reacted to this comment."
+            )
+
+        return attrs
 
     class Meta:
         model = CommentReaction
