@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.reverse import reverse
 from .models import Post, PostReaction
 from rest_framework import serializers
@@ -59,6 +60,25 @@ class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
             kwargs={'slug' : obj.post.slug, 'pk' : obj.pk},
             request=request
         )
+
+    def validate(self, attrs):
+
+        # Only validate on POST requests
+        if self.instance is not None:
+            return attrs
+
+        request = self.context.get('request')
+        slug = self.context['view'].kwargs.get('slug')
+
+        post = get_object_or_404(Post, slug=slug)
+        author = request.user #type: ignore 
+
+        if PostReaction.objects.filter(post=post, author=author).exists():
+            raise serializers.ValidationError(
+                "You have already reacted to this post."
+            )
+
+        return attrs
 
     class Meta:
         model = PostReaction

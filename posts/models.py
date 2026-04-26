@@ -1,3 +1,5 @@
+from email import message
+
 from django.db import models
 from django.utils.text import slugify
 from users.models import User
@@ -22,3 +24,11 @@ class Post(models.Model):
 class PostReaction(Reaction):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_reactions')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reactions')
+
+    class Meta: # type: ignore
+        constraints = [
+            models.constraints.UniqueConstraint(
+                fields=['author', 'post'],
+                name='author_post_reaction',
+            )
+        ]
