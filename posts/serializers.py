@@ -34,6 +34,8 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             kwargs={'slug' : obj.slug},
             request=request
         )
+
+
     class Meta:
         model = Post
         fields = ['url', 'title', 'slug', 'body', 'image', 'creation_date', 'author', 'comments_url', 'reactions_url']
