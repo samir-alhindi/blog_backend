@@ -56,7 +56,6 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='username'
     )
 
-
     def get_url(self, obj):
         request = self.context['request']
         return reverse(

@@ -1,5 +1,3 @@
-from email import message
-
 from django.db import models
 from django.utils.text import slugify
 from users.models import User
@@ -15,7 +13,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts/', null=True)
     creation_date = models.DateField(auto_now=True)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
