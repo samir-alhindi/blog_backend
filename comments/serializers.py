@@ -1,55 +1,44 @@
-from django.shortcuts import get_object_or_404
 
-from .models import Comment, CommentReaction
-from rest_framework import serializers
+from django.shortcuts import get_object_or_404
 from rest_framework.reverse import reverse
+
+from .models import Comment, CommentReaction, Post
+from rest_framework import serializers
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
 
-    url = serializers.SerializerMethodField()
-    reactions_url = serializers.SerializerMethodField()
+    reactions = serializers.SerializerMethodField()
 
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
-        read_only=True,
-        lookup_field='slug'
+        lookup_field='slug',
+        queryset=Post.objects.all()
     )
+
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
         read_only=True,
         lookup_field='username'
     )
-    
-    def get_url(self, obj):
+
+    def get_reactions(self, obj):
         request = self.context.get('request')
-        return reverse(
-            'post-comments-detail',
-            kwargs={
-                'slug' : obj.post.slug,
-                'pk' : obj.pk
-            },
-            request=request
-        )
-    
-    def get_reactions_url(self, obj):
-        request = self.context.get('request')
-        return reverse(
-            'comment-reactions-list',
-            kwargs={
-                'slug' : obj.post.slug,
-                'comment_pk' : obj.pk,
-                },
-            request=request
-        )
+        reactions = []
+        for reaction in obj.reactions.all():
+            reactions.append(reverse(
+                request=request,
+                viewname='comment-reaction-detail',
+                kwargs={'comment_pk' : obj.pk, 'pk' : reaction.pk}
+            ))
+        return reactions
 
     class Meta:
         model = Comment
-        fields = ['url', 'post', 'author', 'creation_date', 'body', 'reactions_url']
+        fields = ['url', 'body', 'post', 'author', 'creation_date', 'reactions']
 
 class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
     url = serializers.SerializerMethodField()
-    comment = serializers.SerializerMethodField()
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
         read_only=True,
@@ -59,24 +48,12 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
     def get_url(self, obj):
         request = self.context['request']
         return reverse(
-            'comment-reactions-detail',
+            viewname='comment-reaction-detail',
+            request=request,
             kwargs={
-                'slug' : obj.comment.post.slug,
                 'comment_pk' : obj.comment.pk,
                 'pk' : obj.pk,
-            },
-            request=request
-        )
-
-    def get_comment(self, obj):
-        request = self.context.get('request')
-        return reverse(
-            'post-comments-detail',
-            kwargs={
-                'slug' : obj.comment.post.slug,
-                'pk' : obj.comment.pk
-            },
-            request=request
+            }
         )
     
     def validate(self, attrs):
@@ -86,7 +63,7 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
             return attrs
 
         request = self.context.get('request')
-        comment_pk = self.context['view'].kwargs.get('comment_pk')
+        comment_pk = self.context['view'].kwargs.get('pk')
 
         comment = get_object_or_404(Comment, pk=comment_pk)
         author = request.user #type: ignore 

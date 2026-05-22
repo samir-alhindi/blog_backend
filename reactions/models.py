@@ -17,3 +17,4 @@ class Reaction(models.Model):
 
     class Meta:
         abstract = True
+

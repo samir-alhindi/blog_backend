@@ -1,3 +1,4 @@
+
 from django.shortcuts import get_object_or_404
 from rest_framework.reverse import reverse
 from .models import Post, PostReaction
@@ -10,40 +11,34 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='slug'
     )
 
+    reactions = serializers.SerializerMethodField()
+
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
         read_only=True,
         lookup_field='username'
     )
 
-    comments_url = serializers.SerializerMethodField()
-    reactions_url = serializers.SerializerMethodField()
-
-    def get_comments_url(self, obj):
+    def get_reactions(self, obj):
         request = self.context.get('request')
-        return reverse(
-            'post-comments-list',
-            kwargs={'slug' : obj.slug},
-            request=request
-        )
-    
-    def get_reactions_url(self, obj):
-        request = self.context.get('request')
-        return reverse(
-            'post-reactions-list',
-            kwargs={'slug' : obj.slug},
-            request=request
-        )
-
+        reactions = []
+        for reaction in obj.reactions.all():
+            reactions.append(reverse(
+                request=request,
+                viewname='post-reaction-detail',
+                kwargs={'slug' : obj.slug, 'pk' : reaction.pk}
+            ))
+        return reactions
 
     class Meta:
         model = Post
-        fields = ['url', 'title', 'slug', 'body', 'image', 'creation_date', 'author', 'comments_url', 'reactions_url']
-        read_only_fields = ['slug', 'author', ]
+        fields = ['url', 'title', 'slug', 'body', 'image', 'creation_date', 'author', 'comments', 'reactions']
+        read_only_fields = ['slug', 'author', 'comments', 'reactions']
     
 class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
 
     url = serializers.SerializerMethodField()
+
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
         read_only=True,
@@ -56,11 +51,14 @@ class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
     )
 
     def get_url(self, obj):
-        request = self.context.get('request')
+        request = self.context['request']
         return reverse(
-            'post-reactions-detail',
-            kwargs={'slug' : obj.post.slug, 'pk' : obj.pk},
-            request=request
+            viewname='post-reaction-detail',
+            request=request,
+            kwargs={
+                'slug' : obj.post.slug,
+                'pk' : obj.pk,
+            }
         )
 
     def validate(self, attrs):
@@ -85,4 +83,4 @@ class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PostReaction
         fields = ['url', 'author', 'reaction_type', 'created_at', 'post']
-        read_only_fields = ['post', 'author', 'comments_url', 'reactions_url']
+        read_only_fields = ['post', 'author']

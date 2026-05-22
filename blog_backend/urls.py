@@ -31,8 +31,8 @@ def api_entry_point(request: Request) -> Response:
     return Response({
         'users' : reverse('user-list', request=request),
         'posts' : reverse('post-list', request=request),
+        'comments' : reverse('comment-list', request=request),
     })
-
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),
@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/', api_entry_point, name='entry-point'),
     path('api/posts/', include('posts.urls')),
     path('api/users/', include('users.urls')),
+    path('api/comments/', include('comments.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,8 +1,7 @@
 from django.db import models
 from posts.models import Post
-from users.models import User
-
 from reactions.models import Reaction
+from users.models import User
 
 # Create your models here.
 class Comment(models.Model):

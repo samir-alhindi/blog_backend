@@ -1,7 +1,6 @@
-from django.shortcuts import get_object_or_404, render
-from rest_framework import permissions, generics
 
-from .serializers import PostSerializer, PostReactionSerializers
+from rest_framework import permissions, generics
+from .serializers import PostReactionSerializers, PostSerializer
 from .models import Post, PostReaction
 from core.permissions import IsAuthorOrReadOnly
 
@@ -12,7 +11,6 @@ class PostList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     lookup_field = 'slug'
-    lookup_url_kwarg = 'slug'
 
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
@@ -20,32 +18,25 @@ class PostList(generics.ListCreateAPIView):
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+    lookup_field = 'slug'
     permission_classes = [
         IsAuthorOrReadOnly
     ]
-    lookup_field = 'slug'
-    lookup_url_kwarg = 'slug'
 
-class PostReactionsList(generics.ListCreateAPIView):
+class PostReactionList(generics.ListCreateAPIView):
     serializer_class = PostReactionSerializers
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        slug = self.kwargs['slug']
-        post = get_object_or_404(Post, slug=slug)
-        return post.reactions # type: ignore
-    
+        post_slug = self.kwargs['slug']
+        return PostReaction.objects.filter(post__slug=post_slug)
+
     def perform_create(self, serializer):
-        slug = self.kwargs['slug']
-        post = get_object_or_404(Post, slug=slug)
         author = self.request.user
+        post = Post.objects.get(slug=self.kwargs['slug'])
         serializer.save(author=author, post=post)
 
-class PostReactionsDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostReactionDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostReactionSerializers
     permission_classes = [IsAuthorOrReadOnly]
-
-    def get_object(self): # type: ignore
-        reaction_pk = self.kwargs['pk']
-        reaction = get_object_or_404(PostReaction, pk=reaction_pk)
-        return reaction
+    queryset = PostReaction.objects.all()
