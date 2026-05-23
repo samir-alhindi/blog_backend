@@ -7,9 +7,7 @@ from core.permissions import IsAuthorOrReadOnly
 class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
-    ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     lookup_field = 'slug'
 
     def perform_create(self, serializer):
@@ -39,4 +37,7 @@ class PostReactionList(generics.ListCreateAPIView):
 class PostReactionDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostReactionSerializers
     permission_classes = [IsAuthorOrReadOnly]
-    queryset = PostReaction.objects.all()
+
+    def get_queryset(self):
+        post_slug = self.kwargs['slug']
+        return PostReaction.objects.filter(post__slug=post_slug)

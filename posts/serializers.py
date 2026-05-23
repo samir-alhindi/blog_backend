@@ -33,7 +33,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
         fields = ['url', 'title', 'slug', 'body', 'image', 'creation_date', 'author', 'comments', 'reactions']
-        read_only_fields = ['slug', 'author', 'comments', 'reactions']
+        read_only_fields = ['slug', 'comments', 'reactions']
     
 class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
 
@@ -83,4 +83,3 @@ class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PostReaction
         fields = ['url', 'author', 'reaction_type', 'created_at', 'post']
-        read_only_fields = ['post', 'author']

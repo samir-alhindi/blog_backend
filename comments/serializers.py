@@ -1,7 +1,6 @@
 
 from django.shortcuts import get_object_or_404
 from rest_framework.reverse import reverse
-
 from .models import Comment, CommentReaction, Post
 from rest_framework import serializers
 
@@ -57,16 +56,20 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
         )
     
     def validate(self, attrs):
+        '''
+        This function exists so we can make sure users can only react to a comment once.
+        '''
 
         # Only validate on POST requests
         if self.instance is not None:
             return attrs
 
         request = self.context.get('request')
+        if request is None:
+            raise serializers.ValidationError('request object is None')
         comment_pk = self.context['view'].kwargs.get('pk')
-
         comment = get_object_or_404(Comment, pk=comment_pk)
-        author = request.user #type: ignore 
+        author = request.user
 
         if CommentReaction.objects.filter(comment=comment, author=author).exists():
             raise serializers.ValidationError(
@@ -78,4 +81,4 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CommentReaction
         fields = ['url', 'author', 'reaction_type', 'created_at', 'comment',]
-        read_only_fields  = ['author', 'comment']
+        read_only_fields  = ['comment']

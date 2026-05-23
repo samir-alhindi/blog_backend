@@ -15,9 +15,13 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs) -> None:
         if not self.slug:
+            import string, random
             self.slug = slugify(self.title)
+            while Post.objects.filter(slug=self.slug).exists():
+                suffix = '-' + ''.join(random.choices(string.ascii_letters + string.digits, k=5))
+                self.slug = slugify(self.title + suffix)
         super().save(*args, **kwargs)
-    
+
     def __str__(self) -> str:
         return self.slug
 
@@ -25,10 +29,13 @@ class PostReaction(Reaction):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_reactions')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reactions')
 
-    class Meta: # type: ignore
+    class Meta:
         constraints = [
             models.constraints.UniqueConstraint(
                 fields=['author', 'post'],
                 name='author_post_reaction',
             )
         ]
+    
+    def __str__(self) -> str:
+        return f'{self.reaction_type} reaction by {self.author} on "{self.post}"'

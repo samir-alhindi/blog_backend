@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from comments.models import Comment
+from comments.models import Comment, CommentReaction
 
 # Register your models here.
-admin.site.register(Comment)
+admin.site.register([Comment, CommentReaction])

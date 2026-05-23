@@ -11,7 +11,6 @@ class Reaction(models.Model):
         ANGRY = 'Angry'
         SCARY = 'Scary'
     
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reactions')
     reaction_type = models.CharField(max_length=20, choices=ReactionTypes.choices, default=ReactionTypes.LIKE)
     created_at = models.DateField(auto_now=True)
 

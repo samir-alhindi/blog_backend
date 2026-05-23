@@ -11,14 +11,21 @@ class Comment(models.Model):
     body = models.TextField()
     creation_date = models.DateField(auto_now=True)
 
+    
+    def __str__(self) -> str:
+        return f'Comment by user {self.author} on post "{self.post}"'
+
 class CommentReaction(Reaction):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_reactions')
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='reactions')
 
-    class Meta: # type: ignore
+    class Meta:
         constraints = [
             models.constraints.UniqueConstraint(
                 fields=['author', 'comment'],
                 name='author_comment_reaction',
             )
         ]
+
+    def __str__(self) -> str:
+        return f'{self.reaction_type} reaction by user {self.author} on {self.comment}'

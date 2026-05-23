@@ -29,10 +29,13 @@ class CommentReactionList(generics.ListCreateAPIView):
     
     def perform_create(self, serializer):
         author = self.request.user
-        comment = Comment.objects.get(pk=self.kwargs['pk'])
+        comment = get_object_or_404(Comment, pk=self.kwargs['pk'])
         serializer.save(author=author, comment=comment)
 
 class CommentReactionDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [IsAuthorOrReadOnly]
-    queryset = CommentReaction.objects.all()
+    
+    def get_queryset(self):
+        comment_pk = self.kwargs['comment_pk']
+        return CommentReaction.objects.filter(comment__pk=comment_pk)
