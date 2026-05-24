@@ -11,6 +11,9 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='slug'
     )
 
+    reactions_count = serializers.SerializerMethodField()
+    comments_count = serializers.SerializerMethodField()
+
     reactions = serializers.SerializerMethodField()
 
     author = serializers.HyperlinkedRelatedField(
@@ -30,9 +33,16 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             ))
         return reactions
 
+    def get_reactions_count(self, obj):
+        return len(obj.reactions.all())
+    
+    def get_comments_count(self, obj):
+        return len(obj.comments.all())
+
     class Meta:
         model = Post
-        fields = ['url', 'title', 'slug', 'body', 'image', 'creation_date', 'author', 'comments', 'reactions']
+        fields = ['url', 'title', 'slug', 'body', 'image', 'creation_date', 'author',
+                  'comments_count', 'comments', 'reactions_count', 'reactions']
         read_only_fields = ['slug', 'comments', 'reactions']
     
 class PostReactionSerializers(serializers.HyperlinkedModelSerializer):

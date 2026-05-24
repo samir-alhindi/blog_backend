@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 
 from .models import User
-from .serializers import UserSerializer, CreateUserSerializer
+from .serializers import UserSerializer, UserCreateSerializer
 from .permissions import IsUserOrReadOnly
 
 # Create your views here.
@@ -10,8 +10,8 @@ from .permissions import IsUserOrReadOnly
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
 
-    def get_serializer_class(self): #type: ignore
-        return CreateUserSerializer if self.request.method == 'POST' else UserSerializer
+    def get_serializer_class(self): 
+        return UserCreateSerializer if self.request.method == 'POST' else UserSerializer
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer

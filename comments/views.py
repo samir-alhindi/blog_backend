@@ -2,17 +2,19 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from .models import Comment, CommentReaction
-from .serializers import CommentReactionSerializer, CommentSerializer
+from .serializers import CommentReactionSerializer, CommentSerializer, CommentCreateSerializer
 from rest_framework import permissions
 from core.permissions import IsAuthorOrReadOnly
 
 class CommentList(generics.ListCreateAPIView):
-    serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Comment.objects.all()
     
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
+    
+    def get_serializer_class(self):
+        return CommentCreateSerializer if self.request.method == 'POST' else CommentSerializer
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer

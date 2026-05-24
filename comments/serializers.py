@@ -4,9 +4,13 @@ from rest_framework.reverse import reverse
 from .models import Comment, CommentReaction, Post
 from rest_framework import serializers
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
-
+class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used only when creating comments
+    '''
     reactions = serializers.SerializerMethodField()
+    reactions_count = serializers.SerializerMethodField()
+    replies_count = serializers.SerializerMethodField()
 
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
@@ -20,6 +24,13 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='username'
     )
 
+    def validate(self, attrs):
+        parent_comment: Comment | None = attrs.get('parent')
+        post: Post | None = attrs.get('post')
+        if parent_comment and post and parent_comment.post != post:
+            raise serializers.ValidationError(f"Comment parent's post must be the same as it's own post.")
+        return super().validate(attrs)
+
     def get_reactions(self, obj):
         request = self.context.get('request')
         reactions = []
@@ -30,10 +41,32 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
                 kwargs={'comment_pk' : obj.pk, 'pk' : reaction.pk}
             ))
         return reactions
+    
+    def get_reactions_count(self, obj):
+        return len(obj.reactions.all())
+    
+    def get_replies_count(self, obj):
+        return len(obj.replies.all())
 
     class Meta:
         model = Comment
-        fields = ['url', 'body', 'post', 'author', 'creation_date', 'reactions']
+        fields = ['url', 'body', 'post', 'parent', 'author', 'creation_date', 'reactions_count', 'reactions', 'replies_count', 'replies']
+        read_only_fields = ['replies']
+
+class CommentSerializer(CommentCreateSerializer):
+    '''
+    Used for retrieve/list/update/delete opperations on comments
+    '''
+    post = serializers.HyperlinkedRelatedField(
+        view_name='post-detail',
+        lookup_field='slug',
+        read_only=True
+    )
+
+    class Meta:
+        model = Comment
+        fields = ['url', 'body', 'post', 'parent', 'author', 'creation_date', 'reactions_count', 'reactions', 'replies_count', 'replies']
+        read_only_fields = ['replies', 'author', 'parent']
 
 class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -80,5 +113,5 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = CommentReaction
-        fields = ['url', 'author', 'reaction_type', 'created_at', 'comment',]
+        fields = ['url', 'author', 'reaction_type', 'created_at', 'comment']
         read_only_fields  = ['comment']

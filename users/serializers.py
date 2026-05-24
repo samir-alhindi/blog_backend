@@ -39,7 +39,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['url', 'username', 'bio', 'avatar', 'posts', 'following', 'followers']
 
-class CreateUserSerializer(serializers.HyperlinkedModelSerializer):
+class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='user-detail',
         lookup_field='username'

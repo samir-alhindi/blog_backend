@@ -7,10 +7,10 @@ from users.models import User
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True)
 
     body = models.TextField()
     creation_date = models.DateField(auto_now=True)
-
     
     def __str__(self) -> str:
         return f'Comment by user {self.author} on post "{self.post}"'
