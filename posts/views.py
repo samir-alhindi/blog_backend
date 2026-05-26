@@ -2,13 +2,20 @@
 from rest_framework import permissions, generics
 from .serializers import PostReactionSerializers, PostSerializer
 from .models import Post, PostReaction
+from users.models import User
 from core.permissions import IsAuthorOrReadOnly
+from .filters import PostFilter
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     lookup_field = 'slug'
+    filterset_class = PostFilter
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ['body', 'title']
 
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
