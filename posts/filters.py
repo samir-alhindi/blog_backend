@@ -1,11 +1,33 @@
 from django_filters import rest_framework as filters
-from .models import Post
 
 class PostFilter(filters.FilterSet):
 
-    created_before = filters.DateTimeFilter('creation_datetime', 'date__lt', label='Created Before')
-    created_after = filters.DateTimeFilter('creation_datetime', 'date__gt', label='Created After')
-    created_at = filters.DateTimeFilter('creation_datetime', 'date__exact', label='Created At')
+    created_before = filters.IsoDateTimeFilter(
+        field_name='creation_datetime',
+        lookup_expr= 'lt',
+        label='Created Before'
+    )
 
-    author_username = filters.CharFilter('author__username', 'exact', label='Author Username')
-    author_id = filters.NumberFilter('author__id', 'exact', label='Author ID')
+    created_after = filters.IsoDateTimeFilter(
+        field_name='creation_datetime',
+        lookup_expr='gt',
+        label='Created After'
+    )
+
+    created_date = filters.DateFilter(
+        field_name='creation_datetime',
+        lookup_expr='date__exact',
+        label='Created Date'
+    )
+
+    author_username = filters.CharFilter(
+        field_name='author__username',
+        lookup_expr='exact',
+        label='Author Username'
+    )
+
+    author_id = filters.NumberFilter(
+        field_name='author__id',
+        lookup_expr='exact',
+        label='Author ID'
+    )

@@ -13,7 +13,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True, max_length=255)
     body = models.TextField()
-    image = models.ImageField(upload_to='posts/', null=True)
+    image = models.ImageField(upload_to='posts/', null=True, blank=True)
     creation_datetime = models.DateTimeField(auto_now_add=True)
     last_edit_datetime = models.DateTimeField(auto_now=True)
 
@@ -22,7 +22,7 @@ class Post(models.Model):
             return super().save(*args, **kwargs)
         for _ in range(10):
             try:
-                self.slug = f'{slugify(self.title)[:246]}-{uuid.uuid4().hex[:8]}'
+                self.slug = f'{slugify(self.title, allow_unicode=True)[:246]}-{uuid.uuid4().hex[:8]}'
                 return super().save(*args, **kwargs)
             except IntegrityError:
                 self.slug = None

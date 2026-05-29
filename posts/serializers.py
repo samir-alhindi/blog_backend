@@ -4,7 +4,7 @@ from rest_framework.reverse import reverse
 from .models import Post, PostReaction
 from rest_framework import serializers
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
+class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
 
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
@@ -12,8 +12,6 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     reactions = serializers.SerializerMethodField()
-    reactions_count = serializers.IntegerField(read_only=True)
-    comments_count = serializers.IntegerField(read_only=True)
 
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
@@ -34,10 +32,31 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['url', 'title', 'slug', 'body', 'image', 'author',
-                  'creation_datetime', 'last_edit_datetime', 'comments_count',
-                  'comments', 'reactions_count', 'reactions']
+        fields = ['url', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
+                  'last_edit_datetime', 'comments', 'reactions']
         read_only_fields = ['slug', 'comments', 'reactions']
+
+class PostListSerializer(serializers.HyperlinkedModelSerializer):
+
+    url = serializers.HyperlinkedIdentityField(
+        view_name='post-detail',
+        lookup_field='slug'
+    )
+
+    author = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        read_only=True,
+        lookup_field='username'
+    )
+
+    reactions_count = serializers.IntegerField(read_only=True)
+    comments_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Post
+        fields = ['url', 'title', 'slug', 'body', 'image', 'author',
+                  'creation_datetime', 'comments_count', 'reactions_count']
+        read_only_fields = ['slug']
 
 class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
 
