@@ -38,9 +38,11 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return (Post.objects
-                .annotate(reactions_count=Count('reactions'))
-                .annotate(comments_count=Count('comments'))
-                )
+                .prefetch_related('reactions', 'comments')
+                .select_related('author')
+                .annotate(
+                    reactions_count=Count('reactions', distinct=True),
+                    comments_count=Count('comments', distinct=True)))
 
 class PostReactionList(generics.ListCreateAPIView):
     serializer_class = PostReactionSerializers
