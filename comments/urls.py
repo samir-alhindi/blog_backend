@@ -1,12 +1,12 @@
 
 from django.urls import path
-from .views import CommentDetail, CommentList, CommentReactionDetail, CommentReactionList
+from .views import CommentDetailView, CommentListCreateView, CommentReactionDetailView, CommentReactionListCreateView
 
 
 urlpatterns = [
-    path('', CommentList.as_view(), name='comment-list'),
-    path('<int:pk>/', CommentDetail.as_view(), name='comment-detail'),
+    path('', CommentListCreateView.as_view(), name='comment-list'),
+    path('<int:pk>/', CommentDetailView.as_view(), name='comment-detail'),
     
-    path('<int:pk>/reactions/', CommentReactionList.as_view(), name='comment-reaction-list'),
-    path('<int:comment_pk>/reactions/<int:pk>/', CommentReactionDetail.as_view(), name='comment-reaction-detail'),
+    path('<int:pk>/reactions/', CommentReactionListCreateView.as_view(), name='comment-reaction-list'),
+    path('<int:comment_pk>/reactions/<int:pk>/', CommentReactionDetailView.as_view(), name='comment-reaction-detail'),
 ]

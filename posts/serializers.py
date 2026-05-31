@@ -5,10 +5,13 @@ from .models import Post, PostReaction
 from rest_framework import serializers
 
 class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for retrieve/update/delete opperations on posts
+    '''
 
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
-        lookup_field='slug'
+        lookup_field='slug',
     )
 
     reactions = serializers.SerializerMethodField()
@@ -32,11 +35,14 @@ class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['url', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
+        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
                   'last_edit_datetime', 'comments', 'reactions']
         read_only_fields = ['slug', 'comments', 'reactions']
 
-class PostListSerializer(serializers.HyperlinkedModelSerializer):
+class PostListCreateSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for list/create opperations on posts
+    '''
 
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
@@ -67,6 +73,7 @@ class PostReactionSerializers(serializers.HyperlinkedModelSerializer):
         read_only=True,
         lookup_field='username'
     )
+    
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
         read_only=True,

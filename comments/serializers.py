@@ -6,11 +6,8 @@ from rest_framework import serializers
 
 class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
     '''
-    Used only when creating comments
+    Used for create opperations on comments
     '''
-    reactions = serializers.SerializerMethodField()
-    reactions_count = serializers.SerializerMethodField()
-    replies_count = serializers.SerializerMethodField()
 
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
@@ -20,8 +17,8 @@ class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
 
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
+        lookup_field='username',
         read_only=True,
-        lookup_field='username'
     )
 
     def validate(self, attrs):
@@ -31,6 +28,52 @@ class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
             raise serializers.ValidationError(f"Comment parent's post must be the same as it's own post.")
         return super().validate(attrs)
 
+    class Meta:
+        model = Comment
+        fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime']
+
+class CommentListSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for list opperations on comments
+    '''
+    post = serializers.HyperlinkedRelatedField(
+        view_name='post-detail',
+        lookup_field='slug',
+        read_only=True
+    )
+
+    author = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        lookup_field='username',
+        read_only=True,
+    )
+
+    reactions_count = serializers.IntegerField(read_only=True)
+    replies_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ['url', 'body', 'post', 'parent', 'author', 'creation_datetime', 'reactions_count', 'replies_count']
+
+class CommentDetailSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for retrieve/update/delete opperations on comments
+    '''
+
+    reactions = serializers.SerializerMethodField()
+
+    post = serializers.HyperlinkedRelatedField(
+        view_name='post-detail',
+        lookup_field='slug',
+        read_only=True
+    )
+
+    author = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        lookup_field='username',
+        read_only=True,
+    )
+    
     def get_reactions(self, obj):
         request = self.context.get('request')
         reactions = []
@@ -41,32 +84,11 @@ class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
                 kwargs={'comment_pk' : obj.pk, 'pk' : reaction.pk}
             ))
         return reactions
-    
-    def get_reactions_count(self, obj):
-        return len(obj.reactions.all())
-    
-    def get_replies_count(self, obj):
-        return len(obj.replies.all())
 
     class Meta:
         model = Comment
-        fields = ['url', 'body', 'post', 'parent', 'author', 'creation_date', 'reactions_count', 'reactions', 'replies_count', 'replies']
-        read_only_fields = ['replies']
-
-class CommentSerializer(CommentCreateSerializer):
-    '''
-    Used for retrieve/list/update/delete opperations on comments
-    '''
-    post = serializers.HyperlinkedRelatedField(
-        view_name='post-detail',
-        lookup_field='slug',
-        read_only=True
-    )
-
-    class Meta:
-        model = Comment
-        fields = ['url', 'body', 'post', 'parent', 'author', 'creation_date', 'reactions_count', 'reactions', 'replies_count', 'replies']
-        read_only_fields = ['replies', 'author', 'parent']
+        fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime', 'reactions', 'replies']
+        read_only_fields = ['replies', 'reactions']
 
 class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 

@@ -1,8 +1,7 @@
 
 from django.db.models import Count
-from django.db import IntegrityError
 from rest_framework import permissions, generics
-from .serializers import PostReactionSerializers, PostListSerializer, PostDetailSerializer
+from .serializers import PostReactionSerializers, PostListCreateSerializer, PostDetailSerializer
 from .models import Post, PostReaction
 from core.permissions import IsAuthorOrReadOnly
 from .filters import PostFilter
@@ -10,8 +9,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from time_machine import travel
 
-class PostList(generics.ListCreateAPIView):
-    serializer_class = PostListSerializer
+class PostListCreateView(generics.ListCreateAPIView):
+    serializer_class = PostListCreateSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_class = PostFilter
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
@@ -30,7 +29,7 @@ class PostList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostDetailSerializer
     lookup_field = 'slug'
     permission_classes = [
@@ -45,7 +44,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
                     reactions_count=Count('reactions', distinct=True),
                     comments_count=Count('comments', distinct=True)))
 
-class PostReactionList(generics.ListCreateAPIView):
+class PostReactionListCreateView(generics.ListCreateAPIView):
     serializer_class = PostReactionSerializers
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -58,7 +57,7 @@ class PostReactionList(generics.ListCreateAPIView):
         post = Post.objects.get(slug=self.kwargs['slug'])
         serializer.save(author=author, post=post)
 
-class PostReactionDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostReactionDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostReactionSerializers
     permission_classes = [IsAuthorOrReadOnly]
 

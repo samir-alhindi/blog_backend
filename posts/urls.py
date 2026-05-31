@@ -1,12 +1,12 @@
 
 from django.urls import path
 
-from .views import PostDetail, PostList, PostReactionList, PostReactionDetail
+from .views import PostDetailView, PostListCreateView, PostReactionListCreateView, PostReactionDetailView
 
 urlpatterns = [
-    path('', PostList.as_view(), name='post-list'),
-    path('<slug:slug>/', PostDetail.as_view(), name='post-detail'),
+    path('', PostListCreateView.as_view(), name='post-list'),
+    path('<slug:slug>/', PostDetailView.as_view(), name='post-detail'),
 
-    path('<slug:slug>/reactions/', PostReactionList.as_view(), name='post-reaction-list'),
-    path('<slug:slug>/reactions/<int:pk>/', PostReactionDetail.as_view(), name='post-reaction-detail'),
+    path('<slug:slug>/reactions/', PostReactionListCreateView.as_view(), name='post-reaction-list'),
+    path('<slug:slug>/reactions/<int:pk>/', PostReactionDetailView.as_view(), name='post-reaction-detail'),
 ]

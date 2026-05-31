@@ -1,44 +1,42 @@
-
-from ast import Or
-
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from .models import Comment, CommentReaction
-from .serializers import CommentReactionSerializer, CommentSerializer, CommentCreateSerializer
+from .serializers import CommentDetailSerializer, CommentReactionSerializer, CommentListSerializer, CommentCreateSerializer
 from rest_framework import permissions
 from core.permissions import IsAuthorOrReadOnly
-from .filters import CommentFilter
 from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from .filters import CommentFilter
 
-
-class CommentList(generics.ListCreateAPIView):
+class CommentListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Comment.objects.all()
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
-    search_fields = ['body']
-    ordering_fields = ['creation_date', 'reactions_count', 'replies_count']
     filterset_class = CommentFilter
+    search_fields = ['body', 'author__username', 'post__title']
+    ordering_fields = ['creation_date', 'reactions_count', 'replies_count']
 
     def get_queryset(self):
         return (Comment.objects
-                .annotate(reactions_count=Count('reactions'))
-                .annotate(replies_count=Count('replies'))
-        )
-
+                .prefetch_related('reactions')
+                .select_related('author')
+                .annotate(
+                    reactions_count=Count('reactions', distinct=True),
+                    replies_count=Count('replies', distinct=True)
+                )
+)
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
     
     def get_serializer_class(self):
-        return CommentCreateSerializer if self.request.method == 'POST' else CommentSerializer
+        return CommentCreateSerializer if self.request.method == 'POST' else CommentListSerializer
 
-class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = CommentSerializer
+class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CommentDetailSerializer
     queryset = Comment.objects.all()
     permission_classes = [IsAuthorOrReadOnly]
 
-class CommentReactionList(generics.ListCreateAPIView):
+class CommentReactionListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -51,7 +49,7 @@ class CommentReactionList(generics.ListCreateAPIView):
         comment = get_object_or_404(Comment, pk=self.kwargs['pk'])
         serializer.save(author=author, comment=comment)
 
-class CommentReactionDetail(generics.RetrieveUpdateDestroyAPIView):
+class CommentReactionDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [IsAuthorOrReadOnly]
     
