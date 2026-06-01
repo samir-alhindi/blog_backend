@@ -4,7 +4,32 @@ from rest_framework.reverse import reverse
 from .models import Comment, CommentReaction, Post
 from rest_framework import serializers
 
-class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
+class _CommentBaseSerializer(serializers.HyperlinkedModelSerializer):
+
+    author = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        lookup_field='username',
+        read_only=True,
+    )
+
+    reactions_count = serializers.IntegerField(read_only=True)
+    replies_count = serializers.IntegerField(read_only=True)
+
+    reactions = serializers.SerializerMethodField()
+    def get_reactions(self, obj):
+        request = self.context.get('request')
+        return reverse(
+            viewname='comment-reaction-list',
+            request=request,
+            kwargs={'pk' : obj.pk}
+        )
+    
+    replies = serializers.SerializerMethodField()
+    def get_replies(self, obj):
+        request = self.context.get('request')
+        return reverse('comment-list', query={'parent_comment_id' : obj.id}, request=request)
+
+class CommentCreateSerializer(_CommentBaseSerializer):
     '''
     Used for create operations on comments
     '''
@@ -13,12 +38,6 @@ class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
         view_name='post-detail',
         lookup_field='slug',
         queryset=Post.objects.all()
-    )
-
-    author = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        lookup_field='username',
-        read_only=True,
     )
 
     def validate(self, attrs):
@@ -32,7 +51,7 @@ class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
         model = Comment
         fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime']
 
-class CommentListSerializer(serializers.HyperlinkedModelSerializer):
+class CommentListSerializer(_CommentBaseSerializer):
     '''
     Used for list operations on comments
     '''
@@ -42,20 +61,11 @@ class CommentListSerializer(serializers.HyperlinkedModelSerializer):
         read_only=True
     )
 
-    author = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        lookup_field='username',
-        read_only=True,
-    )
-
-    reactions_count = serializers.IntegerField(read_only=True)
-    replies_count = serializers.IntegerField(read_only=True)
-
     class Meta:
         model = Comment
-        fields = ['url', 'id', 'post', 'parent', 'author', 'creation_datetime', 'reactions_count', 'replies_count']
+        fields = ['url', 'id', 'post', 'parent', 'author', 'creation_datetime', 'reactions_count', 'replies_count', 'reactions', 'replies']
 
-class CommentDetailSerializer(serializers.HyperlinkedModelSerializer):
+class CommentDetailSerializer(_CommentBaseSerializer):
     '''
     Used for retrieve/update/delete operations on comments
     '''
@@ -66,29 +76,9 @@ class CommentDetailSerializer(serializers.HyperlinkedModelSerializer):
         read_only=True
     )
 
-    author = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        lookup_field='username',
-        read_only=True,
-    )
-    
-    reactions_url = serializers.SerializerMethodField()
-    def get_reactions_url(self, obj):
-        request = self.context.get('request')
-        return reverse(
-            viewname='comment-reaction-list',
-            request=request,
-            kwargs={'pk' : obj.pk}
-        )
-    
-    replies_url = serializers.SerializerMethodField()
-    def get_replies_url(self, obj):
-        request = self.context.get('request')
-        return reverse('comment-list', query={'parent_comment_id' : obj.id}, request=request)
-
     class Meta:
         model = Comment
-        fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime', 'reactions_url', 'replies_url']
+        fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime', 'last_edit_datetime', 'reactions', 'replies']
         read_only_fields = ['parent']
 
 class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):

@@ -4,11 +4,7 @@ from rest_framework.reverse import reverse
 from .models import Post, PostReaction
 from rest_framework import serializers
 
-class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
-    '''
-    Used for retrieve/update/delete operations on posts
-    '''
-
+class _PostBaseSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
         lookup_field='slug'
@@ -16,72 +12,52 @@ class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
 
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
-        lookup_field='username',
         read_only=True,
+        lookup_field='username'
     )
 
     reactions_count = serializers.IntegerField(read_only=True)
     comments_count = serializers.IntegerField(read_only=True)
 
-    reactions_url = serializers.SerializerMethodField()
-    def get_reactions_url(self, obj):
+    reactions = serializers.SerializerMethodField()
+    def get_reactions(self, obj):
         request = self.context.get('request')
         return reverse('post-reaction-list', kwargs={'slug' : obj.slug}, request=request)
     
-    comments_url = serializers.SerializerMethodField()
-    def get_comments_url(self, obj):
+    comments = serializers.SerializerMethodField()
+    def get_comments(self, obj):
         request = self.context.get('request')
         return reverse('comment-list', query={'post_id' : obj.id}, request=request)
 
+class PostListSerializer(_PostBaseSerializer):
+    '''
+    Used for list operations on posts
+    '''
+    class Meta:
+        model = Post
+        fields = ['url', 'id', 'title', 'slug',  'image', 'author',
+                  'creation_datetime', 'comments_count',
+                  'reactions_count', 'comments', 'reactions', ]
+        read_only_fields = ['slug']
+
+class PostDetailSerializer(_PostBaseSerializer):
+    '''
+    Used for retrieve/update/delete operations on posts
+    '''
     class Meta:
         model = Post
         fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
-                  'last_edit_datetime', 'comments_url', 'reactions_url', 'comments_count', 'reactions_count']
+                  'last_edit_datetime', 'comments', 'reactions', 'comments_count', 'reactions_count']
         read_only_fields = ['slug']
 
-class PostCreateSerializer(serializers.HyperlinkedModelSerializer):
+class PostCreateSerializer(_PostBaseSerializer):
     '''
     Used for create operations on posts
     '''
 
-    url = serializers.HyperlinkedIdentityField(
-        view_name='post-detail',
-        lookup_field='slug'
-    )
-
-    author = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        read_only=True,
-        lookup_field='username'
-    )
-
     class Meta:
         model = Post
         fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime']
-        read_only_fields = ['slug']
-
-class PostListSerializer(serializers.HyperlinkedModelSerializer):
-    '''
-    Used for list operations on posts
-    '''
-
-    url = serializers.HyperlinkedIdentityField(
-        view_name='post-detail',
-        lookup_field='slug'
-    )
-
-    author = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        read_only=True,
-        lookup_field='username'
-    )
-
-    reactions_count = serializers.IntegerField(read_only=True)
-    comments_count = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = Post
-        fields = ['url', 'id', 'title', 'slug',  'image', 'author', 'creation_datetime', 'comments_count', 'reactions_count']
         read_only_fields = ['slug']
 
 class PostReactionSerializer(serializers.HyperlinkedModelSerializer):
