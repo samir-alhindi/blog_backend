@@ -12,6 +12,7 @@ class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
         lookup_field='slug',
+        read_only=True
     )
 
     reactions = serializers.SerializerMethodField()
@@ -39,9 +40,30 @@ class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
                   'last_edit_datetime', 'comments', 'reactions']
         read_only_fields = ['slug', 'comments', 'reactions']
 
-class PostListCreateSerializer(serializers.HyperlinkedModelSerializer):
+class PostCreateSerializer(serializers.HyperlinkedModelSerializer):
     '''
-    Used for list/create opperations on posts
+    Used for create opperations on posts
+    '''
+
+    url = serializers.HyperlinkedIdentityField(
+        view_name='post-detail',
+        lookup_field='slug'
+    )
+
+    author = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        read_only=True,
+        lookup_field='username'
+    )
+
+    class Meta:
+        model = Post
+        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime']
+        read_only_fields = ['slug']
+
+class PostListSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for list opperations on posts
     '''
 
     url = serializers.HyperlinkedIdentityField(
@@ -60,8 +82,7 @@ class PostListCreateSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['url', 'title', 'slug', 'body', 'image', 'author',
-                  'creation_datetime', 'comments_count', 'reactions_count']
+        fields = ['url', 'id', 'title', 'slug',  'image', 'author', 'creation_datetime', 'comments_count', 'reactions_count']
         read_only_fields = ['slug']
 
 class PostReactionSerializers(serializers.HyperlinkedModelSerializer):

@@ -1,7 +1,7 @@
 
 from django.db.models import Count
 from rest_framework import permissions, generics
-from .serializers import PostReactionSerializers, PostListCreateSerializer, PostDetailSerializer
+from .serializers import PostReactionSerializers, PostListSerializer, PostDetailSerializer, PostCreateSerializer
 from .models import Post, PostReaction
 from core.permissions import IsAuthorOrReadOnly
 from .filters import PostFilter
@@ -10,7 +10,6 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from time_machine import travel
 
 class PostListCreateView(generics.ListCreateAPIView):
-    serializer_class = PostListCreateSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_class = PostFilter
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
@@ -24,8 +23,10 @@ class PostListCreateView(generics.ListCreateAPIView):
                 .annotate(
                     reactions_count=Count('reactions', distinct=True),
                     comments_count=Count('comments', distinct=True)))
-        
 
+    def get_serializer_class(self):
+        return PostCreateSerializer if self.request.method == 'POST' else PostListSerializer
+        
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
