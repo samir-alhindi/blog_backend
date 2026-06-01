@@ -12,7 +12,7 @@ class Reaction(models.Model):
         SCARY = 'Scary'
     
     reaction_type = models.CharField(max_length=20, choices=ReactionTypes.choices, default=ReactionTypes.LIKE)
-    created_at = models.DateField(auto_now=True)
+    creation_datetime = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True

@@ -20,11 +20,13 @@ class CommentListCreateView(generics.ListCreateAPIView):
         return (Comment.objects
                 .prefetch_related('reactions')
                 .select_related('author')
+                .select_related('parent')
                 .annotate(
                     reactions_count=Count('reactions', distinct=True),
                     replies_count=Count('replies', distinct=True)
                 )
-)
+        )
+    
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
     
@@ -36,13 +38,27 @@ class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     permission_classes = [IsAuthorOrReadOnly]
 
+    def get_queryset(self):
+        return (Comment.objects
+                .prefetch_related('reactions')
+                .select_related('author')
+                .select_related('parent')
+                .annotate(
+                    reactions_count=Count('reactions', distinct=True),
+                    replies_count=Count('replies', distinct=True)
+                )
+        )
+
 class CommentReactionListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         comment_pk = self.kwargs['pk']
-        return CommentReaction.objects.filter(comment__pk=comment_pk)
+        return (CommentReaction.objects.
+                filter(comment__pk=comment_pk)
+                .select_related('author')
+                .select_related('comment'))
     
     def perform_create(self, serializer):
         author = self.request.user
@@ -55,4 +71,7 @@ class CommentReactionDetailView(generics.RetrieveUpdateDestroyAPIView):
     
     def get_queryset(self):
         comment_pk = self.kwargs['comment_pk']
-        return CommentReaction.objects.filter(comment__pk=comment_pk)
+        return (CommentReaction.objects.
+                filter(comment__pk=comment_pk)
+                .select_related('author')
+                .select_related('comment'))

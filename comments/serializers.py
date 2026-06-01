@@ -6,7 +6,7 @@ from rest_framework import serializers
 
 class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
     '''
-    Used for create opperations on comments
+    Used for create operations on comments
     '''
 
     post = serializers.HyperlinkedRelatedField(
@@ -34,7 +34,7 @@ class CommentCreateSerializer(serializers.HyperlinkedModelSerializer):
 
 class CommentListSerializer(serializers.HyperlinkedModelSerializer):
     '''
-    Used for list opperations on comments
+    Used for list operations on comments
     '''
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
@@ -53,14 +53,12 @@ class CommentListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['url', 'body', 'post', 'parent', 'author', 'creation_datetime', 'reactions_count', 'replies_count']
+        fields = ['url', 'id', 'post', 'parent', 'author', 'creation_datetime', 'reactions_count', 'replies_count']
 
 class CommentDetailSerializer(serializers.HyperlinkedModelSerializer):
     '''
-    Used for retrieve/update/delete opperations on comments
+    Used for retrieve/update/delete operations on comments
     '''
-
-    reactions = serializers.SerializerMethodField()
 
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
@@ -74,29 +72,32 @@ class CommentDetailSerializer(serializers.HyperlinkedModelSerializer):
         read_only=True,
     )
     
-    def get_reactions(self, obj):
+    reactions_url = serializers.SerializerMethodField()
+    def get_reactions_url(self, obj):
         request = self.context.get('request')
-        reactions = []
-        for reaction in obj.reactions.all():
-            reactions.append(reverse(
-                request=request,
-                viewname='comment-reaction-detail',
-                kwargs={'comment_pk' : obj.pk, 'pk' : reaction.pk}
-            ))
-        return reactions
+        return reverse(
+            viewname='comment-reaction-list',
+            request=request,
+            kwargs={'pk' : obj.pk}
+        )
+    
+    replies_url = serializers.SerializerMethodField()
+    def get_replies_url(self, obj):
+        request = self.context.get('request')
+        return reverse('comment-list', query={'parent_comment_id' : obj.id}, request=request)
 
     class Meta:
         model = Comment
-        fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime', 'reactions', 'replies']
-        read_only_fields = ['replies', 'reactions']
+        fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime', 'reactions_url', 'replies_url']
+        read_only_fields = ['parent']
 
 class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
     url = serializers.SerializerMethodField()
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
+        lookup_field='username',
         read_only=True,
-        lookup_field='username'
     )
 
     def get_url(self, obj):
@@ -135,5 +136,5 @@ class CommentReactionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = CommentReaction
-        fields = ['url', 'author', 'reaction_type', 'created_at', 'comment']
+        fields = ['url', 'author', 'reaction_type', 'creation_datetime', 'comment']
         read_only_fields  = ['comment']

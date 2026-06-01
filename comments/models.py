@@ -13,7 +13,7 @@ class Comment(models.Model):
     creation_datetime = models.DateTimeField(auto_now=True)
     
     def __str__(self) -> str:
-        return f'Comment by user {self.author} on post "{self.post}"'
+        return f'Comment {self.pk} by user {self.author} on post "{self.post}"'
 
 class CommentReaction(Reaction):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_reactions')

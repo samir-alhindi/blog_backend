@@ -1,7 +1,7 @@
 
 from django.db.models import Count
 from rest_framework import permissions, generics
-from .serializers import PostReactionSerializers, PostListSerializer, PostDetailSerializer, PostCreateSerializer
+from .serializers import PostReactionSerializer, PostListSerializer, PostDetailSerializer, PostCreateSerializer
 from .models import Post, PostReaction
 from core.permissions import IsAuthorOrReadOnly
 from .filters import PostFilter
@@ -46,12 +46,17 @@ class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
                     comments_count=Count('comments', distinct=True)))
 
 class PostReactionListCreateView(generics.ListCreateAPIView):
-    serializer_class = PostReactionSerializers
+    serializer_class = PostReactionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [OrderingFilter]
+    ordering = ['-creation_datetime']
 
     def get_queryset(self):
         post_slug = self.kwargs['slug']
-        return PostReaction.objects.filter(post__slug=post_slug)
+        return (PostReaction.objects
+                .filter(post__slug=post_slug)
+                .select_related('post')
+                .select_related('author'))
 
     def perform_create(self, serializer):
         author = self.request.user
@@ -59,9 +64,11 @@ class PostReactionListCreateView(generics.ListCreateAPIView):
         serializer.save(author=author, post=post)
 
 class PostReactionDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = PostReactionSerializers
+    serializer_class = PostReactionSerializer
     permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
         post_slug = self.kwargs['slug']
-        return PostReaction.objects.filter(post__slug=post_slug)
+        return (PostReaction.objects
+                .filter(post__slug=post_slug)
+                .select_related('post'))
