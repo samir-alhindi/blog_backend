@@ -3,8 +3,10 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
-    followers_count = serializers.SerializerMethodField()
-    following_count = serializers.SerializerMethodField()
+    '''
+    followers_count = serializers.BigIntegerField()
+    following_count = serializers.BigIntegerField()
+    '''
 
     url = serializers.HyperlinkedIdentityField(
         view_name='user-detail',
@@ -38,15 +40,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                 raise serializers.ValidationError(f'{self.instance} can\'t follow themselves')
         return value
     
-    def get_followers_count(self, obj):
-        return len(obj.followers.all())
-    
-    def get_following_count(self, obj):
-        return len(obj.following.all())
-    
     class Meta:
         model = User
-        fields = ['url', 'username', 'id', 'bio','avatar', 'posts', 'following_count', 'following', 'followers_count', 'followers',]
+        fields = ['url', 'username', 'id', 'bio','avatar', 'posts', 'following', 'followers',]
 
 class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(

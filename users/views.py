@@ -14,15 +14,16 @@ class UserList(generics.ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['username', 'bio']
     ordering_fields = ['followers_count', 'following_count', 'date_joined']
+    queryset = User.objects.all()
 
     def get_serializer_class(self): 
         return UserCreateSerializer if self.request.method == 'POST' else UserSerializer
     
-    def get_queryset(self):
+'''    def get_queryset(self):
         return (User.objects
                 .annotate(followers_count=Count('followers', distinct=True))
                 .annotate(following_count=Count('following', distinct=True))
-        )
+        )'''
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
