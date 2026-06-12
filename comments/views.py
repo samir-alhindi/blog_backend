@@ -9,6 +9,16 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import CommentFilter
 
+def get_comment_queryset(self):
+    return (Comment.objects
+            .select_related('author')
+            .select_related('parent')
+            .annotate(
+                reactions_count=Count('reactions', distinct=True),
+                replies_count=Count('replies', distinct=True)
+            )
+    )
+
 class CommentListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
@@ -17,15 +27,7 @@ class CommentListCreateView(generics.ListCreateAPIView):
     ordering_fields = ['creation_date', 'reactions_count', 'replies_count']
 
     def get_queryset(self):
-        return (Comment.objects
-                .prefetch_related('reactions')
-                .select_related('author')
-                .select_related('parent')
-                .annotate(
-                    reactions_count=Count('reactions', distinct=True),
-                    replies_count=Count('replies', distinct=True)
-                )
-        )
+        return get_comment_queryset(self)
     
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
@@ -35,30 +37,24 @@ class CommentListCreateView(generics.ListCreateAPIView):
 
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentDetailSerializer
-    queryset = Comment.objects.all()
     permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
-        return (Comment.objects
-                .prefetch_related('reactions')
-                .select_related('author')
-                .select_related('parent')
-                .annotate(
-                    reactions_count=Count('reactions', distinct=True),
-                    replies_count=Count('replies', distinct=True)
-                )
-        )
+        return get_comment_queryset(self)
+
+def get_reaction_queryset(self):
+    comment_pk = self.kwargs['pk']
+    return (CommentReaction.objects.
+            filter(comment__pk=comment_pk)
+            .select_related('author')
+            .select_related('comment'))
 
 class CommentReactionListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        comment_pk = self.kwargs['pk']
-        return (CommentReaction.objects.
-                filter(comment__pk=comment_pk)
-                .select_related('author')
-                .select_related('comment'))
+        return get_reaction_queryset(self)
     
     def perform_create(self, serializer):
         author = self.request.user
@@ -70,8 +66,4 @@ class CommentReactionDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthorOrReadOnly]
     
     def get_queryset(self):
-        comment_pk = self.kwargs['comment_pk']
-        return (CommentReaction.objects.
-                filter(comment__pk=comment_pk)
-                .select_related('author')
-                .select_related('comment'))
+        return get_reaction_queryset(self)

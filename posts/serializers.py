@@ -93,11 +93,11 @@ class PostReactionSerializer(serializers.HyperlinkedModelSerializer):
         if self.instance is not None:
             return attrs
 
-        request = self.context.get('request')
-        slug = self.context['view'].kwargs.get('slug')
+        request = self.context['request']
+        slug = self.context['view'].kwargs['slug']
 
         post = get_object_or_404(Post, slug=slug)
-        author = request.user #type: ignore 
+        author = request.user
 
         if PostReaction.objects.filter(post=post, author=author).exists():
             raise serializers.ValidationError(

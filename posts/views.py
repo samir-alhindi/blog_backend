@@ -9,6 +9,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from time_machine import travel
 
+def get_post_queryset(self):
+    return (Post.objects
+            .select_related('author')
+            .annotate(
+                reactions_count=Count('reactions', distinct=True),
+                comments_count=Count('comments', distinct=True)))
+
 class PostListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_class = PostFilter
@@ -18,11 +25,7 @@ class PostListCreateView(generics.ListCreateAPIView):
     ordering = ['-creation_datetime']
 
     def get_queryset(self):
-        return (Post.objects
-                .select_related('author')
-                .annotate(
-                    reactions_count=Count('reactions', distinct=True),
-                    comments_count=Count('comments', distinct=True)))
+        return get_post_queryset(self)
 
     def get_serializer_class(self):
         return PostCreateSerializer if self.request.method == 'POST' else PostListSerializer
@@ -38,12 +41,14 @@ class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     ]
 
     def get_queryset(self):
-        return (Post.objects
-                .prefetch_related('reactions', 'comments')
-                .select_related('author')
-                .annotate(
-                    reactions_count=Count('reactions', distinct=True),
-                    comments_count=Count('comments', distinct=True)))
+        return get_post_queryset(self)
+
+def get_reactions_queryset(self):
+    post_slug = self.kwargs['slug']
+    return (PostReaction.objects
+            .filter(post__slug=post_slug)
+            .select_related('post')
+            .select_related('author'))
 
 class PostReactionListCreateView(generics.ListCreateAPIView):
     serializer_class = PostReactionSerializer
@@ -52,11 +57,7 @@ class PostReactionListCreateView(generics.ListCreateAPIView):
     ordering = ['-creation_datetime']
 
     def get_queryset(self):
-        post_slug = self.kwargs['slug']
-        return (PostReaction.objects
-                .filter(post__slug=post_slug)
-                .select_related('post')
-                .select_related('author'))
+        return get_reactions_queryset(self)
 
     def perform_create(self, serializer):
         author = self.request.user
@@ -68,7 +69,4 @@ class PostReactionDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
-        post_slug = self.kwargs['slug']
-        return (PostReaction.objects
-                .filter(post__slug=post_slug)
-                .select_related('post'))
+        return get_reactions_queryset(self)

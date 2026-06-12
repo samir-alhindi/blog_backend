@@ -45,7 +45,7 @@ class CommentCreateSerializer(_CommentBaseSerializer):
         post: Post | None = attrs.get('post')
         if parent_comment and post and parent_comment.post != post:
             raise serializers.ValidationError(f"Comment parent's post must be the same as it's own post.")
-        return super().validate(attrs)
+        return attrs
 
     class Meta:
         model = Comment
