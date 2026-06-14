@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Q, F
 
 # Create your models here.
 class User(AbstractUser):
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True, max_length=1024)
     avatar = models.ImageField(upload_to='avatars/', null=True)
     following = models.ManyToManyField(
         'self',
@@ -22,5 +23,13 @@ class Follow(models.Model):
             models.UniqueConstraint(
                 fields=['from_user', 'to_user'],
                 name='unique_follow'
+            ),
+
+            models.CheckConstraint(
+                condition=~Q(from_user=F('to_user')),
+                name='prevent_self_follow'
             )
         ]
+    
+    def __str__(self) -> str:
+        return f'follow from {self.from_user} to {self.to_user}'

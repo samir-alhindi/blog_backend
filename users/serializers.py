@@ -23,11 +23,37 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                 'author_username' : obj.username
             }
         )
-
     
+    followers = serializers.SerializerMethodField()
+    def get_followers(self, obj):
+        request = self.context['request']
+        return reverse(
+            viewname='follower-list',
+            request=request,
+            kwargs={
+                'username' : obj.username
+            }
+        )
+    
+    following = serializers.SerializerMethodField()
+    def get_following(self, obj):
+        request = self.context['request']
+        return reverse(
+            viewname='following-list',
+            request=request,
+            kwargs={
+                'username' : obj.username
+            }
+        )
+    
+
     class Meta:
         model = User
-        fields = ['url', 'username', 'id', 'bio','avatar', 'posts', 'followers_count', 'following_count']
+        fields = [
+            'url', 'username', 'id', 'bio',
+            'avatar', 'posts', 'followers_count',
+            'following_count', 'followers', 'following'
+            ]
 
 class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
@@ -84,7 +110,6 @@ class FollowingListSerializer(serializers.HyperlinkedModelSerializer):
         
         return value
         
-
     class Meta:
         model = Follow
         fields = ['url', 'to_user', 'creation_date']
