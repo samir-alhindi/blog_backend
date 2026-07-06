@@ -2,6 +2,7 @@
 from .models import User
 from rest_framework import serializers
 from rest_framework.reverse import reverse
+from django.contrib.auth import login
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -73,4 +74,6 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url','username', 'password', 'bio', 'avatar']
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        user = User.objects.create_user(**validated_data)
+        login(self.context['request'], user)
+        return user

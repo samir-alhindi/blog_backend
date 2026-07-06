@@ -8,8 +8,8 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
             return True
         return request.user == obj.author
 
-class isMeOrReadOnly(permissions.BasePermission):
-    def has_permission(self, request, view):
+class IsFollowerOrOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
-        return request.user.username == view.kwargs['username']
+        return request.user == obj.from_user

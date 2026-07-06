@@ -1,12 +1,9 @@
 from django.db.models import Count
-from django.shortcuts import get_object_or_404
 from rest_framework import generics
-
 from core.pagination import StandardPagination
 from .serializers import UserSerializer, UserCreateSerializer
 from .permissions import IsUserOrReadOnly
 from rest_framework.filters import OrderingFilter, SearchFilter
-from core.permissions import isMeOrReadOnly
 from .models import User
 
 # Create your views here.
