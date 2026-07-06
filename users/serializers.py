@@ -24,6 +24,17 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             }
         )
     
+    comments = serializers.SerializerMethodField()
+    def get_comments(self, obj):
+        request = self.context['request']
+        return reverse(
+            viewname='comment-list',
+            request=request,
+            query={
+                'author_username' : obj.username
+            }
+        )
+    
     followers = serializers.SerializerMethodField()
     def get_followers(self, obj):
         request = self.context['request']
@@ -50,9 +61,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = [
-            'url', 'username', 'id', 'bio',
-            'avatar', 'posts', 'followers_count',
-            'following_count', 'followers', 'following'
+            'url', 'username', 'id', 'bio', 'avatar',
+            'posts', 'comments',
+            'followers_count', 'following_count',
+            'followers', 'following'
             ]
 
 class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
