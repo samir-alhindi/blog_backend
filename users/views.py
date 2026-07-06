@@ -22,6 +22,7 @@ class UserList(generics.ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['username', 'bio']
     ordering_fields = ['followers_count', 'following_count', 'date_joined']
+    ordering = ['-date_joined']
     pagination_class = StandardPagination
 
     def get_serializer_class(self): 
@@ -41,6 +42,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class FollowerList(generics.ListAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     ordering_fields = ['creation_date']
+    ordering = ['-creation_date']
     pagination_class = StandardPagination
     serializer_class = FollowerSerializer
 
@@ -50,6 +52,7 @@ class FollowerList(generics.ListAPIView):
 class FollowingList(generics.ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     ordering_fields = ['creation_date']
+    ordering = ['-creation_date']
     serializer_class = FollowingListSerializer
     pagination_class = StandardPagination
     permission_classes = [isMeOrReadOnly]

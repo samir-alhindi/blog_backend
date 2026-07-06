@@ -19,6 +19,7 @@ def get_comment_queryset(self):
                 reactions_count=Count('reactions', distinct=True),
                 replies_count=Count('replies', distinct=True)
             )
+            
     )
 
 class CommentListCreateView(generics.ListCreateAPIView):
@@ -28,6 +29,7 @@ class CommentListCreateView(generics.ListCreateAPIView):
     pagination_class = StandardPagination
     search_fields = ['body', 'author__username', 'post__title']
     ordering_fields = ['creation_date', 'reactions_count', 'replies_count']
+    ordering = ['-creation_datetime']
     pagination_class = StandardPagination
 
     def get_queryset(self):
@@ -50,12 +52,14 @@ def get_reaction_queryset(self):
     comment_pk = self.kwargs['pk']
     return (CommentReaction.objects.
             filter(comment__pk=comment_pk)
+            .order_by('-creation_datetime')
             .select_related('author')
             .select_related('comment'))
 
 class CommentReactionListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentReactionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    pagination_class = StandardPagination
 
     def get_queryset(self):
         return get_reaction_queryset(self)
