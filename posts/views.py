@@ -8,6 +8,7 @@ from .filters import PostFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from time_machine import travel
+from core.pagination import StandardPagination
 
 def get_post_queryset(self):
     return (Post.objects
@@ -20,6 +21,7 @@ class PostListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_class = PostFilter
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
+    pagination_class = StandardPagination
     search_fields = ['body', 'title', 'author__username']
     ordering_fields = ['creation_datetime', 'reactions_count', 'comments_count']
     ordering = ['-creation_datetime']
@@ -55,6 +57,7 @@ class PostReactionListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [OrderingFilter]
     ordering = ['-creation_datetime']
+    pagination_class = StandardPagination
 
     def get_queryset(self):
         return get_reactions_queryset(self)

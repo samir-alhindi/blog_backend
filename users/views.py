@@ -2,6 +2,7 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
+from core.pagination import StandardPagination
 from .models import User, Follow
 from .serializers import FollowingDetailSerializer, UserSerializer, UserCreateSerializer, FollowerSerializer, FollowingListSerializer
 from .permissions import IsUserOrReadOnly
@@ -21,6 +22,7 @@ class UserList(generics.ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['username', 'bio']
     ordering_fields = ['followers_count', 'following_count', 'date_joined']
+    pagination_class = StandardPagination
 
     def get_serializer_class(self): 
         return UserCreateSerializer if self.request.method == 'POST' else UserSerializer
@@ -39,6 +41,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class FollowerList(generics.ListAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     ordering_fields = ['creation_date']
+    pagination_class = StandardPagination
     serializer_class = FollowerSerializer
 
     def get_queryset(self):
@@ -48,6 +51,7 @@ class FollowingList(generics.ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     ordering_fields = ['creation_date']
     serializer_class = FollowingListSerializer
+    pagination_class = StandardPagination
     permission_classes = [isMeOrReadOnly]
 
     def get_queryset(self):

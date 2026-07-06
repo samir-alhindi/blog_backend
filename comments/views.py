@@ -1,6 +1,8 @@
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
+
+from core.pagination import StandardPagination
 from .models import Comment, CommentReaction
 from .serializers import CommentDetailSerializer, CommentReactionSerializer, CommentListSerializer, CommentCreateSerializer
 from rest_framework import permissions
@@ -23,8 +25,10 @@ class CommentListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
     filterset_class = CommentFilter
+    pagination_class = StandardPagination
     search_fields = ['body', 'author__username', 'post__title']
     ordering_fields = ['creation_date', 'reactions_count', 'replies_count']
+    pagination_class = StandardPagination
 
     def get_queryset(self):
         return get_comment_queryset(self)
