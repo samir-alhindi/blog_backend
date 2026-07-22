@@ -32,7 +32,8 @@ def api_entry_point(request: Request) -> Response:
         'users' : reverse('user-list', request=request),
         'posts' : reverse('post-list', request=request),
         'comments' : reverse('comment-list', request=request),
-        'follows' : reverse('follow-list', request=request)
+        'follows' : reverse('follow-list', request=request),
+        'bookmarks' : reverse('bookmark-list', request=request),
     })
 
 urlpatterns = [
@@ -43,6 +44,7 @@ urlpatterns = [
     path('api/users/', include('users.urls')),
     path('api/comments/', include('comments.urls')),
     path('api/follows/', include('follows.urls')),
+    path('api/bookmarks/', include('bookmarks.urls')),
 ]
 
 if settings.DEBUG:

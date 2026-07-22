@@ -18,6 +18,7 @@ class _PostBaseSerializer(serializers.HyperlinkedModelSerializer):
 
     reactions_count = serializers.IntegerField(read_only=True)
     comments_count = serializers.IntegerField(read_only=True)
+    bookmarks_count = serializers.IntegerField(read_only=True)
 
     reactions = serializers.SerializerMethodField()
     def get_reactions(self, obj):
@@ -36,7 +37,7 @@ class PostListSerializer(_PostBaseSerializer):
     class Meta:
         model = Post
         fields = ['url', 'id', 'title', 'slug',  'image', 'author',
-                  'creation_datetime', 'comments_count',
+                  'creation_datetime', 'comments_count', 'bookmarks_count',
                   'reactions_count', 'comments', 'reactions', ]
         read_only_fields = ['slug']
 

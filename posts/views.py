@@ -1,6 +1,7 @@
 
 from django.db.models import Count
 from rest_framework import permissions, generics
+
 from .serializers import PostReactionSerializer, PostListSerializer, PostDetailSerializer, PostCreateSerializer
 from .models import Post, PostReaction
 from core.permissions import IsAuthorOrReadOnly
@@ -15,7 +16,9 @@ def get_post_queryset(self):
             .select_related('author')
             .annotate(
                 reactions_count=Count('reactions', distinct=True),
-                comments_count=Count('comments', distinct=True)))
+                comments_count=Count('comments', distinct=True),
+                bookmarks_count=Count('bookmarks', distinct=True),
+            ))
 
 class PostListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
