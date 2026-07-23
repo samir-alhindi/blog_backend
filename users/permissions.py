@@ -7,3 +7,7 @@ class IsUserOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return request.user == obj
+
+class IsUser(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.username == view.kwargs['username']

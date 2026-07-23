@@ -3,6 +3,7 @@ from .models import User
 from rest_framework import serializers
 from rest_framework.reverse import reverse
 from django.contrib.auth import login
+from django.contrib.auth.password_validation import validate_password
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -73,7 +74,27 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['url','username', 'password', 'bio', 'avatar']
 
+    def validate_password(self, value):
+        validate_password(value)
+        return value
+
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         login(self.context['request'], user)
         return user
+
+class PasswordUpdateSerializer(serializers.Serializer):
+    current_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(write_only=True)
+
+    def validate_current_password(self, value):
+        user: User = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError("Old password is incorrect.")
+        return value
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value
+
+    

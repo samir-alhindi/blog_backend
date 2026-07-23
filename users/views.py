@@ -1,8 +1,11 @@
 from django.db.models import Count
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework import status
+from django.contrib.auth import logout
 from core.pagination import StandardPagination
-from .serializers import UserSerializer, UserCreateSerializer
-from .permissions import IsUserOrReadOnly
+from .serializers import UserSerializer, UserCreateSerializer, PasswordUpdateSerializer
+from .permissions import IsUserOrReadOnly, IsUser
 from rest_framework.filters import OrderingFilter, SearchFilter
 from .models import User
 
@@ -35,3 +38,21 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return get_user_queryset(self)
+
+class PasswordUpdateView(generics.UpdateAPIView):
+    serializer_class = PasswordUpdateSerializer
+    permission_classes = [IsUser]
+
+    def get_object(self):
+        return self.request.user
+
+    def update(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer: PasswordUpdateSerializer = self.get_serializer(data=request.data, context={'request': request})
+        if serializer.is_valid(raise_exception=True):
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+        return Response({
+                "message": "Password updated successfully."},
+                status=status.HTTP_200_OK
+        )
