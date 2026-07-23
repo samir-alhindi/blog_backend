@@ -18,7 +18,7 @@ def get_post_queryset(self):
                 reactions_count=Count('reactions', distinct=True),
                 comments_count=Count('comments', distinct=True),
                 bookmarks_count=Count('bookmarks', distinct=True),
-            ))
+        ))
 
 class PostListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -41,9 +41,7 @@ class PostListCreateView(generics.ListCreateAPIView):
 class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostDetailSerializer
     lookup_field = 'slug'
-    permission_classes = [
-        IsAuthorOrReadOnly
-    ]
+    permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
         return get_post_queryset(self)

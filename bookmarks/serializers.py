@@ -3,18 +3,19 @@ from rest_framework import serializers
 from .models import Bookmark
 from posts.models import Post
 
-class BookmarkCreateSerializer(serializers.HyperlinkedModelSerializer):
+class _BookmarkSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        lookup_field='username',
+        read_only=True,
+    )
+
+class BookmarkCreateSerializer(_BookmarkSerializer):
 
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
         lookup_field='slug',
         queryset=Post.objects.all(),
-    )
-
-    user = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        lookup_field='username',
-        read_only=True,
     )
 
     def validate(self, attrs):
@@ -34,17 +35,11 @@ class BookmarkCreateSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'url', 'creation_date', 'post', 'user']
         model = Bookmark
     
-class BookmarkSerializer(serializers.HyperlinkedModelSerializer):
+class BookmarkSerializer(_BookmarkSerializer):
 
     post = serializers.HyperlinkedRelatedField(
         view_name='post-detail',
         lookup_field='slug',
-        read_only=True,
-    )
-
-    user = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        lookup_field='username',
         read_only=True,
     )
 

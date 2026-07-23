@@ -1,5 +1,5 @@
-from django.db import IntegrityError
 
+from django.db import IntegrityError
 from django.db import models
 from django.utils.text import slugify
 from reactions.models import Reaction
@@ -16,6 +16,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts/', null=True, blank=True)
     creation_datetime = models.DateTimeField(auto_now_add=True)
     last_edit_datetime = models.DateTimeField(auto_now=True)
+    #deletion_datetime = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs) -> None:
         if self.slug:
