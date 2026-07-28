@@ -38,8 +38,8 @@ class PostListSerializer(_PostBaseSerializer):
         model = Post
         fields = ['url', 'id', 'title', 'slug',  'image', 'author',
                   'creation_datetime', 'comments_count', 'bookmarks_count',
-                  'reactions_count', 'comments', 'reactions', ]
-        read_only_fields = ['slug']
+                  'reactions_count', 'comments', 'reactions', 'deletion_datetime']
+        read_only_fields = ['slug', 'deletion_datetime']
 
 class PostDetailSerializer(_PostBaseSerializer):
     '''
@@ -48,8 +48,10 @@ class PostDetailSerializer(_PostBaseSerializer):
     class Meta:
         model = Post
         fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
-                  'last_edit_datetime', 'comments', 'reactions', 'comments_count', 'reactions_count']
-        read_only_fields = ['slug']
+                  'last_edit_datetime', 'comments', 'reactions', 'comments_count',
+                  'bookmarks_count', 'reactions_count', 'deletion_datetime',
+                ]
+        read_only_fields = ['slug', 'deletion_datetime', ]
 
 class PostCreateSerializer(_PostBaseSerializer):
     '''

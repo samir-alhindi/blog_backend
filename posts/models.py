@@ -1,4 +1,6 @@
 
+from typing import Any
+
 from django.db import IntegrityError
 from django.db import models
 from django.utils.text import slugify
@@ -6,8 +8,21 @@ from reactions.models import Reaction
 from users.models import User
 import uuid
 
+class PostManager(models.Manager):
+    def get_queryset(self) -> models.QuerySet:
+        return super().get_queryset().filter(deletion_datetime=None)
+
+class DeletedPostManager(models.Manager):
+    def get_queryset(self) -> models.QuerySet:
+        return super().get_queryset().exclude(deletion_datetime=None)
+
 # Create your models here.
 class Post(models.Model):
+
+    objects = PostManager()
+    all_objects = models.Manager()
+    deleted_objects = DeletedPostManager()
+
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
 
     title = models.CharField(max_length=255)
@@ -16,7 +31,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts/', null=True, blank=True)
     creation_datetime = models.DateTimeField(auto_now_add=True)
     last_edit_datetime = models.DateTimeField(auto_now=True)
-    #deletion_datetime = models.DateTimeField(null=True)
+    deletion_datetime = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs) -> None:
         if self.slug:

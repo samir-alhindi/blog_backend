@@ -9,6 +9,7 @@ from .filters import PostFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from time_machine import travel
+from datetime import datetime
 from core.pagination import StandardPagination
 
 def get_post_queryset(self):
@@ -45,6 +46,10 @@ class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return get_post_queryset(self)
+
+    def perform_destroy(self, instance):
+        instance.deletion_datetime = datetime.now()
+        instance.save()
 
 def get_reactions_queryset(self):
     post_slug = self.kwargs['slug']

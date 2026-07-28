@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import URLResolver, include, path
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.decorators import api_view
@@ -34,6 +34,7 @@ def api_entry_point(request: Request) -> Response:
         'comments' : reverse('comment-list', request=request),
         'follows' : reverse('follow-list', request=request),
         'bookmarks' : reverse('bookmark-list', request=request),
+        'deleted-posts' : reverse('deleted-post-list', request=request)
     })
 
 urlpatterns = [
@@ -45,6 +46,7 @@ urlpatterns = [
     path('api/comments/', include('comments.urls')),
     path('api/follows/', include('follows.urls')),
     path('api/bookmarks/', include('bookmarks.urls')),
+    path('api/deleted-posts/', include('deleted_posts.urls')),
 ]
 
 if settings.DEBUG:

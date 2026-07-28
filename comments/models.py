@@ -3,8 +3,13 @@ from posts.models import Post
 from reactions.models import Reaction
 from users.models import User
 
+class CommentManager(models.Manager):
+    def get_queryset(self) -> models.QuerySet:
+        return super().get_queryset().filter(post__deletion_datetime=None)
+
 # Create your models here.
 class Comment(models.Model):
+    objects = CommentManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True)
