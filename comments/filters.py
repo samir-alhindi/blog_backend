@@ -3,6 +3,10 @@ from django_filters import rest_framework as filters
 
 class CommentFilter(filters.FilterSet):
 
+    '''
+    Used to filter comments
+    '''
+
     author_username = filters.CharFilter(
         field_name='author__username',
         lookup_expr='exact',

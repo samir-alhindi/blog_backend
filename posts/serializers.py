@@ -5,6 +5,10 @@ from .models import Post, PostReaction
 from rest_framework import serializers
 
 class _PostBaseSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Abstract base class for Post Serializers.
+    Simply extend this class and define an inner Meta class with the fields that you want.
+    '''
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
         lookup_field='slug'
@@ -32,7 +36,7 @@ class _PostBaseSerializer(serializers.HyperlinkedModelSerializer):
 
 class PostListSerializer(_PostBaseSerializer):
     '''
-    Used for list operations on posts
+    Used for list operations on posts.
     '''
     class Meta:
         model = Post
@@ -43,7 +47,7 @@ class PostListSerializer(_PostBaseSerializer):
 
 class PostDetailSerializer(_PostBaseSerializer):
     '''
-    Used for retrieve/update/delete operations on posts
+    Used for retrieve/update/delete operations on posts.
     '''
     class Meta:
         model = Post
@@ -55,7 +59,7 @@ class PostDetailSerializer(_PostBaseSerializer):
 
 class PostCreateSerializer(_PostBaseSerializer):
     '''
-    Used for create operations on posts
+    Used for create operations on posts.
     '''
 
     class Meta:
@@ -64,6 +68,9 @@ class PostCreateSerializer(_PostBaseSerializer):
         read_only_fields = ['slug']
 
 class PostReactionSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for retrieve/update/delete/list/create opperations on post reactions.
+    '''
 
     url = serializers.SerializerMethodField()
 

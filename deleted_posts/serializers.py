@@ -5,7 +5,9 @@ from rest_framework import serializers
 
 
 class DeletedPostListSerializer(_PostBaseSerializer):
-
+    '''
+    Used for list opperations on deleted posts.
+    '''
     url = serializers.HyperlinkedIdentityField(
         view_name='deleted-post-detail',
         lookup_field='slug',
@@ -17,8 +19,10 @@ class DeletedPostListSerializer(_PostBaseSerializer):
                   'creation_datetime', 'comments_count', 'bookmarks_count',
                   'reactions_count', 'deletion_datetime']
 
-class DeletedPostDetailSerializer(_PostBaseSerializer):
-
+class DeletedPostRetrieveDestroySerializer(_PostBaseSerializer):
+    '''
+    Used for retrieve/delete operations on deleted posts.
+    '''
     url = serializers.HyperlinkedIdentityField(
         view_name='deleted-post-detail',
         lookup_field='slug',
@@ -40,6 +44,9 @@ class DeletedPostDetailSerializer(_PostBaseSerializer):
         read_only_fields = ['slug']
 
 class DeletedPostUpdateSerializer(_PostBaseSerializer):
+    '''
+    Used for update operations on deleted posts.
+    '''
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
         lookup_field='slug',

@@ -6,6 +6,9 @@ from django.contrib.auth import login
 from django.contrib.auth.password_validation import validate_password
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for list/retrieve/update/destroy opperations on users/authors.
+    '''
 
     followers_count = serializers.BigIntegerField(read_only=True)
     following_count = serializers.BigIntegerField(read_only=True)
@@ -65,6 +68,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             ]
 
 class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Used for create opperations on users/authors.
+    '''
     url = serializers.HyperlinkedIdentityField(
         view_name='user-detail',
         lookup_field='username'
@@ -84,6 +90,9 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 class PasswordUpdateSerializer(serializers.Serializer):
+    '''
+    Used to change a user's password.
+    '''
     current_password = serializers.CharField(write_only=True)
     new_password = serializers.CharField(write_only=True)
 

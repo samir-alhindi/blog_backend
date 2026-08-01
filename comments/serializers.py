@@ -5,6 +5,9 @@ from .models import Comment, CommentReaction, Post
 from rest_framework import serializers
 
 class _CommentBaseSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Abstract base class to be extended by other comment serializers
+    '''
 
     author = serializers.HyperlinkedRelatedField(
         view_name='user-detail',

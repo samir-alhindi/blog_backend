@@ -6,7 +6,7 @@ from core.pagination import StandardPagination
 from follows.filters import FollowFilter
 from follows.models import Follow
 from follows.serializers import FollowSerializer
-from core.permissions import IsFollowerOrOnly
+from .permissions import IsFollowerOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 def get_follow_queryset(self):
@@ -33,7 +33,7 @@ class FollowList(ListCreateAPIView):
 
 class FollowDetail(RetrieveDestroyAPIView):
     serializer_class = FollowSerializer
-    permission_classes = [IsFollowerOrOnly]
+    permission_classes = [IsFollowerOrReadOnly]
     
     def get_queryset(self):
         return get_follow_queryset(self)

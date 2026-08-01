@@ -3,6 +3,9 @@ from users.models import User
 
 # Create your models here.
 class Reaction(models.Model):
+    '''
+    Abstract model that represents an author's reaction (Joy, Sadness, Anger...).
+    '''
     class ReactionTypes(models.TextChoices):
         LIKE = 'Like'
         DISLIKE = 'Dislike'

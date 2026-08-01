@@ -9,18 +9,26 @@ from users.models import User
 import uuid
 
 class PostManager(models.Manager):
+    '''
+    Manager for posts that have not been deleted.
+    '''
     def get_queryset(self) -> models.QuerySet:
         return super().get_queryset().filter(deletion_datetime=None)
 
 class DeletedPostManager(models.Manager):
+    '''
+    Manager for posts that have been deleted.
+    '''
     def get_queryset(self) -> models.QuerySet:
         return super().get_queryset().exclude(deletion_datetime=None)
 
-# Create your models here.
 class Post(models.Model):
+    '''
+    Represents a blog post made by an author. The most important database model in this API.
+    '''
 
-    objects = PostManager()
     all_objects = models.Manager()
+    objects = PostManager()
     deleted_objects = DeletedPostManager()
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
@@ -48,6 +56,9 @@ class Post(models.Model):
         return self.slug or self.title
 
 class PostReaction(Reaction):
+    '''
+    Represents an author's reaction (Joy, Sadness, Anger...) to a blog Post.
+    '''
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_reactions')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reactions')
 

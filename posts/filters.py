@@ -1,6 +1,9 @@
 from django_filters import rest_framework as filters
 
 class PostFilter(filters.FilterSet):
+    '''
+    Used to filter posts.
+    '''
 
     created_before = filters.IsoDateTimeFilter(
         field_name='creation_datetime',

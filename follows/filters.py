@@ -2,6 +2,9 @@
 from django_filters import rest_framework as filters
 
 class FollowFilter(filters.FilterSet):
+    '''
+    Used to fliter user follows.
+    '''
 
     created_before = filters.DateFilter(
         field_name='creation_date',

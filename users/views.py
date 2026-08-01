@@ -2,22 +2,26 @@ from django.db.models import Count
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth import logout
 from core.pagination import StandardPagination
-from .serializers import UserSerializer, UserCreateSerializer, PasswordUpdateSerializer
+from . import serializers
 from .permissions import IsUserOrReadOnly, IsUser
 from rest_framework.filters import OrderingFilter, SearchFilter
 from .models import User
 
-# Create your views here.
-
 def get_user_queryset(self):
+    '''
+    returns a query containing every user in the database.
+    annotated with counts for followers and followings.
+    '''
     return (User.objects
             .annotate(followers_count=Count('followers', distinct=True))
             .annotate(following_count=Count('following', distinct=True))
     )
 
-class UserList(generics.ListCreateAPIView):
+class UserListCreateView(generics.ListCreateAPIView):
+    '''
+    Used for list/create opperations on users.
+    '''
     
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['username', 'bio']
@@ -26,13 +30,16 @@ class UserList(generics.ListCreateAPIView):
     pagination_class = StandardPagination
 
     def get_serializer_class(self): 
-        return UserCreateSerializer if self.request.method == 'POST' else UserSerializer
+        return serializers.UserCreateSerializer if self.request.method == 'POST' else serializers.UserSerializer
     
     def get_queryset(self):
         return get_user_queryset(self)
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSerializer
+    '''
+    Used for retrieve/update/delete operations on users.
+    '''
+    serializer_class = serializers.UserSerializer
     permission_classes = [IsUserOrReadOnly]
     lookup_field = 'username'
 
@@ -40,7 +47,10 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
         return get_user_queryset(self)
 
 class PasswordUpdateView(generics.UpdateAPIView):
-    serializer_class = PasswordUpdateSerializer
+    '''
+    used to change a user's password.
+    '''
+    serializer_class = serializers.PasswordUpdateSerializer
     permission_classes = [IsUser]
 
     def get_object(self):
