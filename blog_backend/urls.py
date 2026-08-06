@@ -22,6 +22,7 @@ from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 @api_view(['GET', 'HEAD'])
 def api_entry_point(request: Request) -> Response:
@@ -34,13 +35,18 @@ def api_entry_point(request: Request) -> Response:
         'comments' : reverse('comment-list', request=request),
         'follows' : reverse('follow-list', request=request),
         'bookmarks' : reverse('bookmark-list', request=request),
-        'deleted-posts' : reverse('deleted-post-list', request=request)
+        'deleted-posts' : reverse('deleted-post-list', request=request),
+        'auth tokens' : reverse('token_obtain_pair', request=request)
     })
 
 urlpatterns = [
-    path('api/admin/', admin.site.urls),
-    path('auth/', include('rest_framework.urls')),
     path('api/', api_entry_point, name='entry-point'),
+    path('api/admin/', admin.site.urls),
+
+    # auth:
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
     path('api/posts/', include('posts.urls')),
     path('api/users/', include('users.urls')),
     path('api/comments/', include('comments.urls')),
