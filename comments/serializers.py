@@ -66,7 +66,7 @@ class CommentListSerializer(_CommentBaseSerializer):
 
     class Meta:
         model = Comment
-        fields = ['url', 'id', 'post', 'parent', 'author', 'creation_datetime', 'reactions_count', 'replies_count', 'reactions', 'replies']
+        fields = ['url', 'id', 'body', 'post', 'parent', 'author', 'creation_datetime', 'reactions_count', 'replies_count', 'reactions', 'replies']
 
 class CommentDetailSerializer(_CommentBaseSerializer):
     '''
