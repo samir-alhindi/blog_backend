@@ -12,6 +12,7 @@ pillow = "*"
 django-stubs = "*"
 django-extensions = "*"
 time-machine = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

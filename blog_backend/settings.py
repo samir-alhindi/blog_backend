@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_simplejwt',
     'django_extensions',
-    
+    'corsheaders',
+
     'core',
     'users',
     'posts',
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -106,6 +108,14 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
         "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
 }
+
+# Local dev only: lets a frontend dev server (e.g. Next.js) on any localhost port
+# call this API cross-origin. Not port-specific so contributors don't need to edit
+# this every time their frontend picks a different port.
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r'^http://localhost:\d+$',
+    r'^http://127\.0\.0\.1:\d+$',
+]
 
 
 # Password validation
