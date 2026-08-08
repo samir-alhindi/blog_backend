@@ -7,6 +7,7 @@ from . import serializers
 from .permissions import IsUserOrReadOnly, IsUser
 from rest_framework.filters import OrderingFilter, SearchFilter
 from .models import User
+from rest_framework_simplejwt import tokens
 
 def get_user_queryset(self):
     '''
@@ -34,6 +35,22 @@ class UserListCreateView(generics.ListCreateAPIView):
     
     def get_queryset(self):
         return get_user_queryset(self)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+
+        refresh = tokens.RefreshToken.for_user(user)
+
+        data = serializer.data
+        data['tokens'] = {
+            'refresh' : str(refresh),
+            'access' : str(refresh.access_token)
+        }
+
+        headers = self.get_success_headers(data)
+        return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     '''

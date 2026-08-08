@@ -85,9 +85,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         return value
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        login(self.context['request'], user)
-        return user
+        return User.objects.create_user(**validated_data)
 
 class PasswordUpdateSerializer(serializers.Serializer):
     '''
