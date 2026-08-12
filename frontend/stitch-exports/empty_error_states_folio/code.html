@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Folio - Empty &amp; Error States</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=Merriweather:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#27313f",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-tertiary-fixed": "#351000",
+                    "secondary": "#712ae2",
+                    "tertiary-container": "#a44100",
+                    "on-surface-variant": "#464555",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "primary-fixed": "#e2dfff",
+                    "on-secondary-container": "#fffbff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "outline-variant": "#c7c4d8",
+                    "surface-variant": "#d9e3f6",
+                    "inverse-on-surface": "#eaf1ff",
+                    "primary": "#3525cd",
+                    "on-error": "#ffffff",
+                    "primary-container": "#4f46e5",
+                    "surface-dim": "#d0dbed",
+                    "surface-bright": "#f8f9ff",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#0f0069",
+                    "background": "#f8f9ff",
+                    "surface-container-highest": "#d9e3f6",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "secondary-container": "#8a4cfc",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#dee9fc",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "secondary-fixed": "#eaddff",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#dad7ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#25005a",
+                    "tertiary-fixed": "#ffdbcc",
+                    "inverse-primary": "#c3c0ff",
+                    "on-background": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-container-low": "#eff4ff",
+                    "on-surface": "#121c2a",
+                    "tertiary": "#7e3000",
+                    "on-tertiary-container": "#ffd2be",
+                    "outline": "#777587",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "surface-tint": "#4d44e3",
+                    "surface": "#f8f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-md": "24px",
+                    "gutter": "24px",
+                    "stack-lg": "64px",
+                    "container-max": "1280px",
+                    "margin-edge": "32px",
+                    "article-width": "720px"
+            },
+            "fontFamily": {
+                    "display-lg": [
+                            "Playfair Display"
+                    ],
+                    "headline-md": [
+                            "Playfair Display"
+                    ],
+                    "ui-label": [
+                            "Public Sans"
+                    ],
+                    "ui-button": [
+                            "Public Sans"
+                    ],
+                    "caption": [
+                            "Public Sans"
+                    ],
+                    "article-body": [
+                            "Merriweather"
+                    ],
+                    "display-lg-mobile": [
+                            "Playfair Display"
+                    ],
+                    "article-body-mobile": [
+                            "Merriweather"
+                    ]
+            },
+            "fontSize": {
+                    "display-lg": [
+                            "64px",
+                            {
+                                    "lineHeight": "72px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "ui-label": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "ui-button": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "caption": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "article-body": [
+                            "20px",
+                            {
+                                    "lineHeight": "34px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg-mobile": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "article-body-mobile": [
+                            "18px",
+                            {
+                                    "lineHeight": "30px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .glass-overlay {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-article-body min-h-screen">
+<!-- TopNavBar (Reference from JSON, contextually hidden for this specific showcase, but included for structure if needed, simplified as it's a reference sheet) -->
+<header class="bg-surface-container-lowest border-b border-outline-variant fixed top-0 w-full z-50">
+<div class="flex justify-between items-center h-16 px-margin-edge max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-md text-primary tracking-tight">Folio</div>
+<nav class="hidden md:flex gap-6 font-ui-label text-ui-label">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Bookmarks</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Write</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="scale-95 active:opacity-80 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-stack-lg px-margin-edge max-w-container-max mx-auto">
+<div class="mb-stack-lg text-center">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-stack-sm">The Atelier in Pause</h1>
+<p class="font-article-body text-article-body-mobile md:text-article-body text-on-surface-variant max-w-article-width mx-auto">A reference collection of empty and error states, designed with quiet editorial sophistication.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter max-w-container-max mx-auto">
+<!-- 1. Empty Feed -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-md md:p-stack-lg flex flex-col items-center justify-center text-center min-h-[400px] hover:shadow-lg transition-shadow duration-300">
+<div class="w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-4xl text-outline" style="font-variation-settings: 'FILL' 0;">history_edu</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">No posts yet</h2>
+<p class="font-article-body text-article-body-mobile text-on-surface-variant mb-stack-md max-w-sm">The page is blank, waiting for your thoughts. Begin your modern editorial journey here.</p>
+<button class="bg-primary text-on-primary font-ui-button text-ui-button px-6 py-3 rounded hover:bg-surface-tint transition-colors">Start Writing</button>
+</section>
+<!-- 2. No Search Results -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-md md:p-stack-lg flex flex-col items-center justify-center text-center min-h-[400px] hover:shadow-lg transition-shadow duration-300">
+<div class="w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-4xl text-outline" style="font-variation-settings: 'FILL' 0;">search_off</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">No matches found</h2>
+<p class="font-article-body text-article-body-mobile text-on-surface-variant mb-stack-md max-w-sm">We couldn't find any articles matching your search criteria. Perhaps try different keywords or explore the latest publications.</p>
+<button class="border border-outline font-ui-button text-ui-button text-on-surface px-6 py-3 rounded hover:bg-surface-container-low transition-colors">Explore Latest</button>
+</section>
+<!-- 3. 404 Error -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-md md:p-stack-lg flex flex-col items-center justify-center text-center min-h-[400px] hover:shadow-lg transition-shadow duration-300 relative overflow-hidden">
+<!-- Abstract visual element for 404 -->
+<div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center">
+<span class="font-display-lg text-[200px] leading-none text-on-surface-variant">404</span>
+</div>
+<div class="w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center mb-stack-md relative z-10">
+<span class="material-symbols-outlined text-4xl text-outline" style="font-variation-settings: 'FILL' 0;">auto_stories</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm relative z-10">The atelier is empty</h2>
+<p class="font-article-body text-article-body-mobile text-on-surface-variant mb-stack-md max-w-sm relative z-10">The page you are looking for has been moved, removed, or never existed in our archives.</p>
+<button class="border border-outline font-ui-button text-ui-button text-on-surface px-6 py-3 rounded hover:bg-surface-container-low transition-colors relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">arrow_back</span> Return Home
+                </button>
+</section>
+<!-- 4. Network Error -->
+<section class="bg-surface-container-lowest border border-error-container rounded-lg p-stack-md md:p-stack-lg flex flex-col items-center justify-center text-center min-h-[400px] hover:shadow-lg transition-shadow duration-300">
+<div class="w-24 h-24 rounded-full bg-error-container flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-4xl text-error" style="font-variation-settings: 'FILL' 0;">wifi_off</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Connection lost</h2>
+<p class="font-article-body text-article-body-mobile text-on-surface-variant mb-stack-md max-w-sm">We're having trouble connecting to the network. Please check your connection and try again.</p>
+<button class="bg-primary text-on-primary font-ui-button text-ui-button px-6 py-3 rounded hover:bg-surface-tint transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">refresh</span> Retry
+                </button>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full border-t border-outline-variant mt-stack-lg">
+<div class="flex flex-col md:flex-row justify-between items-center py-stack-md px-margin-edge max-w-article-width mx-auto">
+<div class="font-caption text-caption text-secondary opacity-90 mb-4 md:mb-0">
+                © 2024 Folio. The Modern Atelier.
+            </div>
+<nav class="flex gap-4 font-caption text-caption">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">RSS</a>
+</nav>
+</div>
+</footer>
+</body></html>

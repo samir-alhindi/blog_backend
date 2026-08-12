@@ -1,0 +1,389 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Edit Profile - Folio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Public+Sans:ital,wght@0,100..900;1,100..900&amp;family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#27313f",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "on-tertiary-fixed": "#351000",
+                      "secondary": "#712ae2",
+                      "tertiary-container": "#a44100",
+                      "on-surface-variant": "#464555",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "primary-fixed": "#e2dfff",
+                      "on-secondary-container": "#fffbff",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "outline-variant": "#c7c4d8",
+                      "surface-variant": "#d9e3f6",
+                      "inverse-on-surface": "#eaf1ff",
+                      "primary": "#3525cd",
+                      "on-error": "#ffffff",
+                      "primary-container": "#4f46e5",
+                      "surface-dim": "#d0dbed",
+                      "surface-bright": "#f8f9ff",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#0f0069",
+                      "background": "#f8f9ff",
+                      "surface-container-highest": "#d9e3f6",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "secondary-container": "#8a4cfc",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#dee9fc",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "secondary-fixed": "#eaddff",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-primary-container": "#dad7ff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#25005a",
+                      "tertiary-fixed": "#ffdbcc",
+                      "inverse-primary": "#c3c0ff",
+                      "on-background": "#121c2a",
+                      "surface-container": "#e6eeff",
+                      "surface-container-low": "#eff4ff",
+                      "on-surface": "#121c2a",
+                      "tertiary": "#7e3000",
+                      "on-tertiary-container": "#ffd2be",
+                      "outline": "#777587",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface-tint": "#4d44e3",
+                      "surface": "#f8f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "24px",
+                      "gutter": "24px",
+                      "stack-lg": "64px",
+                      "container-max": "1280px",
+                      "margin-edge": "32px",
+                      "article-width": "720px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "headline-md": [
+                              "Playfair Display"
+                      ],
+                      "ui-label": [
+                              "Public Sans"
+                      ],
+                      "ui-button": [
+                              "Public Sans"
+                      ],
+                      "caption": [
+                              "Public Sans"
+                      ],
+                      "article-body": [
+                              "Merriweather"
+                      ],
+                      "display-lg-mobile": [
+                              "Playfair Display"
+                      ],
+                      "article-body-mobile": [
+                              "Merriweather"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "72px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "ui-label": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "ui-button": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "caption": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "article-body": [
+                              "20px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "article-body-mobile": [
+                              "18px",
+                              {
+                                      "lineHeight": "30px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .nav-link {
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .input-minimal {
+            border: none;
+            border-bottom: 1px solid theme('colors.outline-variant');
+            border-radius: 0;
+            background-color: transparent;
+            padding: 8px 0;
+            font-family: 'Public Sans', sans-serif;
+            font-size: 16px;
+            color: theme('colors.on-surface');
+            transition: border-color 0.2s ease;
+        }
+        
+        .input-minimal:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom-color: theme('colors.primary');
+        }
+
+        .btn-primary {
+            background-color: theme('colors.primary');
+            color: theme('colors.on-primary');
+            font-family: 'Public Sans', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 12px 24px;
+            border-radius: theme('borderRadius.DEFAULT');
+            transition: opacity 0.2s ease, transform 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: theme('colors.on-surface');
+            border: 1px solid theme('colors.outline');
+            font-family: 'Public Sans', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 12px 24px;
+            border-radius: theme('borderRadius.DEFAULT');
+            transition: background-color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            background-color: theme('colors.surface-variant');
+        }
+        
+        .btn-danger {
+            background-color: transparent;
+            color: theme('colors.error');
+            border: 1px solid theme('colors.error');
+            font-family: 'Public Sans', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 12px 24px;
+            border-radius: theme('borderRadius.DEFAULT');
+            transition: background-color 0.2s ease, color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-danger:hover {
+            background-color: theme('colors.error');
+            color: theme('colors.on-error');
+        }
+
+        .section-card {
+            background-color: theme('colors.surface-container-lowest');
+            border: 1px solid theme('colors.outline-variant');
+            border-radius: theme('borderRadius.DEFAULT');
+            padding: 48px;
+            margin-bottom: 64px;
+            box-shadow: none;
+        }
+        
+        .avatar-overlay {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            background: rgba(0,0,0,0.4);
+        }
+        
+        .avatar-container:hover .avatar-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pt-16">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex justify-between items-center h-16 px-margin-edge max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<a class="font-display-lg text-[24px] font-bold text-primary tracking-tight" href="#">Folio</a>
+<nav class="hidden md:flex gap-6 font-ui-label text-ui-label">
+<!-- Suppressing nav items intent matching as this is a transactional/settings screen -->
+<a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Explore</a>
+<a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Bookmarks</a>
+<a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Write</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Search" class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 0;">search</span>
+</button>
+<button aria-label="Notifications" class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant cursor-pointer">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a thoughtful person in a minimalist, light-mode setting. Soft, natural lighting highlights subtle details, creating a calm, modern atelier aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFVnhejc0dG8Nih6YRs9Khen7XEI9AZ99Ni7uiU82TCAblf_BeIxsMU0lejCCokJbclul9oLSQqnorshbT_zwKelaZN_GPB9QIQqaQ_LN5GCwwHUB-DYf7NZ8jw2oVnGoEhXwXP9fyWNGoQlVPJDuemG4DhXRj08pTM599Z2ubg4_SEoRL3B93Thm8PPP2tzmHssbaJZr_oZqIRKHFLT8MltxqoCuL3mrBo4NaoQ0BGqd1jZpW3nIpgg">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[800px] mx-auto px-margin-edge py-stack-lg">
+<div class="mb-stack-lg text-center">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Account Settings</h1>
+<p class="font-caption text-[16px] text-on-surface-variant">Manage your profile details and security preferences.</p>
+</div>
+<!-- Section 1: Profile Info -->
+<section class="section-card">
+<h2 class="font-headline-md text-[24px] text-on-surface mb-8 pb-4 border-b border-outline-variant">Profile Information</h2>
+<div class="flex flex-col md:flex-row gap-12 mb-8">
+<!-- Avatar Upload -->
+<div class="flex flex-col items-center gap-4 shrink-0">
+<div class="relative w-32 h-32 rounded-full overflow-hidden border border-outline-variant avatar-container cursor-pointer group">
+<img alt="Current Avatar" class="w-full h-full object-cover" data-alt="A high-quality, abstract minimalist texture resembling textured paper or subtle watercolor wash in soft light greys and faint purples. Professional and clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUk3WeoArFojIyZs83qJ4iKNuFVS_mEydHtS634KV8sL8mAtlPo86jFZLpsOkK66kAlkDb13QpYuj8za8TOU3TuVxmPAEXpU7Lh4ICLkIvVW-cHpBdtfk5UD_vVTgdhUfW57Rd_uvqUXxIa4Ph3PA6rLZpV4bAH_oOfMIbA3EX3wMXZPAqYwHPrqVcemnIl8vagznBORJ4uG17t3oM3Atj3RuCCRftB0u_05i1tX7rrapNXCF4Am0QFA">
+<div class="absolute inset-0 avatar-overlay flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-size: 32px;">photo_camera</span>
+</div>
+</div>
+<button class="font-ui-button text-ui-label text-primary hover:underline">Change Avatar</button>
+</div>
+<!-- Form Fields -->
+<div class="flex-grow space-y-6">
+<div class="flex flex-col">
+<label class="font-ui-label text-ui-label text-on-surface-variant mb-1" for="username">Username</label>
+<input class="input-minimal w-full" id="username" placeholder="Enter your username" type="text" value="@modern_reader">
+</div>
+
+</div>
+</div>
+<div class="flex flex-col mb-8">
+<label class="font-ui-label text-ui-label text-on-surface-variant mb-2" for="bio">Bio</label>
+<textarea class="input-minimal w-full resize-none border-b border-outline-variant bg-transparent" id="bio" placeholder="Tell the community about yourself..." rows="4">Avid reader of long-form journalism and structuralist literature. Based in the Pacific Northwest.</textarea>
+<span class="text-right font-caption text-caption text-on-surface-variant mt-1">94 / 200</span>
+</div>
+<div class="flex justify-end">
+<button class="btn-primary">Save Changes</button>
+</div>
+</section>
+<!-- Section 2: Change Password -->
+<section class="section-card">
+<h2 class="font-headline-md text-[24px] text-on-surface mb-8 pb-4 border-b border-outline-variant">Security</h2>
+<div class="space-y-6 mb-8 max-w-md">
+<div class="flex flex-col">
+<label class="font-ui-label text-ui-label text-on-surface-variant mb-1" for="currentPassword">Current Password</label>
+<input class="input-minimal w-full" id="currentPassword" placeholder="••••••••" type="password">
+</div>
+<div class="flex flex-col">
+<label class="font-ui-label text-ui-label text-on-surface-variant mb-1" for="newPassword">New Password</label>
+<input class="input-minimal w-full" id="newPassword" placeholder="••••••••" type="password">
+</div>
+<div class="flex flex-col">
+<label class="font-ui-label text-ui-label text-on-surface-variant mb-1" for="confirmPassword">Confirm New Password</label>
+<input class="input-minimal w-full" id="confirmPassword" placeholder="••••••••" type="password">
+</div>
+</div>
+<div class="flex justify-end">
+<button class="btn-secondary">Update Password</button>
+</div>
+</section>
+<!-- Section 3: Danger Zone -->
+<section class="section-card border-error-container bg-error-container/20">
+<h2 class="font-headline-md text-[24px] text-error mb-4">Danger Zone</h2>
+<p class="font-article-body text-[16px] text-on-surface-variant mb-8 leading-relaxed">
+                Once you delete your account, there is no going back. All your published articles, bookmarks, and interactions will be permanently erased from Folio. Please be certain.
+            </p>
+<div class="flex justify-start">
+<button class="btn-danger">Delete Account</button>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full bg-surface-container-low border-t border-outline-variant mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center py-stack-md px-margin-edge max-w-article-width mx-auto">
+<span class="font-display-lg text-[18px] text-secondary font-semibold">© 2024 Folio. The Modern Atelier.</span>
+<nav class="flex gap-4 mt-4 md:mt-0 font-caption text-caption text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">About</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+<a class="hover:text-primary transition-colors" href="#">RSS</a>
+</nav>
+</div>
+</footer>
+
+
+</body></html>

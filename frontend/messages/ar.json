@@ -1,0 +1,219 @@
+{
+  "Nav": {
+    "explore": "استكشف",
+    "bookmarks": "المحفوظات",
+    "search": "بحث",
+    "write": "اكتب",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات"
+  },
+  "MobileNav": {
+    "home": "الرئيسية",
+    "search": "بحث",
+    "saved": "المحفوظات",
+    "you": "حسابك",
+    "login": "الدخول"
+  },
+  "LanguageSwitcher": {
+    "label": "اللغة",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "Common": {
+    "loading": "جارٍ التحميل…",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "loadMore": "تحميل المزيد"
+  },
+  "Home": {
+    "sortNewest": "الأحدث",
+    "sortMostReacted": "الأكثر تفاعلاً",
+    "sortMostDiscussed": "الأكثر نقاشاً",
+    "loadingPosts": "جارٍ تحميل المقالات…",
+    "emptyTitle": "لا توجد مقالات بعد",
+    "emptyBody": "كن أول من ينشر شيئاً على Folio."
+  },
+  "Reactions": {
+    "Like": "إعجاب",
+    "Dislike": "عدم إعجاب",
+    "Funny": "مضحك",
+    "Sad": "حزين",
+    "Angry": "غاضب",
+    "Scary": "مخيف"
+  },
+  "PostDetail": {
+    "edit": "تعديل",
+    "delete": "حذف",
+    "deleteConfirm": "حذف هذه المقالة؟ يمكن استعادتها لاحقاً من سلة المحذوفات.",
+    "notFound": "نُقلت هذه المقالة أو حُذفت أو لم تكن موجودة أصلاً."
+  },
+  "Comments": {
+    "responses": "الردود ({count})",
+    "placeholder": "أضف وجهة نظرك...",
+    "respond": "نشر",
+    "loginPrompt": "<link>سجّل الدخول</link> للمشاركة في النقاش.",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "reply": "رد",
+    "replyPlaceholder": "اكتب رداً…"
+  },
+  "Editor": {
+    "coverImage": "صورة الغلاف",
+    "coverImageKeep": "(اتركها فارغة للإبقاء على الحالية)",
+    "addCover": "أضف صورة غلاف",
+    "cropHint": "ستقصّها لتناسب المقاس قبل النشر",
+    "changeCover": "تغيير / إعادة القص",
+    "replaceCover": "استبدال الغلاف",
+    "markdownHint": "يدعم Markdown — **عريض**، _مائل_، # عناوين، قوائم، روابط",
+    "preview": "معاينة",
+    "write": "كتابة",
+    "nothingToPreview": "لا شيء لمعاينته بعد.",
+    "titlePlaceholder": "العنوان",
+    "bodyPlaceholder": "ابدأ بكتابة قصتك...",
+    "cancel": "إلغاء",
+    "publish": "نشر",
+    "saveChanges": "حفظ التغييرات",
+    "saving": "جارٍ الحفظ…",
+    "error": "تعذّر حفظ هذه المقالة.",
+    "cropCover": "قص صورة الغلاف"
+  },
+  "CropModal": {
+    "cancel": "إلغاء",
+    "apply": "تطبيق",
+    "saving": "جارٍ الحفظ…",
+    "defaultTitle": "اضبط صورتك",
+    "zoom": "تكبير"
+  },
+  "Profile": {
+    "editProfile": "تعديل الملف",
+    "followers": "المتابِعون",
+    "following": "يُتابِع",
+    "tabPosts": "المقالات",
+    "tabComments": "التعليقات",
+    "noPosts": "لا توجد مقالات بعد.",
+    "noComments": "لا توجد تعليقات بعد.",
+    "commentedOn": "علّق على <link>مقالة</link> · {date}",
+    "notFoundTitle": "لا يوجد كاتب بهذا الاسم",
+    "notFoundBody": "هذا الملف الشخصي حُذف أو لم يكن موجوداً في أرشيفنا."
+  },
+  "Follow": {
+    "follow": "متابعة",
+    "following": "متابَع"
+  },
+  "FollowList": {
+    "followersTitle": "متابِعو @{username}",
+    "followingTitle": "يتابعهم @{username}",
+    "empty": "لا أحد هنا بعد."
+  },
+  "Login": {
+    "brand": "Folio",
+    "tagline": "المرسم العصري",
+    "heading": "تسجيل الدخول",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "submit": "تسجيل الدخول",
+    "submitting": "جارٍ تسجيل الدخول…",
+    "errorCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة.",
+    "errorGeneric": "حدث خطأ ما. حاول مرة أخرى.",
+    "noAccount": "ليس لديك حساب؟",
+    "signupLink": "إنشاء حساب"
+  },
+  "Signup": {
+    "brand": "Folio",
+    "tagline": "المرسم العصري",
+    "uploadAvatar": "رفع صورة (اختياري)",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "bioLabel": "نبذة مختصرة",
+    "optional": "(اختياري)",
+    "submit": "إنشاء حساب",
+    "submitting": "جارٍ إنشاء الحساب…",
+    "error": "تعذّر إنشاء الحساب.",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "loginLink": "تسجيل الدخول",
+    "cropAvatar": "قص صورتك"
+  },
+  "Settings": {
+    "title": "الإعدادات",
+    "subtitle": "اعتنِ بحضورك في المرسم.",
+    "labelIdentity": "الهوية",
+    "labelSecurity": "الأمان",
+    "labelAccount": "الحساب",
+    "changePhoto": "تغيير الصورة",
+    "profileDesc": "كيف تظهر عبر Folio.",
+    "securityDesc": "حافظ على حماية حسابك.",
+    "avatarHint": "PNG أو JPG، والصورة المربعة أنسب.",
+    "profileSection": "معلومات الملف الشخصي",
+    "username": "اسم المستخدم",
+    "bio": "نبذة",
+    "avatar": "الصورة الرمزية",
+    "uploadAvatar": "رفع صورة",
+    "changeAvatar": "تغيير الصورة",
+    "saveChanges": "حفظ التغييرات",
+    "saved": "تم الحفظ.",
+    "saveError": "تعذّر حفظ التغييرات.",
+    "securitySection": "الأمان",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور الجديدة",
+    "updatePassword": "تحديث كلمة المرور",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين.",
+    "passwordUpdated": "تم تحديث كلمة المرور.",
+    "passwordError": "تعذّر تحديث كلمة المرور.",
+    "preferencesSection": "التفضيلات",
+    "language": "اللغة",
+    "languageDesc": "اختر لغة الواجهة.",
+    "sessionSection": "الجلسة",
+    "logout": "تسجيل الخروج",
+    "logoutDesc": "سجّل الخروج من Folio على هذا الجهاز.",
+    "logoutConfirmTitle": "تسجيل الخروج؟",
+    "logoutConfirmBody": "يمكنك تسجيل الدخول مجدداً في أي وقت باسم المستخدم وكلمة المرور.",
+    "dangerZone": "منطقة الخطر",
+    "dangerBody": "بمجرد حذف حسابك، لا يمكن التراجع. ستُحذف جميع مقالاتك المنشورة ومحفوظاتك وتفاعلاتك نهائياً من Folio.",
+    "deleteAccount": "حذف الحساب",
+    "deleteConfirmTitle": "حذف الحساب؟",
+    "deleteConfirm": "حذف حسابك نهائياً؟ لا يمكن التراجع عن هذا."
+  },
+  "Search": {
+    "title": "بحث",
+    "placeholder": "ابحث في Folio…",
+    "filterAll": "الكل",
+    "filterPosts": "المقالات",
+    "filterWriters": "الكتّاب",
+    "noResultsTitle": "لا توجد نتائج",
+    "noResultsBody": "لم نجد أي شيء يطابق \"{query}\".",
+    "sectionPosts": "المقالات",
+    "sectionWriters": "الكتّاب",
+    "loadMorePosts": "تحميل مزيد من المقالات",
+    "loadMoreWriters": "تحميل مزيد من الكتّاب"
+  },
+  "Trash": {
+    "title": "سلة المحذوفات",
+    "subtitle": "المقالات التي حذفتها. استعِدها أو احذفها نهائياً.",
+    "empty": "سلة المحذوفات فارغة.",
+    "deletedOn": "حُذفت في {date}",
+    "restore": "استعادة",
+    "deletePermanently": "حذف نهائي",
+    "deleteConfirm": "حذف هذه المقالة نهائياً؟ لا يمكن التراجع عن هذا."
+  },
+  "Bookmarks": {
+    "title": "المقالات المحفوظة",
+    "emptyTitle": "لا توجد مقالات محفوظة بعد",
+    "emptyBody": "قائمة القراءة لديك فارغة. استكشف Folio لتجد ما يستحق الحفظ.",
+    "exploreCta": "استكشف Folio"
+  },
+  "NotFound": {
+    "title": "المرسم فارغ",
+    "body": "الصفحة التي تبحث عنها نُقلت أو حُذفت أو لم تكن موجودة في أرشيفنا.",
+    "returnHome": "العودة إلى الرئيسية"
+  },
+  "Footer": {
+    "tagline": "صُنع من أجل المرسم العصري.",
+    "rights": "© {year} Folio."
+  }
+}

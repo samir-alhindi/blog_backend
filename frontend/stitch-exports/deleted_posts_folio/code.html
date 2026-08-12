@@ -1,0 +1,252 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Trash - Folio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=Merriweather:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#27313f",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "on-tertiary-fixed": "#351000",
+                      "secondary": "#712ae2",
+                      "tertiary-container": "#a44100",
+                      "on-surface-variant": "#464555",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "primary-fixed": "#e2dfff",
+                      "on-secondary-container": "#fffbff",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "outline-variant": "#c7c4d8",
+                      "surface-variant": "#d9e3f6",
+                      "inverse-on-surface": "#eaf1ff",
+                      "primary": "#3525cd",
+                      "on-error": "#ffffff",
+                      "primary-container": "#4f46e5",
+                      "surface-dim": "#d0dbed",
+                      "surface-bright": "#f8f9ff",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#0f0069",
+                      "background": "#f8f9ff",
+                      "surface-container-highest": "#d9e3f6",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "secondary-container": "#8a4cfc",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#dee9fc",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "secondary-fixed": "#eaddff",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-primary-container": "#dad7ff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#25005a",
+                      "tertiary-fixed": "#ffdbcc",
+                      "inverse-primary": "#c3c0ff",
+                      "on-background": "#121c2a",
+                      "surface-container": "#e6eeff",
+                      "surface-container-low": "#eff4ff",
+                      "on-surface": "#121c2a",
+                      "tertiary": "#7e3000",
+                      "on-tertiary-container": "#ffd2be",
+                      "outline": "#777587",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface-tint": "#4d44e3",
+                      "surface": "#f8f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "24px",
+                      "gutter": "24px",
+                      "stack-lg": "64px",
+                      "container-max": "1280px",
+                      "margin-edge": "32px",
+                      "article-width": "720px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "headline-md": [
+                              "Playfair Display"
+                      ],
+                      "ui-label": [
+                              "Public Sans"
+                      ],
+                      "ui-button": [
+                              "Public Sans"
+                      ],
+                      "caption": [
+                              "Public Sans"
+                      ],
+                      "article-body": [
+                              "Merriweather"
+                      ],
+                      "display-lg-mobile": [
+                              "Playfair Display"
+                      ],
+                      "article-body-mobile": [
+                              "Merriweather"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "72px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "ui-label": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "ui-button": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "caption": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "article-body": [
+                              "20px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "article-body-mobile": [
+                              "18px",
+                              {
+                                      "lineHeight": "30px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-article-body">
+<!-- TopNavBar (Nav shell suppressed as this is a private maintenance/dead-end page) -->
+<header class="bg-surface-container-lowest border-b border-outline-variant h-16 w-full z-50">
+<div class="flex justify-between items-center h-full px-margin-edge max-w-container-max mx-auto">
+<a class="font-display-lg text-display-lg text-primary tracking-tight" href="#" style="font-size: 24px; line-height: 1;">Folio</a>
+<div class="flex items-center gap-4">
+<span class="font-ui-label text-ui-label text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+                    Private Workspace
+                </span>
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A small, circular avatar portrait of a modern user in a minimalist setting. The lighting is soft and high-key, fitting a clean, editorial digital platform aesthetic. The user looks thoughtful and composed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcIjSgvzSrE34NSWub0JiMGtHkvaJy9IusTnUHWmwwycmsXdAjTr1Xn46IfkL9Jal8fJHGFlNuIzsV7f1S8Lk0xZU4ozafLDxVsUJozfjyuCjgU0YjzJgKCPvrXysJjSuGCCp6GNQUXVDxT9ZH--2Ce38noGBnx70soLMleIB6e6sp4PlHMYsXAcXTv1A0VeaDNaGIj0uxsMlIE8YjLqPn9CLqSAUI14gIrq_HRJSX3ilm_qZfN3KXmA">
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-article-width mx-auto w-full px-margin-edge py-stack-lg">
+<div class="mb-stack-lg border-b border-outline-variant pb-stack-sm flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg md:text-display-lg text-display-lg-mobile text-on-surface">Trash</h1>
+<p class="font-article-body text-article-body md:text-article-body text-article-body-mobile text-on-surface-variant mt-2 opacity-80">Posts you've deleted. Restore them or remove them for good.</p>
+</div>
+
+</div>
+<div class="flex flex-col gap-4">
+<!-- List Item 1 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-300 hover:shadow-[0_4px_12px_rgba(113,42,226,0.1)]">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight mb-1">The Architecture of Silence</h3>
+<p class="font-caption text-caption text-on-surface-variant">Deleted on Oct 12, 2024 · 1.2k words</p>
+</div>
+<div class="flex items-center gap-3 font-ui-button text-ui-button">
+<button class="text-primary hover:text-primary-container px-3 py-1 transition-colors">Restore</button>
+<button class="text-error hover:bg-error-container hover:text-on-error-container px-3 py-1 rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+                        Delete
+                    </button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-300 hover:shadow-[0_4px_12px_rgba(113,42,226,0.1)]">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight mb-1">Draft: Winter Editorials</h3>
+<p class="font-caption text-caption text-on-surface-variant">Deleted on Oct 10, 2024 · 450 words</p>
+</div>
+<div class="flex items-center gap-3 font-ui-button text-ui-button">
+<button class="text-primary hover:text-primary-container px-3 py-1 transition-colors">Restore</button>
+<button class="text-error hover:bg-error-container hover:text-on-error-container px-3 py-1 rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+                        Delete
+                    </button>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-300 hover:shadow-[0_4px_12px_rgba(113,42,226,0.1)] opacity-70">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight mb-1">Untitled Snippet</h3>
+<p class="font-caption text-caption text-on-surface-variant text-error">Deleted on Sep 15, 2024 · Expiring tomorrow</p>
+</div>
+<div class="flex items-center gap-3 font-ui-button text-ui-button">
+<button class="text-primary hover:text-primary-container px-3 py-1 transition-colors">Restore</button>
+<button class="text-error hover:bg-error-container hover:text-on-error-container px-3 py-1 rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+                        Delete
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center py-stack-md px-margin-edge max-w-article-width mx-auto gap-4">
+<span class="font-display-lg text-display-lg text-on-surface" style="font-size: 20px; line-height: 1;">Folio</span>
+<div class="flex gap-4">
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">RSS</a>
+</div>
+<span class="font-caption text-caption text-secondary">© 2024 Folio. The Modern Atelier.</span>
+</div>
+</footer>
+
+
+</body></html>

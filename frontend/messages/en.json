@@ -1,0 +1,219 @@
+{
+  "Nav": {
+    "explore": "Explore",
+    "bookmarks": "Bookmarks",
+    "search": "Search",
+    "write": "Write",
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "MobileNav": {
+    "home": "Home",
+    "search": "Search",
+    "saved": "Saved",
+    "you": "You",
+    "login": "Log in"
+  },
+  "LanguageSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "Common": {
+    "loading": "Loading…",
+    "cancel": "Cancel",
+    "save": "Save",
+    "loadMore": "Load more"
+  },
+  "Home": {
+    "sortNewest": "Newest",
+    "sortMostReacted": "Most Reacted",
+    "sortMostDiscussed": "Most Discussed",
+    "loadingPosts": "Loading posts…",
+    "emptyTitle": "No posts yet",
+    "emptyBody": "Be the first to publish something on Folio."
+  },
+  "Reactions": {
+    "Like": "Like",
+    "Dislike": "Dislike",
+    "Funny": "Funny",
+    "Sad": "Sad",
+    "Angry": "Angry",
+    "Scary": "Scary"
+  },
+  "PostDetail": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this post? It can be restored later from Trash.",
+    "notFound": "This post has been moved, removed, or never existed."
+  },
+  "Comments": {
+    "responses": "Responses ({count})",
+    "placeholder": "Add your perspective...",
+    "respond": "Respond",
+    "loginPrompt": "<link>Log in</link> to join the discussion.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…"
+  },
+  "Editor": {
+    "coverImage": "Cover image",
+    "coverImageKeep": "(leave empty to keep current)",
+    "addCover": "Add a cover image",
+    "cropHint": "You'll crop it to fit before publishing",
+    "changeCover": "Change / re-crop",
+    "replaceCover": "Replace cover",
+    "markdownHint": "Markdown supported — **bold**, _italic_, # headings, lists, links",
+    "preview": "Preview",
+    "write": "Write",
+    "nothingToPreview": "Nothing to preview yet.",
+    "titlePlaceholder": "Title",
+    "bodyPlaceholder": "Begin writing your story...",
+    "cancel": "Cancel",
+    "publish": "Publish",
+    "saveChanges": "Save Changes",
+    "saving": "Saving…",
+    "error": "Could not save this post.",
+    "cropCover": "Crop your cover"
+  },
+  "CropModal": {
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "saving": "Saving…",
+    "defaultTitle": "Adjust your image",
+    "zoom": "Zoom"
+  },
+  "Profile": {
+    "editProfile": "Edit Profile",
+    "followers": "Followers",
+    "following": "Following",
+    "tabPosts": "Posts",
+    "tabComments": "Comments",
+    "noPosts": "No posts yet.",
+    "noComments": "No comments yet.",
+    "commentedOn": "Commented on <link>a post</link> · {date}",
+    "notFoundTitle": "No such writer",
+    "notFoundBody": "This profile has been removed or never existed in our archives."
+  },
+  "Follow": {
+    "follow": "Follow",
+    "following": "Following"
+  },
+  "FollowList": {
+    "followersTitle": "Followers of @{username}",
+    "followingTitle": "Following of @{username}",
+    "empty": "Nobody here yet."
+  },
+  "Login": {
+    "brand": "Folio",
+    "tagline": "The Modern Atelier",
+    "heading": "Sign In",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Log In",
+    "submitting": "Signing in…",
+    "errorCredentials": "Incorrect username or password.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "noAccount": "Don't have an account?",
+    "signupLink": "Sign up"
+  },
+  "Signup": {
+    "brand": "Folio",
+    "tagline": "The Modern Atelier",
+    "uploadAvatar": "Upload Avatar (Optional)",
+    "username": "Username",
+    "password": "Password",
+    "bioLabel": "Short Bio",
+    "optional": "(Optional)",
+    "submit": "Create Account",
+    "submitting": "Creating account…",
+    "error": "Could not create account.",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "cropAvatar": "Crop your avatar"
+  },
+  "Settings": {
+    "title": "Settings",
+    "subtitle": "Tend to your presence in the atelier.",
+    "labelIdentity": "Identity",
+    "labelSecurity": "Security",
+    "labelAccount": "Account",
+    "changePhoto": "Change photo",
+    "profileDesc": "How you appear across Folio.",
+    "securityDesc": "Keep your account protected.",
+    "avatarHint": "PNG or JPG, square looks best.",
+    "profileSection": "Profile Information",
+    "username": "Username",
+    "bio": "Bio",
+    "avatar": "Avatar",
+    "uploadAvatar": "Upload avatar",
+    "changeAvatar": "Change avatar",
+    "saveChanges": "Save Changes",
+    "saved": "Saved.",
+    "saveError": "Could not save changes.",
+    "securitySection": "Security",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "updatePassword": "Update Password",
+    "passwordMismatch": "New passwords don't match.",
+    "passwordUpdated": "Password updated.",
+    "passwordError": "Could not update password.",
+    "preferencesSection": "Preferences",
+    "language": "Language",
+    "languageDesc": "Choose the language for the interface.",
+    "sessionSection": "Session",
+    "logout": "Log out",
+    "logoutDesc": "Sign out of Folio on this device.",
+    "logoutConfirmTitle": "Log out?",
+    "logoutConfirmBody": "You can sign back in anytime with your username and password.",
+    "dangerZone": "Danger Zone",
+    "dangerBody": "Once you delete your account, there is no going back. All your published posts, bookmarks, and interactions will be permanently erased from Folio.",
+    "deleteAccount": "Delete Account",
+    "deleteConfirmTitle": "Delete account?",
+    "deleteConfirm": "Delete your account permanently? This cannot be undone."
+  },
+  "Search": {
+    "title": "Search",
+    "placeholder": "Search Folio…",
+    "filterAll": "all",
+    "filterPosts": "posts",
+    "filterWriters": "writers",
+    "noResultsTitle": "No results found",
+    "noResultsBody": "We couldn't find anything matching \"{query}\".",
+    "sectionPosts": "Posts",
+    "sectionWriters": "Writers",
+    "loadMorePosts": "Load more posts",
+    "loadMoreWriters": "Load more writers"
+  },
+  "Trash": {
+    "title": "Trash",
+    "subtitle": "Posts you've deleted. Restore them or remove them for good.",
+    "empty": "Nothing in the trash.",
+    "deletedOn": "Deleted on {date}",
+    "restore": "Restore",
+    "deletePermanently": "Delete Permanently",
+    "deleteConfirm": "Permanently delete this post? This cannot be undone."
+  },
+  "Bookmarks": {
+    "title": "Saved Posts",
+    "emptyTitle": "No saved posts yet",
+    "emptyBody": "Your reading list is empty. Explore Folio to find pieces worth keeping.",
+    "exploreCta": "Explore Folio"
+  },
+  "NotFound": {
+    "title": "The atelier is empty",
+    "body": "The page you're looking for has been moved, removed, or never existed in our archives.",
+    "returnHome": "Return Home"
+  },
+  "Footer": {
+    "tagline": "Crafted for the modern atelier.",
+    "rights": "© {year} Folio."
+  }
+}
