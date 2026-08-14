@@ -6,19 +6,19 @@ class PostFilter(filters.FilterSet):
     '''
 
     created_before = filters.IsoDateTimeFilter(
-        field_name='creation_datetime',
+        field_name='created_at',
         lookup_expr= 'lt',
         label='Created Before'
     )
 
     created_after = filters.IsoDateTimeFilter(
-        field_name='creation_datetime',
+        field_name='created_at',
         lookup_expr='gt',
         label='Created After'
     )
 
     created_date = filters.DateFilter(
-        field_name='creation_datetime',
+        field_name='created_at',
         lookup_expr='date__exact',
         label='Created Date'
     )

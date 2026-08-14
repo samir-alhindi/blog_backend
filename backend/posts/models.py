@@ -13,14 +13,14 @@ class PostManager(models.Manager):
     Manager for posts that have not been deleted.
     '''
     def get_queryset(self) -> models.QuerySet:
-        return super().get_queryset().filter(deletion_datetime=None)
+        return super().get_queryset().filter(deleted_at=None)
 
 class DeletedPostManager(models.Manager):
     '''
     Manager for posts that have been deleted.
     '''
     def get_queryset(self) -> models.QuerySet:
-        return super().get_queryset().exclude(deletion_datetime=None)
+        return super().get_queryset().exclude(deleted_at=None)
 
 class Post(models.Model):
     '''
@@ -37,9 +37,9 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, blank=True, max_length=255)
     body = models.TextField()
     image = models.ImageField(upload_to='posts/', null=True, blank=True)
-    creation_datetime = models.DateTimeField(auto_now_add=True)
-    last_edit_datetime = models.DateTimeField(auto_now=True)
-    deletion_datetime = models.DateTimeField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    edited_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs) -> None:
         if self.slug:

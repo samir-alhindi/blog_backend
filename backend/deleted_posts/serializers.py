@@ -16,8 +16,8 @@ class DeletedPostListSerializer(_PostBaseSerializer):
     class Meta:
         model = Post
         fields = ['url', 'id', 'title', 'slug',  'image', 'author',
-                  'creation_datetime', 'comments_count', 'bookmarks_count',
-                  'reactions_count', 'deletion_datetime']
+                  'created_at', 'comments_count', 'bookmarks_count',
+                  'reactions_count', 'deleted_at']
 
 class DeletedPostRetrieveDestroySerializer(_PostBaseSerializer):
     '''
@@ -28,7 +28,7 @@ class DeletedPostRetrieveDestroySerializer(_PostBaseSerializer):
         lookup_field='slug',
     )
 
-    def validate_deletion_datetime(self, value):
+    def validate_deleted_at(self, value):
         if value is not None:
             raise serializers.ValidationError(
                 'you cannot manually set a deletion timestamp. Set to null to restore.'
@@ -37,9 +37,9 @@ class DeletedPostRetrieveDestroySerializer(_PostBaseSerializer):
 
     class Meta:
         model = Post
-        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
+        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'created_at',
                   'last_edit_datetime', 'comments_count',
-                  'reactions_count', 'deletion_datetime',
+                  'reactions_count', 'deleted_at',
                 ]
         read_only_fields = ['slug']
 
@@ -54,8 +54,8 @@ class DeletedPostUpdateSerializer(_PostBaseSerializer):
 
     class Meta:
         model = Post
-        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
+        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'created_at',
                   'last_edit_datetime', 'comments_count',
-                  'reactions_count', 'deletion_datetime',
+                  'reactions_count', 'deleted_at',
                 ]
         read_only_fields = ['slug']

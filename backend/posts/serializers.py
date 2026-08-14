@@ -41,9 +41,9 @@ class PostListSerializer(_PostBaseSerializer):
     class Meta:
         model = Post
         fields = ['url', 'id', 'title', 'slug',  'image', 'author',
-                  'creation_datetime', 'comments_count', 'bookmarks_count',
-                  'reactions_count', 'comments', 'reactions', 'deletion_datetime']
-        read_only_fields = ['slug', 'deletion_datetime']
+                  'created_at', 'comments_count', 'bookmarks_count',
+                  'reactions_count', 'comments', 'reactions', 'deleted_at']
+        read_only_fields = ['slug', 'deleted_at']
 
 class PostDetailSerializer(_PostBaseSerializer):
     '''
@@ -51,11 +51,11 @@ class PostDetailSerializer(_PostBaseSerializer):
     '''
     class Meta:
         model = Post
-        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime',
-                  'last_edit_datetime', 'comments', 'reactions', 'comments_count',
-                  'bookmarks_count', 'reactions_count', 'deletion_datetime',
+        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'created_at',
+                  'edited_at', 'comments', 'reactions', 'comments_count',
+                  'bookmarks_count', 'reactions_count', 'deleted_at',
                 ]
-        read_only_fields = ['slug', 'deletion_datetime', ]
+        read_only_fields = ['slug', 'deleted_at', ]
 
 class PostCreateSerializer(_PostBaseSerializer):
     '''
@@ -64,7 +64,7 @@ class PostCreateSerializer(_PostBaseSerializer):
 
     class Meta:
         model = Post
-        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'creation_datetime']
+        fields = ['url', 'id', 'title', 'slug', 'body', 'image', 'author', 'created_at']
         read_only_fields = ['slug']
 
 class PostReactionSerializer(serializers.HyperlinkedModelSerializer):
@@ -118,4 +118,4 @@ class PostReactionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = PostReaction
-        fields = ['url', 'author', 'reaction_type', 'post', 'creation_datetime']
+        fields = ['url', 'author', 'reaction_type', 'post', 'created_at']

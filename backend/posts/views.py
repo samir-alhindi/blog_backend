@@ -9,6 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from time_machine import travel
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from core.pagination import StandardPagination
 
 def get_post_queryset(self):
@@ -33,8 +34,8 @@ class PostListCreateView(generics.ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
     pagination_class = StandardPagination
     search_fields = ['body', 'title', 'author__username']
-    ordering_fields = ['creation_datetime', 'reactions_count', 'comments_count']
-    ordering = ['-creation_datetime']
+    ordering_fields = ['created_at', 'reactions_count', 'comments_count']
+    ordering = ['-created_at']
 
     def get_queryset(self):
         return get_post_queryset(self)
@@ -57,7 +58,7 @@ class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
         return get_post_queryset(self)
 
     def perform_destroy(self, instance):
-        instance.deletion_datetime = datetime.now()
+        instance.deleted_at = datetime.now(ZoneInfo('UTC'))
         instance.save()
 
 def get_reactions_queryset(self):
@@ -79,7 +80,7 @@ class PostReactionListCreateView(generics.ListCreateAPIView):
     serializer_class = serializers.PostReactionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [OrderingFilter]
-    ordering = ['-creation_datetime']
+    ordering = ['-created_at']
     pagination_class = StandardPagination
 
     def get_queryset(self):
