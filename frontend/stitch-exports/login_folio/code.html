@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Folio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;family=Playfair+Display:wght@400;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#c3c0ff",
+                        "on-background": "#121c2a",
+                        "secondary": "#712ae2",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-tint": "#4d44e3",
+                        "outline": "#777587",
+                        "primary-fixed": "#e2dfff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#a44100",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "surface-container": "#e6eeff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "on-tertiary-container": "#ffd2be",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-primary-fixed": "#0f0069",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-dim": "#d0dbed",
+                        "outline-variant": "#c7c4d8",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "secondary-container": "#8a4cfc",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "background": "#f8f9ff",
+                        "surface-variant": "#d9e3f6",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-tertiary-fixed": "#351000",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface": "#f8f9ff",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-surface": "#27313f",
+                        "surface-bright": "#f8f9ff",
+                        "secondary-fixed": "#eaddff",
+                        "on-surface": "#121c2a",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#dee9fc",
+                        "primary-container": "#4f46e5",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-highest": "#d9e3f6",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "tertiary": "#7e3000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "container-max": "1280px",
+                        "stack-md": "24px",
+                        "stack-lg": "64px",
+                        "article-width": "720px",
+                        "gutter": "24px",
+                        "margin-edge": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Playfair Display"],
+                        "article-body": ["Merriweather"],
+                        "ui-button": ["Public Sans"],
+                        "headline-md": ["Playfair Display"],
+                        "article-body-mobile": ["Merriweather"],
+                        "display-lg": ["Playfair Display"],
+                        "caption": ["Public Sans"],
+                        "ui-label": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "article-body": ["20px", { "lineHeight": "34px", "fontWeight": "400" }],
+                        "ui-button": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "article-body-mobile": ["18px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "ui-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col justify-center items-center p-margin-edge relative overflow-hidden">
+<!-- Decorative atmospheric background element -->
+<div class="absolute inset-0 z-0 opacity-40 pointer-events-none" style="background-image: radial-gradient(circle at 80% 20%, #eaddff 0%, transparent 40%), radial-gradient(circle at 20% 80%, #dee9fc 0%, transparent 40%);"></div>
+<div class="relative z-10 w-full max-w-md mx-auto">
+<!-- Brand Anchor -->
+<div class="text-center mb-stack-lg">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">Folio</h1>
+<p class="font-article-body text-article-body text-on-surface-variant mt-stack-sm opacity-80">The Modern Atelier</p>
+</div>
+<!-- Login Card -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl shadow-sm transition-shadow duration-300 hover:shadow-[0_8px_30px_rgb(53,37,205,0.08)]">
+<h2 class="font-headline-md text-headline-md mb-stack-lg text-center">Sign In</h2>
+<form class="flex flex-col gap-stack-md">
+<div class="flex flex-col gap-2">
+<label class="font-ui-label text-ui-label text-on-surface-variant" for="username">Username or Email</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-2 font-article-body-mobile text-article-body-mobile text-on-surface transition-colors rounded-none placeholder:text-outline" id="username" name="username" placeholder="Enter your credentials" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-ui-label text-ui-label text-on-surface-variant" for="password">Password</label>
+<a class="font-caption text-caption text-primary hover:text-secondary transition-colors" href="#">Forgot?</a>
+</div>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-2 font-article-body-mobile text-article-body-mobile text-on-surface transition-colors rounded-none placeholder:text-outline" id="password" name="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="mt-stack-md">
+<button class="w-full bg-primary text-on-primary font-ui-button text-ui-button py-3 px-6 rounded-DEFAULT hover:bg-secondary transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2 group" type="submit">
+                        Log In
+                        <span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Secondary Action -->
+<div class="text-center mt-stack-md">
+<p class="font-ui-label text-ui-label text-on-surface-variant">
+                Don't have an account? 
+                <a class="text-primary hover:text-secondary font-bold transition-colors border-b border-transparent hover:border-secondary" href="#">Sign up</a>
+</p>
+</div>
+</div>
+<!-- Suppressed Nav/Footer per instruction: Linear/Transactional screen -> HIDE SHELL -->
+</body></html>

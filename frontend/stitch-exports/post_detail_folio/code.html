@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Post Detail - Folio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;family=Playfair+Display:wght@600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "inverse-primary": "#c3c0ff",
+                            "on-background": "#121c2a",
+                            "secondary": "#712ae2",
+                            "on-secondary-fixed": "#25005a",
+                            "surface-tint": "#4d44e3",
+                            "outline": "#777587",
+                            "primary-fixed": "#e2dfff",
+                            "surface-container-lowest": "#ffffff",
+                            "tertiary-container": "#a44100",
+                            "tertiary-fixed-dim": "#ffb695",
+                            "surface-container": "#e6eeff",
+                            "on-tertiary": "#ffffff",
+                            "on-surface-variant": "#464555",
+                            "on-tertiary-container": "#ffd2be",
+                            "tertiary-fixed": "#ffdbcc",
+                            "on-primary-fixed": "#0f0069",
+                            "inverse-on-surface": "#eaf1ff",
+                            "surface-dim": "#d0dbed",
+                            "outline-variant": "#c7c4d8",
+                            "on-primary-fixed-variant": "#3323cc",
+                            "secondary-container": "#8a4cfc",
+                            "on-error-container": "#93000a",
+                            "error-container": "#ffdad6",
+                            "on-secondary": "#ffffff",
+                            "on-error": "#ffffff",
+                            "background": "#f8f9ff",
+                            "surface-variant": "#d9e3f6",
+                            "on-primary-container": "#dad7ff",
+                            "on-tertiary-fixed-variant": "#7b2f00",
+                            "on-tertiary-fixed": "#351000",
+                            "on-secondary-fixed-variant": "#5a00c6",
+                            "surface": "#f8f9ff",
+                            "on-secondary-container": "#fffbff",
+                            "inverse-surface": "#27313f",
+                            "surface-bright": "#f8f9ff",
+                            "secondary-fixed": "#eaddff",
+                            "on-surface": "#121c2a",
+                            "error": "#ba1a1a",
+                            "on-primary": "#ffffff",
+                            "surface-container-high": "#dee9fc",
+                            "primary-container": "#4f46e5",
+                            "primary-fixed-dim": "#c3c0ff",
+                            "surface-container-low": "#eff4ff",
+                            "surface-container-highest": "#d9e3f6",
+                            "primary": "#3525cd",
+                            "secondary-fixed-dim": "#d2bbff",
+                            "tertiary": "#7e3000"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "stack-sm": "8px",
+                            "container-max": "1280px",
+                            "stack-md": "24px",
+                            "stack-lg": "64px",
+                            "article-width": "720px",
+                            "gutter": "24px",
+                            "margin-edge": "32px"
+                    },
+                    "fontFamily": {
+                            "display-lg-mobile": [
+                                    "Playfair Display"
+                            ],
+                            "article-body": [
+                                    "Merriweather"
+                            ],
+                            "ui-button": [
+                                    "Public Sans"
+                            ],
+                            "headline-md": [
+                                    "Playfair Display"
+                            ],
+                            "article-body-mobile": [
+                                    "Merriweather"
+                            ],
+                            "display-lg": [
+                                    "Playfair Display"
+                            ],
+                            "caption": [
+                                    "Public Sans"
+                            ],
+                            "ui-label": [
+                                    "Public Sans"
+                            ]
+                    },
+                    "fontSize": {
+                            "display-lg-mobile": [
+                                    "40px",
+                                    {
+                                            "lineHeight": "48px",
+                                            "fontWeight": "700"
+                                    }
+                            ],
+                            "article-body": [
+                                    "20px",
+                                    {
+                                            "lineHeight": "34px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "ui-button": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "24px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "headline-md": [
+                                    "32px",
+                                    {
+                                            "lineHeight": "40px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "article-body-mobile": [
+                                    "18px",
+                                    {
+                                            "lineHeight": "30px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "display-lg": [
+                                    "64px",
+                                    {
+                                            "lineHeight": "72px",
+                                            "letterSpacing": "-0.02em",
+                                            "fontWeight": "700"
+                                    }
+                            ],
+                            "caption": [
+                                    "13px",
+                                    {
+                                            "lineHeight": "18px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "ui-label": [
+                                    "14px",
+                                    {
+                                            "lineHeight": "20px",
+                                            "letterSpacing": "0.01em",
+                                            "fontWeight": "600"
+                                    }
+                            ]
+                    }
+            },
+                },
+        }
+    </script>
+<style>
+        .progress-bar {
+            transform-origin: 0% 50%;
+            transform: scaleX(0);
+            transition: transform 0.1s linear;
+        }
+        .reaction-button {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s;
+        }
+        .reaction-button:hover {
+            transform: scale(1.1);
+        }
+        .reaction-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- Progress Indicator -->
+<div class="fixed top-0 left-0 w-full h-1 bg-surface-variant z-50">
+<div class="progress-bar h-full bg-primary w-full" id="reading-progress"></div>
+</div>
+<!-- Top Navigation (Generated from JSON) -->
+<header class="w-full top-0 sticky bg-background dark:bg-on-background border-b border-outline-variant dark:border-outline z-40">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-edge h-20">
+<a class="font-display-lg text-display-lg font-bold text-primary dark:text-inverse-primary" href="#" style="font-size: 32px; line-height: 40px;">Folio</a>
+<nav class="hidden md:flex items-center gap-stack-md font-article-body text-article-body text-[16px]">
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Bookmarks</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Write</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<div class="hidden md:flex relative text-on-surface-variant">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="bg-transparent border-b border-outline-variant focus:border-primary focus:outline-none py-1 pl-10 pr-2 w-48 font-ui-label text-ui-label text-on-background transition-colors placeholder:text-outline" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+<button class="bg-primary text-on-primary font-ui-button text-ui-button px-4 py-2 rounded scale-95 active:scale-90 transition-transform hover:bg-surface-tint ml-2">Publish</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col md:flex-row max-w-container-max mx-auto w-full relative">
+<!-- Left Sidebar (Empty or Utility on Desktop) -->
+<aside class="hidden md:block w-64 shrink-0 py-stack-lg px-margin-edge sticky top-20 h-[calc(100vh-80px)] overflow-y-auto">
+<div class="flex flex-col gap-stack-md text-on-surface-variant">
+<button class="flex items-center gap-2 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+<span class="font-ui-button text-ui-button">Back to Explore</span>
+</button>
+</div>
+</aside>
+<!-- Center Reading Canvas -->
+<article class="flex-grow max-w-article-width mx-auto px-4 md:px-0 py-stack-lg w-full">
+<!-- Hero Image -->
+<div class="w-full aspect-[21/9] mb-stack-lg rounded bg-surface-variant overflow-hidden border border-outline-variant relative">
+<img class="w-full h-full object-cover" data-alt="A serene, minimalist workspace with a sleek wooden desk bathed in soft, natural morning light. High-end aesthetic with neutral tones, deep blacks, and crisp whites. An open notebook sits invitingly next to a refined ceramic coffee cup. The mood is calm, focused, and intellectually stimulating, perfectly embodying the 'Modern Atelier' style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbdpHcwIhAqOa-QGP41CuKCNHOOA8h8yX5Hfgx5yDLMBmQwfkuhKq2TZPad_wZYlrYmEAp3xp67gc66LAecrOJMOWW1eK8g8faxGm6sv2mo4leZ_Oszt8KeBNTL_0T3foOt71zp_vLueAdEnaiBOnV9xe61UbTBpIH6zwnqpst1REqoDniU-dBC4nF_911LB5orGhkeh4tEL8MqWeq9fCOFwovPNGfMiuZDP4_eWPwGyJUj498zB_Wcg"/>
+</div>
+<!-- Post Header -->
+<header class="mb-stack-lg">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-stack-md">The Architecture of Silence: Finding Focus in a Noisy World</h1>
+<div class="flex items-center justify-between border-b border-outline-variant pb-stack-md">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A sophisticated black and white portrait of an author, soft lighting highlighting subtle facial features against a clean, minimal background. Expresses quiet authority and editorial elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-W7yoQfnbAia8n0a8Op16YRRgk4scMOwPQBC9nr_ZsZmIY11g12h8LKbyIjly0nn-dmYC1PYUy-dVbCvdik63FZTFUCThOb2SDgZ1m9pnq3PzVk0lzd_2AS98QzfflvO3NPh84Byza7HsbB34htAsNwwluqUpFpBsCKb-NnsGdpzxRFBHuLCXnKPOuA6ZQ1xJyb07efxbp7NeUv7DxpjCFU2fCPpUp6NY_Y_J9_WWEdKMynwiC684UQ"/>
+</div>
+<div>
+<div class="font-ui-label text-ui-label text-on-surface">Elena Rostova</div>
+<div class="font-caption text-caption text-on-surface-variant">Oct 12, 2024 · 8 min read</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-1.5 border border-outline text-on-surface hover:bg-surface-container transition-colors rounded-full font-ui-button text-ui-button">Follow</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Bookmark">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bookmark_border</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="More options">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">more_horiz</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Body Content -->
+<div class="font-article-body-mobile md:font-article-body text-article-body-mobile md:text-article-body text-on-surface space-y-8 leading-relaxed">
+<p class="first-letter:text-5xl first-letter:font-display-lg first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-primary">
+                    In an era defined by constant connectivity, silence has transitioned from a natural state of being into a luxury commodity. The modern atelier is no longer just a physical space; it is a meticulously constructed mental environment where deep work can flourish. We often mistake quietness for absence, but true silence is deeply architectural.
+                </p>
+<p>
+                    Consider the layout of a traditional library. The soaring ceilings, the hushed acoustics, the physical distance between reading desks—every element is designed to signal reverence for focus. Translating this physical architecture into our digital and mental lives requires deliberate effort and, occasionally, ruthless subtraction.
+                </p>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-stack-md mb-stack-sm">The Cognitive Cost of Interruption</h2>
+<p>
+                    Research consistently demonstrates that the human brain requires approximately 23 minutes to return to a state of flow after a significant interruption. When our environments are optimized for alerts rather than attention, we operate in a state of perpetual triage.
+                </p>
+<blockquote class="pl-6 border-l-4 border-primary italic text-on-surface-variant my-stack-md">
+                    "To cultivate focus is not to ignore the world, but to choose how and when to invite it in."
+                </blockquote>
+<p>
+                    Building this architecture begins with acknowledging that attention is finite. By crafting boundaries—both temporal and spatial—we create sanctuaries where ideas can incubate without the immediate demand for a reaction.
+                </p>
+</div>
+<!-- Reaction Bar -->
+<div class="mt-stack-lg border-y border-outline-variant py-stack-md flex items-center justify-between"><div class="flex items-center gap-2 md:gap-4">
+<button class="flex items-center gap-2 text-primary bg-primary-container px-3 py-1.5 rounded-full font-ui-button text-ui-button reaction-button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span>Like</span>
+<span class="font-caption bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">142</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:bg-surface-container px-3 py-1.5 rounded-full font-ui-button text-ui-button transition-colors reaction-button">
+<span class="material-symbols-outlined">thumb_down</span>
+<span class="hidden md:inline">Dislike</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:bg-surface-container px-3 py-1.5 rounded-full font-ui-button text-ui-button transition-colors reaction-button">
+<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+<span class="hidden md:inline">Funny</span>
+<span class="font-caption">12</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:bg-surface-container px-3 py-1.5 rounded-full font-ui-button text-ui-button transition-colors reaction-button">
+<span class="material-symbols-outlined">sentiment_dissatisfied</span>
+<span class="hidden md:inline">Sad</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:bg-surface-container px-3 py-1.5 rounded-full font-ui-button text-ui-button transition-colors reaction-button">
+<span class="material-symbols-outlined">mood_bad</span>
+<span class="hidden md:inline">Angry</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:bg-surface-container px-3 py-1.5 rounded-full font-ui-button text-ui-button transition-colors reaction-button">
+<span class="material-symbols-outlined">skull</span>
+<span class="hidden md:inline">Scary</span>
+<span class="font-caption">8</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors flex items-center gap-1 font-ui-button text-ui-button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">share</span>
+<span class="hidden md:inline">Share</span>
+</button>
+</div></div>
+<!-- Comments Section -->
+<section class="mt-stack-lg pb-stack-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-md">Responses (2)</h3>
+<!-- Composer -->
+<div class="mb-stack-lg bg-surface-container-low border border-outline-variant p-4 rounded focus-within:border-primary transition-colors">
+<textarea class="w-full bg-transparent resize-none outline-none font-article-body-mobile text-on-surface placeholder:text-on-surface-variant" placeholder="Add your perspective..." rows="3"></textarea>
+<div class="flex justify-between items-center mt-4">
+<span class="font-caption text-caption text-on-surface-variant">Formatting options</span>
+<button class="bg-primary text-on-primary font-ui-button text-ui-button px-4 py-2 rounded hover:bg-surface-tint transition-colors">Respond</button>
+</div>
+</div>
+<!-- Comment Thread -->
+<div class="space-y-stack-md">
+<!-- Comment 1 -->
+<div class="border-b border-outline-variant pb-stack-sm">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small, stylized profile avatar of a reader, simple minimalist shapes in muted blues and greys. Editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6V9gBa4fEMvPINtHjbK-VU6fw8IWmQrcVGMkvWW1C35rcyH9R5KiaGboPL_xNoelgB4el3MORSNTRdtBHzmWNb9SQ6dXvXaD4JKOxWRjdn-5BTrsl-wpVyIEIDJ-LNwph0YOIz3MqwTyJOrsO1BOi6E3CYXoG3uii1c-SZphEA2gqstKhFdvYqBx0LsSOhKL912Epfek_dbGLsqJubz1KcNMbowrqktGZz7bz8eyBkjd7lqr-GT9JVg"/>
+</div>
+<div>
+<div class="font-ui-label text-ui-label text-on-surface">Marcus Vance</div>
+<div class="font-caption text-caption text-on-surface-variant">2 hours ago</div>
+</div>
+</div>
+<!-- Author Actions (Simulated visible) -->
+<div class="flex gap-2 text-on-surface-variant opacity-0 hover:opacity-100 transition-opacity">
+<button class="hover:text-primary"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<p class="font-article-body-mobile text-on-surface mb-3">
+                            The point about temporal boundaries resonates deeply. We often try to manage space (closing the door) but fail to manage time (turning off notifications for set blocks).
+                        </p>
+<div class="flex items-center gap-4 text-on-surface-variant font-caption text-caption"><div class="flex items-center gap-2">
+<button class="hover:text-primary transition-colors flex items-center gap-0.5"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">thumb_up</span> 4</button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">thumb_down</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">sentiment_very_satisfied</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">sentiment_dissatisfied</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">mood_bad</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">skull</span></button>
+</div>
+<button class="flex items-center gap-1 hover:text-primary transition-colors ml-2"><span class="material-symbols-outlined text-sm">reply</span> Reply</button></div>
+</div>
+<!-- Nested Reply -->
+<div class="ml-12 border-l-2 border-outline-variant pl-4 pb-stack-sm">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Another minimalist profile avatar, warm neutral tones, simple geometric composition. Clean and elegant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8XOX8SctN76JXo6sUOVHno-Zny9E754Ji_e3BIXc3XUD84yrfnftUe3vf-WYjaHOUp2jtnSd0Atk3SgjXiOMpQQ8YKMaHvcbu4cMOSaHWHsaQ3Cw68WZNas5rKthhXRte8B6xoK2Y1gfd4UwVmYhbASJjlHkNnTD7kGgylhktNY1tdurzC_L216RvoVuaRRnQbt9VOenebEG_ozBNs37ZTvba2BJfxOOyUeSJRDTG7r_gWCkBDbckeQ"/>
+</div>
+<div>
+<div class="font-ui-label text-ui-label text-on-surface text-sm">Elena Rostova <span class="bg-surface-container-high px-1 rounded text-xs ml-1">Author</span></div>
+</div>
+</div>
+<p class="font-article-body-mobile text-sm text-on-surface mb-2">
+                            Exactly. Space without temporal protection is just a quiet room waiting to be interrupted.
+                        </p>
+<div class="flex items-center gap-4 text-on-surface-variant font-caption text-caption"><div class="flex items-center gap-2">
+<button class="hover:text-primary transition-colors flex items-center gap-0.5"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">thumb_up</span> 2</button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">thumb_down</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">sentiment_very_satisfied</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">sentiment_dissatisfied</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">mood_bad</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">skull</span></button>
+</div></div>
+</div>
+</div>
+</section>
+</article>
+<!-- Right Sidebar (Metadata / Table of Contents on Desktop) -->
+<aside class="hidden xl:block w-64 shrink-0 py-stack-lg px-margin-edge sticky top-20 h-[calc(100vh-80px)] overflow-y-auto border-l border-outline-variant">
+<h4 class="font-ui-label text-ui-label text-on-surface mb-4 uppercase tracking-wider text-xs">On this page</h4>
+<nav class="space-y-2 font-caption text-caption text-on-surface-variant border-l border-outline pl-3">
+<a class="block hover:text-primary transition-colors text-primary border-l-2 border-primary -ml-[13px] pl-3 py-1" href="#">The Architecture of Silence</a>
+<a class="block hover:text-primary transition-colors py-1" href="#">The Cognitive Cost of Interruption</a>
+</nav>
+</aside>
+</main>
+<!-- Footer (Generated from JSON) -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface w-full py-stack-lg border-t border-outline-variant dark:border-outline mt-auto">
+<div class="max-w-article-width mx-auto flex flex-col items-center gap-stack-sm text-center">
+<div class="font-display-lg text-display-lg-mobile text-on-surface mb-2">Folio</div>
+<div class="flex gap-4 font-caption text-caption text-on-surface-variant dark:text-surface-variant">
+<a class="hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">About</a>
+<a class="hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy</a>
+<a class="hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">Terms</a>
+<a class="hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">Contact</a>
+</div>
+<p class="font-caption text-caption text-on-surface dark:text-on-primary-fixed mt-4">© 2024 Folio. Crafted for the modern atelier.</p>
+</div>
+</footer>
+<script>
+        // Progress Bar Script
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("reading-progress").style.transform = `scaleX(${scrolled / 100})`;
+        });
+    </script>
+</body></html>

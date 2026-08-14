@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Followers - Folio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=Merriweather:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#27313f",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary-fixed": "#351000",
+                        "secondary": "#712ae2",
+                        "tertiary-container": "#a44100",
+                        "on-surface-variant": "#464555",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary-container": "#fffbff",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "outline-variant": "#c7c4d8",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary": "#3525cd",
+                        "on-error": "#ffffff",
+                        "primary-container": "#4f46e5",
+                        "surface-dim": "#d0dbed",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#0f0069",
+                        "background": "#f8f9ff",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "secondary-container": "#8a4cfc",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#dee9fc",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "secondary-fixed": "#eaddff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#dad7ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#25005a",
+                        "tertiary-fixed": "#ffdbcc",
+                        "inverse-primary": "#c3c0ff",
+                        "on-background": "#121c2a",
+                        "surface-container": "#e6eeff",
+                        "surface-container-low": "#eff4ff",
+                        "on-surface": "#121c2a",
+                        "tertiary": "#7e3000",
+                        "on-tertiary-container": "#ffd2be",
+                        "outline": "#777587",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-tint": "#4d44e3",
+                        "surface": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "gutter": "24px",
+                        "stack-lg": "64px",
+                        "container-max": "1280px",
+                        "margin-edge": "32px",
+                        "article-width": "720px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "ui-label": ["Public Sans"],
+                        "ui-button": ["Public Sans"],
+                        "caption": ["Public Sans"],
+                        "article-body": ["Merriweather"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "article-body-mobile": ["Merriweather"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "ui-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "ui-button": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "caption": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "article-body": ["20px", { "lineHeight": "34px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "article-body-mobile": ["18px", { "lineHeight": "30px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .tab-active { border-bottom-color: theme('colors.primary'); color: theme('colors.primary'); }
+        .tab-inactive { border-bottom-color: transparent; color: theme('colors.on-surface-variant'); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline fixed top-0 w-full z-50">
+<div class="flex justify-between items-center h-16 px-margin-edge max-w-container-max mx-auto">
+<div class="font-display-lg text-display-lg text-primary dark:text-inverse-primary hidden md:block" style="font-size: 24px; line-height: 32px;">Folio</div>
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-inverse-primary md:hidden" style="font-size: 24px; line-height: 32px;">Folio</div>
+<nav class="hidden md:flex space-x-8 font-ui-label text-ui-label">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-colors duration-200 scale-95 active:opacity-80 transition-transform" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-colors duration-200 scale-95 active:opacity-80 transition-transform" href="#">Bookmarks</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-colors duration-200 scale-95 active:opacity-80 transition-transform" href="#">Write</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="text-primary dark:text-primary-fixed-dim scale-95 active:opacity-80 transition-transform hover:text-primary dark:hover:text-secondary-fixed-dim transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A small circular user avatar showing a minimalist portrait of a writer with glasses, rendered in a clean, modern editorial style with soft lighting against a neutral background. The image should convey intellectual calm and professional authority, matching the Folio brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBafZF8y1BWTU8QuNplcbfFsvX68sBZtYQQw4iqyyB7RT3EfOPUsldIgbPA1ZWUgzO1suqH3Kzm1i1gBiUwupTpg7kf_N6uw79XKvHLR-U0Oe-79Cr8dB2zQnD8TbyHMBc_yE30NHzx2dFnDqjZHUS8eD1WHmAsdgBlUHVQ1nRwM1n4Pj0sQmzgGYZVuDT9nrCKKzMET4zQJe7-w4AlA7ehqXz4FPB0R8yMORzQwxhdAfgZqYXTCBaxLQ"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[104px] pb-stack-lg px-margin-edge w-full max-w-article-width mx-auto flex flex-col">
+<!-- Header -->
+<div class="mb-stack-md text-center md:text-left">
+<h1 class="font-headline-md text-headline-md text-on-background mb-stack-sm">Elias Thorne's Network</h1>
+<p class="font-article-body text-article-body text-on-surface-variant hidden md:block">Exploring the connections of a modern atelier writer.</p>
+<p class="font-article-body-mobile text-article-body-mobile text-on-surface-variant md:hidden">Exploring the connections of a modern atelier writer.</p>
+</div>
+<!-- Tabs -->
+<div class="flex border-b border-outline-variant mb-stack-md">
+<button class="flex-1 pb-stack-sm font-ui-label text-ui-label tab-active border-b-2 hover:text-primary transition-colors duration-200">Followers <span class="ml-1 text-on-surface-variant font-normal">1,204</span></button>
+<button class="flex-1 pb-stack-sm font-ui-label text-ui-label tab-inactive border-b-2 hover:text-primary transition-colors duration-200">Following <span class="ml-1 text-on-surface-variant font-normal">342</span></button>
+</div>
+<!-- User List -->
+<div class="flex flex-col space-y-4">
+<!-- User Row 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-lg hover:shadow-[0_4px_12px_rgba(113,42,226,0.1)] transition-shadow duration-300">
+<div class="flex items-center space-x-4">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a contemporary author looking thoughtful, set against a stark white studio background. Soft, diffused lighting highlights sharp facial features. The aesthetic is high-end editorial photography, suitable for a literary magazine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb8HqqHrrJtvlyau3Hnyz-EYqbIcAWtEMKrG7kHBgq9DKr8qgtOTT-pDnQQtrYd6aaI7N54NvJP39KQj8E2WAWYuuSWdIHnqg3KxnaxUC63qWFN5ltGBuIuVimlZ-DuU2TqgPUjKdZG3GLGYoxiY3bgOwmT0xuZOK2Z3sAsykdfgXdmn4_DkgZvEhEFzEAwnheKDHUnAKMvDr8-73lx3761CUWLOn0Yk2AFHbcNFlzfhw_fGSlNLWDGw"/>
+<div>
+<h3 class="font-ui-label text-ui-label text-on-background">Clara Vance</h3>
+<p class="font-caption text-caption text-on-surface-variant">Essays on brutalist architecture and urban decay.</p>
+</div>
+</div>
+<button class="px-4 py-2 font-ui-button text-ui-button text-primary border border-outline rounded hover:bg-surface-variant transition-colors duration-200">Follow</button>
+</div>
+<!-- User Row 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-lg hover:shadow-[0_4px_12px_rgba(113,42,226,0.1)] transition-shadow duration-300">
+<div class="flex items-center space-x-4">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="A minimalist black and white headshot of a poet, with strong contrast and deep shadows. The subject is slightly off-center, conveying a sense of artistic melancholy. The style is reminiscent of classic mid-century literary portraits." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrab9B4HuEy-BfMhyUYl2f9c-B88-EWgON-1ZIhV2S2Q1Wa_4PzpiP88ZEMrtpFrD6tj1t24KBrj60p13BQkKgQAE3LixB-G63JDqI1HAuFrB7TS6T8wASkkimJvXWSa_0I-Di-R14Fhb3htb8wVhoITOC9f-wxDLP4LpoSVM3hNPREwluJ0hwJ-sye9-WR11BMNH5J36XhN4-yk-_dT5lKfqflSZQu7INCD9jQG5gfVaw_d9yuwm48A"/>
+<div>
+<h3 class="font-ui-label text-ui-label text-on-background">Marcus Reid</h3>
+<p class="font-caption text-caption text-on-surface-variant">Fiction editor at The New Standard. Wordsmith.</p>
+</div>
+</div>
+<button class="px-4 py-2 font-ui-button text-ui-button bg-primary text-on-primary rounded hover:bg-primary-container transition-colors duration-200">Following</button>
+</div>
+<!-- User Row 3 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-lg hover:shadow-[0_4px_12px_rgba(113,42,226,0.1)] transition-shadow duration-300">
+<div class="flex items-center space-x-4">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="A warm, brightly lit portrait of a lifestyle journalist holding a cup of coffee. The background features blurred bookshelves in a cozy modern apartment. The image exudes approachable intellect and relaxed sophistication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxbCPsV2GNavu_aTEQHvMmTPSCrqo90icJmL_Zf6lqmM5IJA3cNAOTeT-KX-9eT0BomI42Qw-O-GeD4ElagM3YAhJpe2kbkhdnPY-se-8x33G1yrsgHr6B3WIuy9QvEOObf_GPrXkot2khf7WCI6i36F59gmfCt-BVEO7IHopHNoSr9frJYXsaymkBVDNeqlGTptgnt8sB1LDH7ffih5zo3F5lPa1P9XFBRN3qFHrFrJZ5dZ7ugWCjrQ"/>
+<div>
+<h3 class="font-ui-label text-ui-label text-on-background">Elena Rostova</h3>
+<p class="font-caption text-caption text-on-surface-variant">Curating calm spaces in a chaotic world.</p>
+</div>
+</div>
+<button class="px-4 py-2 font-ui-button text-ui-button text-primary border border-outline rounded hover:bg-surface-variant transition-colors duration-200">Follow</button>
+</div>
+<!-- User Row 4 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-lg hover:shadow-[0_4px_12px_rgba(113,42,226,0.1)] transition-shadow duration-300">
+<div class="flex items-center space-x-4">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="An abstract, stylized digital illustration serving as an avatar, featuring geometric shapes in shades of deep ink purple and soft cream. The design is clean, precise, and perfectly aligns with a minimalist digital art direction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHJg_WEn3ziB5-p2DObIcuR9Rvmb2VYlr2Od8ieHyPWF1K8DTJflB59IxJv--jShlYPsGiuQcVOT9kgqnK2kRq7Cr7oG8hItq8irt4tYIJQFpy1camJyRhM_fnnuJWG9kavEu4ztrH82f63_SWIPwmgKjT0Pxr705d8ODdUzSEwyNjFyBtuGAmvFY8eCc4r72A33_d9CkiBvjbSYNPA-IS9tBmfdc01__8PZvsHFlAkTc3KBjpWdd5oA"/>
+<div>
+<h3 class="font-ui-label text-ui-label text-on-background">Julian Sparks</h3>
+<p class="font-caption text-caption text-on-surface-variant">Tech philosophy and digital mindfulness.</p>
+</div>
+</div>
+<button class="px-4 py-2 font-ui-button text-ui-button bg-primary text-on-primary rounded hover:bg-primary-container transition-colors duration-200">Following</button>
+</div>
+</div>
+<div class="mt-stack-md flex justify-center">
+<button class="px-6 py-2 font-ui-button text-ui-button text-secondary border-b border-secondary hover:text-secondary-container hover:border-secondary-container transition-colors duration-200">Load More</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant dark:border-outline w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center py-stack-md px-margin-edge max-w-article-width mx-auto">
+<div class="font-display-lg text-display-lg mb-4 md:mb-0 text-secondary dark:text-secondary-fixed-dim" style="font-size: 20px; line-height: 28px;">Folio</div>
+<nav class="flex flex-wrap justify-center gap-4 font-caption text-caption">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">About</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Terms</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Privacy</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Contact</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">RSS</a>
+</nav>
+<div class="font-caption text-caption text-secondary dark:text-secondary-fixed-dim mt-4 md:mt-0 text-center md:text-right">
+                © 2024 Folio. The Modern Atelier.
+            </div>
+</div>
+</footer>
+</body></html>

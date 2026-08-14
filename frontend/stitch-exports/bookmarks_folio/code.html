@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saved Posts - Folio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=Merriweather:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#27313f",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary-fixed": "#351000",
+                        "secondary": "#712ae2",
+                        "tertiary-container": "#a44100",
+                        "on-surface-variant": "#464555",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary-container": "#fffbff",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "outline-variant": "#c7c4d8",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary": "#3525cd",
+                        "on-error": "#ffffff",
+                        "primary-container": "#4f46e5",
+                        "surface-dim": "#d0dbed",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#0f0069",
+                        "background": "#f8f9ff",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "secondary-container": "#8a4cfc",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#dee9fc",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "secondary-fixed": "#eaddff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#dad7ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#25005a",
+                        "tertiary-fixed": "#ffdbcc",
+                        "inverse-primary": "#c3c0ff",
+                        "on-background": "#121c2a",
+                        "surface-container": "#e6eeff",
+                        "surface-container-low": "#eff4ff",
+                        "on-surface": "#121c2a",
+                        "tertiary": "#7e3000",
+                        "on-tertiary-container": "#ffd2be",
+                        "outline": "#777587",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-tint": "#4d44e3",
+                        "surface": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "gutter": "24px",
+                        "stack-lg": "64px",
+                        "container-max": "1280px",
+                        "margin-edge": "32px",
+                        "article-width": "720px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "ui-label": ["Public Sans"],
+                        "ui-button": ["Public Sans"],
+                        "caption": ["Public Sans"],
+                        "article-body": ["Merriweather"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "article-body-mobile": ["Merriweather"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "ui-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "ui-button": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "caption": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "article-body": ["20px", { "lineHeight": "34px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "article-body-mobile": ["18px", { "lineHeight": "30px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f8f9ff; }
+        .card-hover:hover {
+            box-shadow: 0 10px 25px -5px rgba(113, 42, 226, 0.1), 0 8px 10px -6px rgba(113, 42, 226, 0.1);
+            transform: translateY(-2px);
+        }
+        .transition-all-200 { transition: all 200ms ease-in-out; }
+    </style>
+</head>
+<body class="text-on-background bg-background min-h-screen flex flex-col pt-16">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-inverse-surface fixed top-0 w-full z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center h-16 px-margin-edge max-w-container-max mx-auto">
+<!-- Brand -->
+<a class="font-display-lg text-display-lg text-primary dark:text-inverse-primary" href="#" style="font-size: 24px; line-height: 32px;">Folio</a>
+<!-- Links (Desktop) -->
+<div class="hidden md:flex space-x-gutter">
+<a class="font-ui-label text-ui-label text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-colors duration-200 scale-95 active:opacity-80 transition-transform" href="#">Explore</a>
+<a class="font-ui-label text-ui-label text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 hover:text-primary dark:hover:text-secondary-fixed-dim transition-colors duration-200 scale-95 active:opacity-80 transition-transform" href="#">Bookmarks</a>
+<a class="font-ui-label text-ui-label text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-colors duration-200 scale-95 active:opacity-80 transition-transform" href="#">Write</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-stack-sm">
+<!-- Search (Right) -->
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors scale-95 active:opacity-80 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="ml-2 overflow-hidden rounded-full border border-outline-variant scale-95 active:opacity-80 transition-transform">
+<img alt="User Avatar" class="w-8 h-8 object-cover" data-alt="A small, circular avatar portrait of a modern user in a brightly lit studio setting. Minimalist background, high-key lighting, matching the crisp, light-mode Folio editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8YWr7JNHpzJUwRQlJFYe6VtjAcRYfYSwoQijwfw5o5KkzrDl9v_90DI92DlI0Ef3CCWc5KEwSm8Ii_0lvhp014A39Q2IOGCeglA-qEjel_4iwRT6iH33eKU-pKqXO8zD622_4DyzAGqFJ8V0BS7mPqV0MkAKA35n4Cgw3RsbfnoA6kVwQxRahFsEKJivP41lCzNJcHl3rRfsEj9dBy5ntz9uWDs_o6F7nCHI-WeElw-NR_qBy99fV2A"/>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow max-w-article-width mx-auto w-full px-margin-edge py-stack-lg">
+<!-- Header -->
+<header class="mb-stack-lg border-b border-outline-variant pb-stack-sm">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Saved Posts</h1>
+<p class="font-article-body-mobile md:font-article-body text-article-body-mobile md:text-article-body text-on-surface-variant mt-stack-sm">Your personal archive of curated reading.</p>
+</header>
+<!-- List Container (Populated) -->
+<div class="space-y-stack-md hidden" id="bookmarks-list">
+<!-- Card 1 -->
+<article class="group border border-outline-variant bg-surface-container-lowest rounded-lg p-stack-md flex flex-col md:flex-row gap-stack-md transition-all-200 card-hover">
+<div class="md:w-1/3 shrink-0">
+<div class="aspect-video md:aspect-square overflow-hidden rounded">
+<img alt="Post thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A serene, minimalist still-life photograph featuring a delicate porcelain teacup on a stack of pristine white books, bathed in soft, diffused natural light from a nearby window. The mood is calm and intellectual, perfectly aligned with the Folio editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_jeByLXPvdzqhslQXQKLxco1xnC0qqclXAMcDrnvcX0CG1mcKqz1M-kni9idzQu6sHc1xsmHpPfmd10O6BhGG-mV5cwkaHsOdo_YesnNlxz63DAx9ETIpmFpUrp2bEoqrcxy-7YZUl--mEkr1f1npkGlz_FpayW7abkuSEbDphVy3cNpGisQp4CorkQJ5zHa7HLtj9ZmiHl58_YDSeVILOgOIES8C_7-x8w4KUKBWuEZXpADbX-mcng"/>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="font-caption text-caption text-primary tracking-wider uppercase">Design</span>
+<button class="text-secondary hover:text-error transition-colors" onclick="removeBookmark(this)" title="Remove bookmark">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm line-clamp-2">The Architecture of Silence: Designing for Deep Focus</h2>
+<p class="font-article-body-mobile text-article-body-mobile text-on-surface-variant line-clamp-2">In an era of relentless digital noise, creating physical and digital spaces that prioritize quietude is not merely an aesthetic choice, but a cognitive necessity.</p>
+</div>
+<div class="mt-stack-md flex items-center justify-between font-caption text-caption text-outline">
+<div class="flex items-center gap-2">
+<span>By Elena Rossi</span>
+<span>•</span>
+<span>Oct 12</span>
+</div>
+<span>8 min read</span>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group border border-outline-variant bg-surface-container-lowest rounded-lg p-stack-md flex flex-col md:flex-row gap-stack-md transition-all-200 card-hover">
+<div class="md:w-1/3 shrink-0">
+<div class="aspect-video md:aspect-square overflow-hidden rounded">
+<img alt="Post thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An abstract, architectural photograph capturing sharp geometric shadows cast on a smooth, white concrete wall. The interplay of light and dark creates a striking, modern composition. Minimalist, high-contrast, editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGz0E33djykx3hhufwwAGVb8nboCc6JcCuel1lYWYmoGX7sggS0PyWYQh1qL0HGnq3TMbiQHYPWnLdn1z_KZbPe2IB28wuZWT6ecOdS6itJEo-pGv4GhRddaFCQro2XndCRQJ4DmfdZjLod6kMRY9PB_lvIetpQgjsYFOiyt8yrsPoUR8g3Cpiu4hRVtzzcK6Vsp6Gu-QOcaMRHUjihzrGp3WWSGv2fpEjr7NuLp4IWDXTANGZx5YPZQ"/>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="font-caption text-caption text-primary tracking-wider uppercase">Culture</span>
+<button class="text-secondary hover:text-error transition-colors" onclick="removeBookmark(this)" title="Remove bookmark">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm line-clamp-2">Reclaiming the Long Form in a Micro-Content World</h2>
+<p class="font-article-body-mobile text-article-body-mobile text-on-surface-variant line-clamp-2">Examining the resurgence of extensive, thought-provoking essays as an antidote to the fleeting nature of modern social media consumption patterns.</p>
+</div>
+<div class="mt-stack-md flex items-center justify-between font-caption text-caption text-outline">
+<div class="flex items-center gap-2">
+<span>By Julian Vance</span>
+<span>•</span>
+<span>Sep 28</span>
+</div>
+<span>14 min read</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Empty State -->
+<div class="flex flex-col items-center justify-center py-stack-lg text-center mt-stack-md" id="empty-state">
+<div class="w-48 h-48 mb-stack-md rounded-full bg-surface-variant flex items-center justify-center opacity-80">
+<span class="material-symbols-outlined text-outline" style="font-size: 64px;">bookmark_border</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">No saved posts yet</h2>
+<p class="font-article-body-mobile text-article-body-mobile text-on-surface-variant max-w-md mb-stack-md">Your reading list is empty. Explore our curated collections to find pieces worth keeping.</p>
+<a class="inline-flex items-center justify-center bg-primary text-on-primary font-ui-button text-ui-button px-6 py-3 rounded hover:bg-primary-container transition-colors" href="#">
+                Explore Folio
+            </a>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant dark:border-outline w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center py-stack-md px-margin-edge max-w-article-width mx-auto">
+<div class="font-display-lg text-display-lg text-on-surface opacity-90 hover:opacity-100 mb-4 md:mb-0" style="font-size: 20px; line-height: 28px;">Folio</div>
+<div class="flex flex-wrap justify-center gap-4 mb-4 md:mb-0">
+<a class="font-caption text-caption text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">About</a>
+<a class="font-caption text-caption text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Terms</a>
+<a class="font-caption text-caption text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Privacy</a>
+<a class="font-caption text-caption text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Contact</a>
+<a class="font-caption text-caption text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">RSS</a>
+</div>
+<div class="font-caption text-caption text-secondary dark:text-secondary-fixed-dim">
+                © 2024 Folio. The Modern Atelier.
+            </div>
+</div>
+</footer>
+<script>
+        // Simple logic to toggle between populated and empty states for demonstration
+        let bookmarkCount = 2;
+        const listContainer = document.getElementById('bookmarks-list');
+        const emptyState = document.getElementById('empty-state');
+
+        // Initially show list if items exist (simulate populated state initially)
+        if(bookmarkCount > 0) {
+            listContainer.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+        }
+
+        function removeBookmark(btn) {
+            const article = btn.closest('article');
+            article.style.opacity = '0';
+            article.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                article.remove();
+                bookmarkCount--;
+                if (bookmarkCount === 0) {
+                    listContainer.classList.add('hidden');
+                    emptyState.classList.remove('hidden');
+                    // Add subtle fade-in for empty state
+                    emptyState.style.opacity = '0';
+                    setTimeout(() => {
+                        emptyState.style.transition = 'opacity 0.5s ease';
+                        emptyState.style.opacity = '1';
+                    }, 50);
+                }
+            }, 200); // Wait for CSS transition
+        }
+    </script>
+</body></html>

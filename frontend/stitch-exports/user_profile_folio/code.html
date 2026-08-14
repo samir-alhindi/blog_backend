@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Profile - Folio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Public+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-primary": "#c3c0ff",
+                      "on-background": "#121c2a",
+                      "secondary": "#712ae2",
+                      "on-secondary-fixed": "#25005a",
+                      "surface-tint": "#4d44e3",
+                      "outline": "#777587",
+                      "primary-fixed": "#e2dfff",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#a44100",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "surface-container": "#e6eeff",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#464555",
+                      "on-tertiary-container": "#ffd2be",
+                      "tertiary-fixed": "#ffdbcc",
+                      "on-primary-fixed": "#0f0069",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-dim": "#d0dbed",
+                      "outline-variant": "#c7c4d8",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "secondary-container": "#8a4cfc",
+                      "on-error-container": "#93000a",
+                      "error-container": "#ffdad6",
+                      "on-secondary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "background": "#f8f9ff",
+                      "surface-variant": "#d9e3f6",
+                      "on-primary-container": "#dad7ff",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "on-tertiary-fixed": "#351000",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "surface": "#f8f9ff",
+                      "on-secondary-container": "#fffbff",
+                      "inverse-surface": "#27313f",
+                      "surface-bright": "#f8f9ff",
+                      "secondary-fixed": "#eaddff",
+                      "on-surface": "#121c2a",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#dee9fc",
+                      "primary-container": "#4f46e5",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface-container-low": "#eff4ff",
+                      "surface-container-highest": "#d9e3f6",
+                      "primary": "#3525cd",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "tertiary": "#7e3000"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "container-max": "1280px",
+                      "stack-md": "24px",
+                      "stack-lg": "64px",
+                      "article-width": "720px",
+                      "gutter": "24px",
+                      "margin-edge": "32px"
+              },
+              "fontFamily": {
+                      "display-lg-mobile": [
+                              "Playfair Display"
+                      ],
+                      "article-body": [
+                              "Merriweather"
+                      ],
+                      "ui-button": [
+                              "Public Sans"
+                      ],
+                      "headline-md": [
+                              "Playfair Display"
+                      ],
+                      "article-body-mobile": [
+                              "Merriweather"
+                      ],
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "caption": [
+                              "Public Sans"
+                      ],
+                      "ui-label": [
+                              "Public Sans"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "article-body": [
+                              "20px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "ui-button": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "article-body-mobile": [
+                              "18px",
+                              {
+                                      "lineHeight": "30px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "72px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "caption": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "ui-label": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .reaction-tray {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.2s ease-in-out;
+        }
+        .reaction-container:hover .reaction-tray {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .reaction-icon {
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reaction-icon:hover {
+            transform: scale(1.2);
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col md:flex-row"><header class="bg-surface dark:bg-inverse-surface w-full sticky top-0 border-b border-outline-variant dark:border-outline z-50">
+<div class="max-w-container-max mx-auto px-margin-edge h-20 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<h1 class="font-display-lg text-display-lg-mobile font-bold text-primary">Folio</h1>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-ui-label text-ui-label text-on-surface hover:text-primary transition-colors" href="#">Explore</a>
+<a class="font-ui-label text-ui-label text-on-surface hover:text-primary transition-colors" href="#">Bookmarks</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-ui-label w-64 focus:ring-2 focus:ring-primary" placeholder="Search Folio..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary font-ui-button text-ui-button py-2 px-6 rounded-full hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined">edit</span>
+                Write
+            </button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEobP4CT6f2rMAKBR03v-ig0jmhjSM6OptmvzIpjnWLHNwH3U5G8qRaE6OUm7sBJTWUmS2ie3c263_VXtZ6nC5cb9oW-POTQymy1gpgNOFTTH0EzT1WU4uRT9hRFTbnW4vLMHd95FLVtoj-WD8XBmvSKgGaMBSxl56AogESsI6EEZPRrjTEnjAQwfnnGQpPdXIEBn92xTNmF-FHmnQSGVF8dbGUBOsT5cAC8wBBLLqNSy_mZxB76tGEQ"/>
+</div>
+</div>
+</header>
+<!-- Desktop SideNav -->
+<!-- Mobile Top Nav -->
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-[100vw]">
+<!-- Centered Column -->
+<div class="max-w-article-width mx-auto px-margin-edge py-stack-lg">
+<!-- Profile Header -->
+<section class="flex flex-col md:flex-row items-start md:items-center gap-stack-md mb-stack-lg">
+<div class="flex-shrink-0">
+<img alt="Large user avatar" class="w-32 h-32 md:w-40 md:h-40 rounded-full border border-outline-variant object-cover" data-alt="A large, striking portrait of a writer for a profile header. The subject is gazing thoughtfully off-camera, illuminated by soft, natural window light. The background is a slightly blurred, modern atelier workspace with neutral tones and minimalist decor. The overall mood is intellectual and focused." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHXJ9hE0F0xrYauFpsz6uo9_jozYTYzUQs1r2pFPjBZIH0IINOLIRR6DJURrrTJwYNRvO1I6KCQiPBIN-vu-QfUU5w0UziQeohzlbuepEZV6zkgAW-tPU5Fw6VxNgr9Iw3cPwWoulxkmnVeaT41YDIlzWaA3CnNwCeQCH_ZFVTfAb3VZ_Xv75Z-UIQTMHBnsXIF2Vl-u_rb2f2fzE1aUf3vqDOsj65_HtNrHThb0p7IuT6plMNM-yREw"/>
+</div>
+<div class="flex-1">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Elias Thorne</h2>
+<p class="font-caption text-caption text-on-surface-variant">@elias_writes</p>
+</div>
+<button class="border border-outline text-on-surface font-ui-button text-ui-button py-2 px-6 rounded-full hover:bg-surface-container-low transition-colors">
+                            Edit Profile
+                        </button>
+</div>
+<p class="font-article-body text-article-body-mobile md:text-article-body text-on-surface mb-6">
+                        Exploring the intersection of architecture, literature, and digital spaces. Currently drafting essays on modern urban solitude.
+                    </p>
+<div class="flex gap-6 font-ui-label text-ui-label">
+<a class="hover:text-primary transition-colors flex gap-1" href="#">
+<span class="font-bold text-on-surface">1,204</span> <span class="text-on-surface-variant">Followers</span>
+</a>
+<a class="hover:text-primary transition-colors flex gap-1" href="#">
+<span class="font-bold text-on-surface">342</span> <span class="text-on-surface-variant">Following</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Tabs -->
+<nav class="border-b border-outline-variant mb-stack-md flex gap-8"><a class="font-ui-label text-ui-label text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-3 px-2" href="#">Posts</a>
+<a class="font-ui-label text-ui-label text-on-surface-variant hover:text-secondary transition-colors pb-3 px-2" href="#">Comments</a></nav>
+<!-- Posts List -->
+<section class="space-y-stack-md">
+<!-- Card 1 -->
+<article class="border border-outline-variant p-6 hover:shadow-[0_4px_24px_rgba(113,42,226,0.1)] transition-shadow duration-300 bg-surface-container-lowest">
+<p class="font-caption text-caption text-on-surface-variant mb-3">Published Oct 12, 2023</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 hover:text-primary transition-colors cursor-pointer">
+                        The Quiet Geometry of Brutalism
+                    </h3>
+<p class="font-article-body text-article-body-mobile md:text-article-body text-on-surface-variant mb-6 line-clamp-3">
+                        Beyond the stark concrete facades lies a profound silence. Examining how mid-century architectural monoliths shape our internal landscapes and foster a unique kind of urban introspection.
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex gap-2">
+<span class="bg-surface-container px-3 py-1 rounded-full font-caption text-caption text-primary">Architecture</span>
+<span class="bg-surface-container px-3 py-1 rounded-full font-caption text-caption text-primary">Design</span>
+</div>
+<div class="reaction-container flex items-center relative h-8">
+<div class="reaction-tray flex items-center gap-2 bg-surface-container-highest px-3 py-1 rounded-full absolute right-full mr-2">
+<span class="material-symbols-outlined text-secondary reaction-icon cursor-pointer text-[18px]">favorite</span>
+<span class="material-symbols-outlined text-tertiary-container reaction-icon cursor-pointer text-[18px]">emoji_objects</span>
+<span class="material-symbols-outlined text-on-surface reaction-icon cursor-pointer text-[18px]">forum</span>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors font-caption text-caption">
+<span class="material-symbols-outlined text-[18px]">favorite_border</span>
+                                245
+                            </button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="border border-outline-variant p-6 hover:shadow-[0_4px_24px_rgba(113,42,226,0.1)] transition-shadow duration-300 bg-surface-container-lowest">
+<p class="font-caption text-caption text-on-surface-variant mb-3">Published Sep 28, 2023</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 hover:text-primary transition-colors cursor-pointer">
+                        Digital Marginalia
+                    </h3>
+<p class="font-article-body text-article-body-mobile md:text-article-body text-on-surface-variant mb-6 line-clamp-3">
+                        Tracing the history of readers leaving their mark in the margins, and how modern interfaces succeed (and fail) at capturing the intimacy of a handwritten note next to a printed line.
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex gap-2">
+<span class="bg-surface-container px-3 py-1 rounded-full font-caption text-caption text-primary">Technology</span>
+<span class="bg-surface-container px-3 py-1 rounded-full font-caption text-caption text-primary">Literature</span>
+</div>
+<div class="reaction-container flex items-center relative h-8">
+<div class="reaction-tray flex items-center gap-2 bg-surface-container-highest px-3 py-1 rounded-full absolute right-full mr-2">
+<span class="material-symbols-outlined text-secondary reaction-icon cursor-pointer text-[18px]">favorite</span>
+<span class="material-symbols-outlined text-tertiary-container reaction-icon cursor-pointer text-[18px]">emoji_objects</span>
+<span class="material-symbols-outlined text-on-surface reaction-icon cursor-pointer text-[18px]">forum</span>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors font-caption text-caption">
+<span class="material-symbols-outlined text-[18px]">favorite_border</span>
+                                189
+                            </button>
+</div>
+</div>
+</article>
+</section><section class="hidden space-y-4" id="comments-tab">
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-lg">
+<p class="font-caption text-caption text-on-surface-variant mb-2">Commented on <a class="text-primary hover:underline" href="#">The Quiet Geometry of Brutalism</a> • 2 days ago</p>
+<p class="font-article-body text-article-body-mobile text-on-surface">The way you describe the silence of concrete really resonates. It's a specific kind of weight that feels both heavy and liberating.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-lg">
+<p class="font-caption text-caption text-on-surface-variant mb-2">Commented on <a class="text-primary hover:underline" href="#">Digital Marginalia</a> • 1 week ago</p>
+<p class="font-article-body text-article-body-mobile text-on-surface">I've always felt that Kindle highlights lack the soul of a pencil mark. Great piece.</p>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface w-full py-stack-lg border-t border-outline-variant dark:border-outline mt-stack-lg">
+<div class="max-w-article-width mx-auto flex flex-col items-center gap-stack-sm text-center">
+<h4 class="font-display-lg text-display-lg-mobile text-on-surface">Folio</h4>
+<p class="font-caption text-caption text-on-surface">© 2024 Folio. Crafted for the modern atelier.</p>
+<div class="flex gap-4 mt-2">
+<a class="font-caption text-caption text-on-surface-variant dark:text-surface-variant hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">About</a>
+<a class="font-caption text-caption text-on-surface-variant dark:text-surface-variant hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy</a>
+<a class="font-caption text-caption text-on-surface-variant dark:text-surface-variant hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">Terms</a>
+<a class="font-caption text-caption text-on-surface-variant dark:text-surface-variant hover:underline text-secondary opacity-80 hover:opacity-100 transition-opacity" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>
